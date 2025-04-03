@@ -2,30 +2,59 @@
 /* stylelint-disable no-duplicate-selectors */
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: var(--color-white);
   width: 100%;
   z-index: 2;
   position: fixed;
+  padding-bottom: 50px;
+  margin-top: 0px;
+  padding-top: 50px;
+
 }
+/* shrink navbar */
+.nav-wrapper {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: white; 
+  padding: 20px 40px; 
+  transition: all 0.3s ease;
+  box-shadow: none; 
+}
+
+.nav-wrapper.shrink {
+  padding: 10px 40px;
+  background: white; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+}
+
+.nav-wrapper .nav-brand img {
+  height: 80px;
+  transition: height 0.3s ease, padding 0.3s ease;
+}
+
+.nav-wrapper.shrink .nav-brand img {
+  height: 50px;
+}
+
+
+
 /* navigation customization */
+
 .default-content-wrapper {
   float: right;
   padding-top: 15px;
 }
 
-header.header-wrapper {
+/* header.header-wrapper {
   padding-top: 50px;
-}
-
-ul li:hover, 
-ul li:focus {
-    background-color:var(--nav-background-color); 
 }
 
 header nav .nav-sections ul > li {
   padding: 17px 15px;
   font-size:var(--body-font-size-xs);
-}
+} */
 
 
 header nav {
@@ -72,8 +101,16 @@ header nav p {
   line-height: 1;
 }
 
+/* */
+
 header nav a:any-link {
   color: currentcolor;
+  font-size: 14px;
+  padding: 15px 17px;
+  text-decoration: none;
+}
+.header nav a:any-link:focus,.header nav a:any-link:hover {
+  background-color: var( --color-yellow)
 }
 
 /* hamburger */
@@ -191,9 +228,9 @@ header nav .nav-sections ul {
   font-size: var(--body-font-size-s);
 }
 
-header nav .nav-sections ul > li {
+/* header nav .nav-sections ul > li {
   font-weight:100;
-}
+} */
 
 header nav .nav-sections ul > li > ul {
   margin-top: 0;

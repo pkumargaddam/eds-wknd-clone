@@ -129,13 +129,13 @@ export default async function decorate(block) {
   const logo = navBrand.querySelector('picture');
   if (logo) {
     navBrand.innerHTML = `<a href="/" aria-label="Home" title="Home" class="home">${logo.outerHTML}</a>`;
-    navBrand.querySelector('img').settAttribute('loading', 'eager');
+    navBrand.querySelector('img').setAttribute('loading', 'eager');
   }
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
-  }
+  // const brandLink = navBrand.querySelector('.button');
+  // if (brandLink) {
+  //   brandLink.className = '';
+  //   brandLink.closest('.button-container').className = '';
+  // }
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
@@ -168,4 +168,15 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+
+  window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".nav-wrapper");
+    if (window.scrollY > 50) {
+      navbar.classList.add("shrink");
+    } else {
+      navbar.classList.remove("shrink");
+    }
+  });
+  
 }
