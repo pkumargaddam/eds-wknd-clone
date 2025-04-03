@@ -169,14 +169,12 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 
-
-  window.addEventListener("scroll", function () {
-    const navbar = document.querySelector(".nav-wrapper");
+  window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.nav-wrapper');
     if (window.scrollY > 50) {
-      navbar.classList.add("shrink");
+      navbar.classList.add('shrink');
     } else {
-      navbar.classList.remove("shrink");
+      navbar.classList.remove('shrink');
     }
   });
-  
 }
