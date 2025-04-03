@@ -1,3 +1,5 @@
+/* stylelint-disable comment-empty-line-before */
+/* stylelint-disable no-duplicate-selectors */
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);
@@ -6,7 +8,6 @@ header .nav-wrapper {
   position: fixed;
 }
 /* navigation customization */
-
 .default-content-wrapper {
   float: right;
   padding-top: 15px;
@@ -191,7 +192,7 @@ header nav .nav-sections ul {
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 0;
+  font-weight:100;
 }
 
 header nav .nav-sections ul > li > ul {
