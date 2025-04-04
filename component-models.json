@@ -92,6 +92,33 @@
             "value": "secondary"
           }
         ]
+      },
+      {
+        "component": "select",
+        "name": "iconlist",
+        "label": "Icon List",
+        "options": [
+          {
+            "name": "Menu",
+            "value": "menu"
+          },
+          {
+            "name": "Google",
+            "value": "google"
+          },
+          {
+            "name": "Twitter",
+            "value": "twitter"
+          },
+          {
+            "name": "Facebook",
+            "value": "facebook"
+          },
+          {
+            "name": "Instagram",
+            "value": "instagram"
+          }
+        ]
       }
     ]
   },
