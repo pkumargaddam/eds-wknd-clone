@@ -118,6 +118,45 @@
     ]
   },
   {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Expand",
+        "options": [
+          {
+            "name": "Single",
+            "value": "single-expand"
+          },
+          {
+            "name": "Multiple",
+            "value": "multiple-expand"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "accordionitem",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordionitemlabel",
+        "label": "Accordion label",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "accordionitembody",
+        "value": "",
+        "label": "Accordion body",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
