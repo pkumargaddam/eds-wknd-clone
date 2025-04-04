@@ -21,6 +21,11 @@
       "id": "teaser",
       "fields": [
         {
+          "component": "text",
+          "name": "pretitle",
+          "label": "Pretitle"
+        },
+        {
           "component": "reference",
           "valueType": "string",
           "name": "image",
@@ -28,11 +33,36 @@
           "multi": false
         },
         {
+          "component": "text",
+          "name": "imageAlt",
+          "label": "Alt Text"
+        },
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Title"
+        },
+        {
           "component": "richtext",
-          "name": "text",
+          "name": "description",
           "value": "",
-          "label": "Text",
+          "label": "Description",
           "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "name": "calltoactions",
+          "label": "Call-to-actions",
+          "valueType": "string",
+          "required": true,
+          "validation": {
+            "rootPath": "/content/eds-wknd"
+          }
+        },
+        {
+          "component": "text",
+          "name": "buttonText",
+          "label": "Button Text"
         }
       ]
     }
