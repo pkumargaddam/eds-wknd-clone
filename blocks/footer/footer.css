@@ -86,7 +86,8 @@ footer {
 
 .footer-social>div {
   display: flex;
-  flex-wrap: wrap;
+
+ /* flex-wrap: wrap; */
   padding-left: 14px;
 }
 
@@ -102,7 +103,7 @@ footer {
 
 .footer-social p:first-child {
   color: var(--color-gray-light);
-  font-size: var(--font-size-h4);
+  font-size: var(--font-size-small);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-base);
   margin: 1.33em 0;

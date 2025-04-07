@@ -29,7 +29,6 @@
   --color-yellow: #ffea00;
   --color-blue: #0045ff;
   --color-pink: #ff0058;
-  
 
   /* brand Colors */
   --brand-primary: var(--color-yellow);
@@ -290,4 +289,41 @@ img {
 .icon img {
   height: 100%;
   width: 100%;
+}
+
+/* Social container styling */
+.social-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 0; 
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.social-button i {
+  font-size: 18px;
+  color: #202020;
+}
+
+.social-button:hover {
+  background-color: white;
+}
+
+.button-container.social-container a.button.social-icon.social-button {
+  background: #ebebeb; 
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
