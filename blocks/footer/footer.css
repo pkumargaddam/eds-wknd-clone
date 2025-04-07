@@ -103,7 +103,7 @@ footer {
 
 .footer-social p:first-child {
   color: var(--color-gray-light);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-h4);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-base);
   margin: 1.33em 0;
