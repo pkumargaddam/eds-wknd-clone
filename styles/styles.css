@@ -29,7 +29,6 @@
   --color-yellow: #ffea00;
   --color-blue: #0045ff;
   --color-pink: #ff0058;
-  
 
   /* brand Colors */
   --brand-primary: var(--color-yellow);
@@ -110,6 +109,7 @@
   --button-size: 3rem; /* 48px */
   --button-border-radius: 0;
 }
+
 
 /* global styles */
 body {
@@ -291,3 +291,4 @@ img {
   height: 100%;
   width: 100%;
 }
+

@@ -86,7 +86,8 @@ footer {
 
 .footer-social>div {
   display: flex;
-  flex-wrap: wrap;
+
+ /* flex-wrap: wrap; */
   padding-left: 14px;
 }
 
