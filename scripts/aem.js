@@ -407,14 +407,22 @@ function wrapTextNodes(block) {
  * @param {Element} element container element
  */
 function decorateButtons(element) {
+  const socialIcons = {
+    Facebook: '<i class="fa-brands fa-facebook-f"></i>',
+    Twitter: '<i class="fa-brands fa-twitter"></i>',
+    Instagram: '<i class="fa-brands fa-instagram"></i>',
+  };
+
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
+
     if (a.href !== a.textContent) {
       const up = a.parentElement;
-      const twoup = a.parentElement.parentElement;
+      const twoup = up.parentElement;
+
       if (!a.querySelector('img')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-          a.className = 'button'; // default
+          a.className = 'button';
           up.classList.add('button-container');
         }
         if (
@@ -436,6 +444,14 @@ function decorateButtons(element) {
           twoup.classList.add('button-container');
         }
       }
+    }
+
+    // Apply social icons if the link matches a social platform name
+    const textContent = a.textContent.trim();
+    if (socialIcons[textContent]) {
+      a.innerHTML = socialIcons[textContent];
+      a.classList.add('social-icon', 'social-button', 'button');
+      a.parentElement.classList.add('social-container');
     }
   });
 }
