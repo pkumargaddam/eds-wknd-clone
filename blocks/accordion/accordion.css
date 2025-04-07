@@ -47,7 +47,6 @@
   margin: 0;
 }
 
-/* Ensure the active (open) accordion item is styled correctly */
 .accordion [data-aue-model="accordionitem"].open [data-aue-prop="accordionitemlabel"] {
   color: var(--dark-color);
   border: 0;
