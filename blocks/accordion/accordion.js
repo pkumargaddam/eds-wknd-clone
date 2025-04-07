@@ -1,4 +1,4 @@
-export default function decorate(block) {
+export default function decorate(_block) {
   document.querySelectorAll('.accordion').forEach((accordionWrapper) => {
     accordionWrapper.querySelectorAll('[data-aue-model="accordionitem"]').forEach((item) => {
       const label = item.querySelector('[data-aue-prop="accordionitemlabel"]');
