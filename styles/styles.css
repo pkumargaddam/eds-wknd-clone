@@ -138,6 +138,12 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
+main > .section > div {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 0 var(--gutter-padding);
+}
+
 /* headings */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -268,10 +274,11 @@ button.secondary {
 }
 
 /* image and icon style */
-main img {
+img {
+  display: block;
+  height: auto;
   max-width: 100%;
   width: auto;
-  height: auto;
 }
 
 .icon {
@@ -284,24 +291,3 @@ main img {
   height: 100%;
   width: 100%;
 }
-
-/* sections --->> needs to update
- main > .section {
-  margin: 40px 0;
-}
-
-main > .section > div {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 24px;
-}
-
-main > .section:first-of-type {
-  margin-top: 0;
-}
-
-@media (width >= 900px) {
-  main > .section > div {
-    padding: 0 32px;
-  }
-} */
