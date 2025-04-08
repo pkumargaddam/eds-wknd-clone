@@ -72,13 +72,13 @@
                 "component": "aem-content",
                 "name": "ctaLink",
                 "label": "CTA Link",
-                "condition": { "===": [{"var" : "no"}, true] }
+                "condition": { "===": [{"var" : "yes"}, false] }
               },
               {
                 "component": "text",
                 "name": "ctaLabel",
                 "label": "CTA Label",
-                "condition": { "===": [{"var" : "no"}, true] }
+                "condition": { "===": [{"var" : "yes"}, false] }
               }
             ]
           }
