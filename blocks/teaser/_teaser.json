@@ -32,20 +32,17 @@
                 "name": "foreground_pretitle",
                 "value": "",
                 "label": "Pre title",
-                "valueType": "string",
-                "condition": { "===": [{"var" : "yes"}, false] }
+                "valueType": "string"
               },
               {
                 "component": "aem-content",
                 "name": "ctaLink",
-                "label": "CTA Link",
-                "condition": { "===": [{"var" : "yes"}, false] }
+                "label": "CTA Link"
               },
               {
                 "component": "text",
                 "name": "ctaLabel",
-                "label": "CTA Label",
-                "condition": { "===": [{"var" : "yes"}, false] }
+                "label": "CTA Label"
               },
               {
                 "component": "tab",
