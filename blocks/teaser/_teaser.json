@@ -50,7 +50,7 @@
                 "value": "",
                 "label": "Pre title",
                 "valueType": "string",
-                "condition": { "===": [{"var" : "no"}, true] }
+                "condition": { "===": [{"var" : "yes"}, false] }
               },
               {
                 "component": "text",
@@ -71,12 +71,14 @@
               {
                 "component": "aem-content",
                 "name": "ctaLink",
-                "label": "CTA Link"
+                "label": "CTA Link",
+                "condition": { "===": [{"var" : "no"}, true] }
               },
               {
                 "component": "text",
                 "name": "ctaLabel",
-                "label": "CTA Label"
+                "label": "CTA Label",
+                "condition": { "===": [{"var" : "no"}, true] }
               }
             ]
           }

@@ -239,9 +239,9 @@
         "condition": {
           "===": [
             {
-              "var": "no"
+              "var": "yes"
             },
-            true
+            false
           ]
         }
       },
@@ -278,12 +278,28 @@
       {
         "component": "aem-content",
         "name": "ctaLink",
-        "label": "CTA Link"
+        "label": "CTA Link",
+        "condition": {
+          "===": [
+            {
+              "var": "no"
+            },
+            true
+          ]
+        }
       },
       {
         "component": "text",
         "name": "ctaLabel",
-        "label": "CTA Label"
+        "label": "CTA Label",
+        "condition": {
+          "===": [
+            {
+              "var": "no"
+            },
+            true
+          ]
+        }
       }
     ]
   }
