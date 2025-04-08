@@ -328,3 +328,27 @@ img {
   align-items: center;
 }
  
+
+.wknd-icon {
+  font-family: var(--icomoon-font-family);
+  font-style: normal;
+  font-weight: normal;
+  display: inline-block;
+}
+
+.wkndicon-facebook::before {
+  content: var(--wkndicon-facebook);
+}
+
+.wkndicon-instagram::before {
+  content: var(--wkndicon-instagram);
+}
+
+.wkndicon-twitter::before {
+  content: var(--wkndicon-twitter);
+}
+
+.social-button .wknd-icon {
+  font-size: 18px;
+  color: #202020; 
+}

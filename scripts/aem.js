@@ -408,9 +408,9 @@ function wrapTextNodes(block) {
  */
 function decorateButtons(element) {
   const socialIcons = {
-    Facebook: '<i class="fa-brands fa-facebook-f"></i>',
-    Twitter: '<i class="fa-brands fa-twitter"></i>',
-    Instagram: '<i class="fa-brands fa-instagram"></i>',
+    Facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
+    Twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
+    Instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
   };
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
@@ -442,7 +442,6 @@ function decorateButtons(element) {
         }
       }
     }
-    // Apply social icons if the link matches a social platform name
     const textContent = a.textContent.trim();
     if (socialIcons[textContent]) {
       a.innerHTML = socialIcons[textContent];
