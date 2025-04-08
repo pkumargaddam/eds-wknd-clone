@@ -16,8 +16,9 @@
       "cards",
       "columns",
       "fragment",
-      "teaser",
       "seperator"
+      "teaser",
+      "carousel"
     ]
   },
   {
