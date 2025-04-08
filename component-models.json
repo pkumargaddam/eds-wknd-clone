@@ -195,48 +195,97 @@
     "id": "teaser",
     "fields": [
       {
-        "component": "text",
-        "name": "pretitle",
-        "label": "Pretitle"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
+        "component": "tab",
+        "label": "Properties",
+        "name": "properties"
       },
       {
         "component": "text",
-        "name": "imageAlt",
-        "label": "Alt Text"
-      },
-      {
-        "component": "text",
-        "name": "title",
-        "label": "Title"
-      },
-      {
-        "component": "richtext",
-        "name": "description",
+        "name": "foreground_pretitle",
         "value": "",
-        "label": "Description",
+        "label": "Pre title",
         "valueType": "string"
       },
       {
         "component": "aem-content",
-        "name": "calltoactions",
-        "label": "Call-to-actions",
+        "name": "ctaLink",
+        "label": "CTA Link"
+      },
+      {
+        "component": "text",
+        "name": "ctaLabel",
+        "label": "CTA Label"
+      },
+      {
+        "component": "tab",
+        "label": "Content",
+        "name": "content"
+      },
+      {
+        "component": "boolean",
+        "label": "Disable Inheriting page properties?",
+        "name": "yes",
+        "valueType": "boolean"
+      },
+      {
+        "component": "reference",
         "valueType": "string",
-        "required": true,
-        "validation": {
-          "rootPath": "/content/eds-wknd"
+        "name": "background_image",
+        "label": "Background Image",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
         }
       },
       {
         "component": "text",
-        "name": "buttonText",
-        "label": "Button Text"
+        "name": "background_imageAlt",
+        "value": "",
+        "label": "Alt Text",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "name": "foreground_title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
+      },
+      {
+        "component": "richtext",
+        "name": "foreground_description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
       }
     ]
   }
