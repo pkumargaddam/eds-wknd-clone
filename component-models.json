@@ -196,7 +196,7 @@
     "fields": [
       {
         "component": "boolean",
-        "label": "Inherit page properties?",
+        "label": "Disable Inheriting page properties?",
         "name": "yes",
         "valueType": "boolean"
       },
@@ -211,7 +211,7 @@
             {
               "var": "yes"
             },
-            false
+            true
           ]
         }
       },
@@ -220,7 +220,15 @@
         "name": "background_imageAlt",
         "value": "",
         "label": "Alt Text",
-        "valueType": "string"
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
       },
       {
         "component": "text",
@@ -234,7 +242,15 @@
         "name": "foreground_title",
         "value": "",
         "label": "Title",
-        "valueType": "string"
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
       },
       {
         "component": "select",
@@ -273,16 +289,24 @@
         "name": "foreground_description",
         "value": "",
         "label": "Description",
-        "valueType": "string"
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
       },
       {
         "component": "aem-content",
-        "name": "cta",
-        "label": "CTA"
+        "name": "ctaLink",
+        "label": "CTA Link"
       },
       {
         "component": "text",
-        "name": "ctalabel",
+        "name": "ctaLabel",
         "label": "CTA Label"
       }
     ]
