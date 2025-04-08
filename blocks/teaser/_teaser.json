@@ -34,7 +34,7 @@
                 "name": "background_image",
                 "label": "Background Image",
                 "multi": false,
-                "condition": { "===": [{"var" : "yes"}, true] }
+                "condition": { "===": [{"var" : "yes"}, false] }
               },
               {
                 "component": "text",
