@@ -1,0 +1,58 @@
+.carousel {
+    width: 100%;
+    max-width: 960px;
+    height: 450px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    margin: auto;
+}
+
+.slide {
+    width: 100%;
+    max-width: 960px;
+    height: 350px;
+    position: absolute;
+    transition: all 0.5s;
+
+    img {
+        width: 100%;
+    }
+}
+
+div.slide-text {
+    position: absolute;
+    width: 100%;
+    top: 60%;
+    color: #fff;
+    text-align: center;
+    text-shadow: 1px 1px 2px #b8b5b5c2, 0 0 1em black, 0 0 0.2em black;
+}
+
+.btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    z-index: 10;
+    cursor: pointer;
+    background-color: #fff;
+    font-size: 18px;
+    color: black;
+}
+
+.btn:active {
+    *transform: scale(1.1);
+}
+
+.btn-prev {
+    top: 45%;
+    left: 2%;
+}
+
+.btn-next {
+    top: 45%;
+    right: 2%;
+}
