@@ -195,6 +195,57 @@
     "id": "teaser",
     "fields": [
       {
+        "component": "tab",
+        "label": "Properties",
+        "name": "properties"
+      },
+      {
+        "component": "text",
+        "name": "foreground_pretitle",
+        "value": "",
+        "label": "Pre title",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            false
+          ]
+        }
+      },
+      {
+        "component": "aem-content",
+        "name": "ctaLink",
+        "label": "CTA Link",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            false
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "name": "ctaLabel",
+        "label": "CTA Label",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            false
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "Content",
+        "name": "content"
+      },
+      {
         "component": "boolean",
         "label": "Disable Inheriting page properties?",
         "name": "yes",
@@ -232,21 +283,6 @@
       },
       {
         "component": "text",
-        "name": "foreground_pretitle",
-        "value": "",
-        "label": "Pre title",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "yes"
-            },
-            false
-          ]
-        }
-      },
-      {
-        "component": "text",
         "name": "foreground_title",
         "value": "",
         "label": "Title",
@@ -272,32 +308,6 @@
               "var": "yes"
             },
             true
-          ]
-        }
-      },
-      {
-        "component": "aem-content",
-        "name": "ctaLink",
-        "label": "CTA Link",
-        "condition": {
-          "===": [
-            {
-              "var": "yes"
-            },
-            false
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "name": "ctaLabel",
-        "label": "CTA Label",
-        "condition": {
-          "===": [
-            {
-              "var": "yes"
-            },
-            false
           ]
         }
       }
