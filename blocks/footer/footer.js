@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { highlightActiveLink } from '../../scripts/helper.js';
 
 export default async function decorate(block) {
   // Load footer as fragment
@@ -36,6 +37,9 @@ export default async function decorate(block) {
   socialButtons.forEach((btn) => {
     btn.classList.add('social-button');
   });
+
+  // Highlight active link
+  highlightActiveLink(footer);
 
   // Append footer to block
   block.append(footer);
