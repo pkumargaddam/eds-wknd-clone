@@ -238,10 +238,10 @@ button {
   margin: 12px 0;
   border: 2px solid transparent;
   border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  padding: 1em 2.5em;
   font-family: var(--body-font-family);
   font-style: normal;
-  font-weight: 500;
+  font-weight:var(--font-weight-bold);
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
@@ -251,6 +251,7 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: var(--font-size-small) ;
 }
 
 a.button:hover, a.button:focus,
@@ -291,7 +292,7 @@ img {
   width: 100%;
 }
 
-/* Social container styling */
+/* Social icons styling */
 .social-container {
   display: flex;
   gap: 10px;
