@@ -235,7 +235,15 @@
         "name": "foreground_pretitle",
         "value": "",
         "label": "Pre title",
-        "valueType": "string"
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "no"
+            },
+            true
+          ]
+        }
       },
       {
         "component": "text",
