@@ -195,11 +195,25 @@
     "id": "teaser",
     "fields": [
       {
+        "component": "boolean",
+        "label": "Inherit page properties?",
+        "name": "yes",
+        "valueType": "boolean"
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "background_image",
         "label": "Background Image",
-        "multi": false
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
       },
       {
         "component": "text",
