@@ -93,8 +93,8 @@
   --icon-size: var(--font-size-large);
 
   /* page layout */
-  --header-height: 12.5rem; /* 200px */
-  --header-mobile-height: 8.125rem; /* 130px */
+  --header-height: 10.625rem; /* 170px */
+  --header-mobile-height: 5.625rem; /* 90px */
   --utility-nav-height: 1.5625rem; /* 25px */
 
   /* language switcher */
@@ -135,6 +135,16 @@ footer .footer {
 header .header[data-block-status="loaded"],
 footer .footer[data-block-status="loaded"] {
   visibility: visible;
+}
+
+main {
+  padding-top: var(--set-header-mobile-height, var(--header-mobile-height));
+}
+
+@media (width >=1024px) {
+  main {
+    padding-top: var(--set-header-height, var(--header-height));
+  }  
 }
 
 main > .section > div {
