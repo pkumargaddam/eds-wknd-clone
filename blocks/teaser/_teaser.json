@@ -22,8 +22,9 @@
         "fields": [
           {
             "component": "tab",
-            "label": "Content",
-            "name": "content"
+            "label": "Link",
+            "name": "link",
+            "description": "The teaser title, description and image can be inherited from the linked page, or from the page linked in the first call to action. If neither a link nor a call to action is specified, then the title, description and image will be inherited from the current page."
           },
           {
             "component": "text",
