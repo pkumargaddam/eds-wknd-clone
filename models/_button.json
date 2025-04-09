@@ -74,10 +74,7 @@
               "name": "Instagram",
               "value": "instagram"
             }
-          ],
-          "visibleWhen": {
-            "linkType": "primary"
-          }
+          ]
         }
       ]
     }
