@@ -272,7 +272,7 @@ button:disabled:hover {
 a.button.secondary {
   box-sizing: border-box;
   background-color:var(--color-black); 
-  color: white;
+  color:var(--color-white);
   font-size: var(--font-size-small) ;
   text-transform: uppercase;
 
@@ -324,15 +324,15 @@ img {
  
 .social-button i {
   font-size: 18px;
-  color: #202020;
+  color: var(--color-black);
 }
  
 .social-button:hover {
-  background-color: white;
+  background-color:var(--color-white);
 }
  
 .button-container.social-container a.button.social-icon.social-button {
-  background: #ebebeb;
+  background:var( --color-gray-light);
   padding: 0;
   display: flex;
   justify-content: center;
@@ -361,7 +361,11 @@ img {
  
 .social-button .wknd-icon {
   font-size: 18px;
-  color: #202020;
+  color:var(--color-black);
 }
  
+.button.secondary.social-button .wknd-icon {
+  font-size: 18px;
+  color:var(--color-white);
+}
  
