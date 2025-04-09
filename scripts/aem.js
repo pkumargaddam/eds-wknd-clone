@@ -449,7 +449,7 @@ function decorateButtons(element) {
     }
 
     if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey]; // Replace text with icon
+      a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
