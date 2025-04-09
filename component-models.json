@@ -80,12 +80,12 @@
         "label": "Type",
         "options": [
           {
-            "name": "default",
-            "value": ""
-          },
-          {
             "name": "primary",
             "value": "primary"
+          },
+          {
+            "name": "default",
+            "value": ""
           }
         ]
       },
