@@ -269,7 +269,7 @@ button:disabled:hover {
 
 /* Secondary Button */
 
-.button.secondary {
+a.button.secondary {
   background-color:var(--color-black); 
   color: white;
 }
