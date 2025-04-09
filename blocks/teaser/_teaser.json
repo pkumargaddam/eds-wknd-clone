@@ -26,6 +26,15 @@
             "name": "link"
           },
           {
+            "component": "aem-content",
+            "name": "teaser-link",
+            "label": "Link",
+            "valueType": "string",
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          },
+          {
             "component": "container",
             "label": "",
             "name": "dynamic-link-container",
