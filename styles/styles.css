@@ -257,7 +257,7 @@ button {
 
 a.button:hover, a.button:focus,
 button:hover, button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var( --color-yellow);
   cursor: pointer;
 }
 
@@ -267,12 +267,16 @@ button:disabled:hover {
   cursor: unset;
 }
 
-/* a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
-} */
+/* Secondary Button */
+
+.button.secondary {
+  background-color:var(--color-black); 
+  color: white;
+}
+
+.button.secondary:hover {
+  background-color:var(--color-black); 
+}
 
 /* image and icon style */
 img {

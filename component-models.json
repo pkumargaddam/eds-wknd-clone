@@ -86,6 +86,10 @@
           {
             "name": "icon",
             "value": ""
+          },
+          {
+            "name": "Secondary",
+            "value": "secondary"
           }
         ]
       }
