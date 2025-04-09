@@ -408,18 +408,16 @@ function wrapTextNodes(block) {
  */
 function decorateButtons(element) {
   const socialIcons = {
-    facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
-    twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
-    instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
-    google: '<i class="wknd-icon wkndicon-google"></i>',
     menu: '<i class="wknd-icon wkndicon-menu"></i>',
+    google: '<i class="wknd-icon wkndicon-google"></i>',
+    twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
+    facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
+    instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
   };
 
   element.querySelectorAll('a').forEach((a) => {
-    a.title = a.title || a.textContent;
-
-    // Extract icon type from data attribute or fallback to text content
-    const iconType = a.getAttribute('data-iconlist') || a.dataset.iconlist || a.textContent.trim().toLowerCase();
+    a.title = a.title || a.textContent.trim(); // Ensure title is set
+    const iconKey = a.title.toLowerCase(); // Convert title to lowercase for matching
 
     if (a.href !== a.textContent) {
       const up = a.parentElement;
@@ -450,9 +448,9 @@ function decorateButtons(element) {
       }
     }
 
-    // Apply icon if available in the icon list
-    if (socialIcons[iconType]) {
-      a.innerHTML = socialIcons[iconType];
+    // Use the title (from iconlist selection) to determine the icon
+    if (socialIcons[iconKey]) {
+      a.innerHTML = socialIcons[iconKey]; // Replace text with icon
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
