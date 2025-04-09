@@ -47,22 +47,22 @@
           },
           {
             "component": "text",
-            "name": "cta_1_label",
+            "name": "cta1_label",
             "label": "CTA 1 Label"
           },
           {
             "component": "aem-content",
-            "name": "cta_1_link",
+            "name": "cta1_link",
             "label": "CTA 1 Link"
           },
           {
             "component": "text",
-            "name": "cta_2_label",
+            "name": "cta2_label",
             "label": "CTA 2 Label"
           },
           {
             "component": "aem-content",
-            "name": "cta_2_link",
+            "name": "cta2_link",
             "label": "CTA 2 Link"
           }
         ]
