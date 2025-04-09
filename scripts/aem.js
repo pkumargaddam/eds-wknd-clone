@@ -408,31 +408,22 @@ function wrapTextNodes(block) {
  */
 function decorateButtons(element) {
   const socialIcons = {
-    facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
-    twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
-    instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
-    google: '<i class="wknd-icon wkndicon-google"></i>',
-    menu: '<i class="wknd-icon wkndicon-menu"></i>',
+    Facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
+    Twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
+    Instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
   };
-
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
-    const type = a.dataset.type || ''; // "primary" or "default"
-    const iconType = a.dataset.icon || ''; // Icon name from JSON
-
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
-
       if (!a.querySelector('img')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button';
           up.classList.add('button-container');
         }
-
         if (
-          type === 'primary'
-          && up.childNodes.length === 1
+          up.childNodes.length === 1
           && up.tagName === 'STRONG'
           && twoup.childNodes.length === 1
           && twoup.tagName === 'P'
@@ -440,12 +431,20 @@ function decorateButtons(element) {
           a.className = 'button primary';
           twoup.classList.add('button-container');
         }
+        if (
+          up.childNodes.length === 1
+          && up.tagName === 'EM'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
+        ) {
+          a.className = 'button secondary';
+          twoup.classList.add('button-container');
+        }
       }
     }
-
-    // Apply icon if the type is "primary"
-    if (type === 'primary' && iconType && socialIcons[iconType]) {
-      a.innerHTML = socialIcons[iconType]; // Add the selected icon
+    const textContent = a.textContent.trim();
+    if (socialIcons[textContent]) {
+      a.innerHTML = socialIcons[textContent];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }

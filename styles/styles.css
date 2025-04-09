@@ -292,7 +292,7 @@ img {
   height: 100%;
   width: 100%;
 }
-
+ 
 /* Social icons styling */
 .social-container {
   display: flex;
@@ -301,57 +301,58 @@ img {
   align-items: center;
   padding: 0;
 }
-
+ 
 .social-button {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 48px;
   height: 48px;
-  border-radius: 5px;
+  border-radius: 0;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
-
+ 
 .social-button i {
   font-size: 18px;
-  color: #fff; /* Ensure icon is visible */
+  color: #202020;
 }
-
+ 
 .social-button:hover {
-  background-color: gray;
+  background-color: white;
 }
-
+ 
 .button-container.social-container a.button.social-icon.social-button {
-  background: #007bff; /* Blue background for primary buttons */
+  background: #ebebeb;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
 }
-
-/* Ensuring correct font icon display */
+ 
+ 
 .wknd-icon {
   font-family: var(--icomoon-font-family);
   font-style: normal;
   font-weight: normal;
   display: inline-block;
 }
-
+ 
 .wkndicon-facebook::before {
   content: var(--wkndicon-facebook);
 }
-
+ 
 .wkndicon-instagram::before {
   content: var(--wkndicon-instagram);
 }
-
+ 
 .wkndicon-twitter::before {
   content: var(--wkndicon-twitter);
 }
-
+ 
 .social-button .wknd-icon {
   font-size: 18px;
-  color: white; /* Ensure visibility */
+  color: #202020;
 }
+ 
+ 
