@@ -301,36 +301,37 @@ img {
   align-items: center;
   padding: 0;
 }
- 
+
 .social-button {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 48px;
   height: 48px;
-  border-radius: 0;
+  border-radius: 5px;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
- 
+
 .social-button i {
   font-size: 18px;
-  color: #202020;
+  color: #fff; /* Ensure icon is visible */
 }
- 
+
 .social-button:hover {
-  background-color: white;
+  background-color: gray;
 }
- 
+
 .button-container.social-container a.button.social-icon.social-button {
-  background: #ebebeb;
+  background: #007bff; /* Blue background for primary buttons */
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
 }
- 
 
+/* Ensuring correct font icon display */
 .wknd-icon {
   font-family: var(--icomoon-font-family);
   font-style: normal;
@@ -352,5 +353,5 @@ img {
 
 .social-button .wknd-icon {
   font-size: 18px;
-  color: #202020; 
+  color: white; /* Ensure visibility */
 }

@@ -408,16 +408,17 @@ function wrapTextNodes(block) {
  */
 function decorateButtons(element) {
   const socialIcons = {
-    Facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
-    Twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
-    Instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
-    Google: '<i class="wknd-icon wkndicon-google"></i>',
-    Menu: '<i class="wknd-icon wkndicon-menu"></i>',
+    facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
+    twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
+    instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
+    google: '<i class="wknd-icon wkndicon-google"></i>',
+    menu: '<i class="wknd-icon wkndicon-menu"></i>',
   };
 
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
-    const type = a.dataset.type || ''; // Assuming `data-type="primary"` is set on AEM output
+    const type = a.dataset.type || ''; // "primary" or "default"
+    const iconType = a.dataset.icon || ''; // Icon name from JSON
 
     if (a.href !== a.textContent) {
       const up = a.parentElement;
@@ -442,14 +443,11 @@ function decorateButtons(element) {
       }
     }
 
-    // Apply icon only if the type is "primary"
-    if (type === 'primary') {
-      const textContent = a.textContent.trim();
-      if (socialIcons[textContent]) {
-        a.innerHTML = socialIcons[textContent];
-        a.classList.add('social-icon', 'social-button', 'button');
-        a.parentElement.classList.add('social-container');
-      }
+    // Apply icon if the type is "primary"
+    if (type === 'primary' && iconType && socialIcons[iconType]) {
+      a.innerHTML = socialIcons[iconType]; // Add the selected icon
+      a.classList.add('social-icon', 'social-button', 'button');
+      a.parentElement.classList.add('social-container');
     }
   });
 }
