@@ -411,19 +411,27 @@ function decorateButtons(element) {
     Facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
     Twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
     Instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
+    Google: '<i class="wknd-icon wkndicon-google"></i>',
+    Menu: '<i class="wknd-icon wkndicon-menu"></i>',
   };
+
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
+    const type = a.dataset.type || ''; // Assuming `data-type="primary"` is set on AEM output
+
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
+
       if (!a.querySelector('img')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button';
           up.classList.add('button-container');
         }
+
         if (
-          up.childNodes.length === 1
+          type === 'primary'
+          && up.childNodes.length === 1
           && up.tagName === 'STRONG'
           && twoup.childNodes.length === 1
           && twoup.tagName === 'P'
@@ -433,11 +441,15 @@ function decorateButtons(element) {
         }
       }
     }
-    const textContent = a.textContent.trim();
-    if (socialIcons[textContent]) {
-      a.innerHTML = socialIcons[textContent];
-      a.classList.add('social-icon', 'social-button', 'button');
-      a.parentElement.classList.add('social-container');
+
+    // Apply icon only if the type is "primary"
+    if (type === 'primary') {
+      const textContent = a.textContent.trim();
+      if (socialIcons[textContent]) {
+        a.innerHTML = socialIcons[textContent];
+        a.classList.add('social-icon', 'social-button', 'button');
+        a.parentElement.classList.add('social-container');
+      }
     }
   });
 }
