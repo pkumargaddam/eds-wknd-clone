@@ -26,46 +26,24 @@
             "name": "link"
           },
           {
-            "description": "The teaser title, description and image can be inherited from the linked page, or from the page linked in the first call to action. If neither a link nor a call to action is specified, then the title, description and image will be inherited from the current page."},
-          {
-            "component": "text",
-            "name": "title",
-            "label": "Title"
-          },
-          {
-            "component": "text",
-            "name": "subtitle",
-            "label": "Subtitle"
-          },
-          {
-            "component": "richtext",
-            "name": "description",
-            "label": "Description"
-          },
-          {
-            "component": "tab",
-            "label": "CTAs",
-            "name": "ctas"
-          },
-          {
-            "component": "text",
-            "name": "cta1_label",
-            "label": "CTA-1 Label"
-          },
-          {
-            "component": "aem-content",
-            "name": "cta1_link",
-            "label": "CTA-1 Link"
-          },
-          {
-            "component": "text",
-            "name": "cta2_label",
-            "label": "CTA-2 Label"
-          },
-          {
-            "component": "aem-content",
-            "name": "cta2_link",
-            "label": "CTA-2 Link"
+            "component": "container",
+            "label": "",
+            "name": "dynamic-link-container",
+            "description": "The teaser title, description and image can be inherited from the linked page, or from the page linked in the first call to action. If neither a link nor a call to action is specified, then the title, description and image will be inherited from the current page.",
+            "valueType": "string",
+            "collapsible": false,
+            "fields": [
+              {
+                "component": "aem-content",
+                "name": "dynamic-article-link",
+                "label": "Please select all articles root page path",
+                "valueType": "string",
+                "required": true,
+                "validation": {
+                  "rootPath": "/content/eds-helium-xwalk"
+                }
+              }
+            ]
           }
         ]
       }
