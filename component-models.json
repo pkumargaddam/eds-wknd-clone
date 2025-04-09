@@ -84,12 +84,8 @@
             "value": ""
           },
           {
-            "name": "primary",
+            "name": "icon",
             "value": "primary"
-          },
-          {
-            "name": "secondary",
-            "value": "secondary"
           }
         ]
       },
