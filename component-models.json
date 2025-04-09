@@ -162,21 +162,121 @@
     ]
   },
   {
-    "id": "slide",
+    "id": "image",
     "fields": [
+      {
+        "id": "image",
+        "fields": [
+          {
+            "component": "reference",
+            "name": "image",
+            "label": "Image",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "imageAlt",
+            "label": "Alt Text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teaser",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "Properties",
+        "name": "properties"
+      },
+      {
+        "component": "text",
+        "name": "foreground_pretitle",
+        "value": "",
+        "label": "Pre title",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "ctaLink",
+        "label": "CTA Link"
+      },
+      {
+        "component": "text",
+        "name": "ctaLabel",
+        "label": "CTA Label"
+      },
+      {
+        "component": "tab",
+        "label": "Content",
+        "name": "content"
+      },
+      {
+        "component": "boolean",
+        "label": "Disable Inheriting page properties?",
+        "name": "yes",
+        "valueType": "boolean"
+      },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
+        "name": "background_image",
+        "label": "Background Image",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "name": "background_imageAlt",
+        "value": "",
+        "label": "Alt Text",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "name": "foreground_title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
       },
       {
         "component": "richtext",
-        "name": "text",
+        "name": "foreground_description",
         "value": "",
-        "label": "Content",
-        "valueType": "string"
+        "label": "Description",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "yes"
+            },
+            true
+          ]
+        }
       }
     ]
   },
