@@ -237,7 +237,6 @@ button {
   max-width: 100%;
   margin: 12px 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
   padding: 1em 2.5em;
   font-family: var(--body-font-family);
   font-style: normal;
@@ -245,14 +244,16 @@ button {
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: var(--color-yellow);
+  color: var(--color-black);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: var(--font-size-small) ;
+  text-transform: uppercase;
 }
+
 
 a.button:hover, a.button:focus,
 button:hover, button:focus {
@@ -266,12 +267,12 @@ button:disabled:hover {
   cursor: unset;
 }
 
-a.button.secondary,
+/* a.button.secondary,
 button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color);
-}
+} */
 
 /* image and icon style */
 img {
