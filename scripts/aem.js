@@ -416,7 +416,9 @@ function decorateButtons(element) {
   };
 
   element.querySelectorAll('a').forEach((a) => {
-    a.title = a.title || a.textContent;
+    a.title = a.title || a.textContent.trim(); // Ensure title is set
+    const iconKey = a.title.toLowerCase(); // Convert title to lowercase for matching
+
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
@@ -446,9 +448,9 @@ function decorateButtons(element) {
       }
     }
 
-    const iconValue = a.dataset.iconlist || '';
-    if (socialIcons[iconValue]) {
-      a.innerHTML = socialIcons[iconValue];
+    // Use the title (from iconlist selection) to determine the icon
+    if (socialIcons[iconKey]) {
+      a.innerHTML = socialIcons[iconKey]; // Replace text with icon
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
