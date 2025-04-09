@@ -236,6 +236,7 @@
         "valueType": "string",
         "collapsible": false,
         "multi": true,
+        "required": true,
         "fields": [
           {
             "component": "text",
