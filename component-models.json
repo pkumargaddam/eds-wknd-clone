@@ -80,16 +80,16 @@
         "label": "Type",
         "options": [
           {
-            "name": "default",
+            "name": "Primary",
             "value": "primary"
-          },
-          {
-            "name": "icon",
-            "value": ""
           },
           {
             "name": "Secondary",
             "value": "secondary"
+          },
+          {
+            "name": "IconType",
+            "value": ""
           }
         ]
       }
