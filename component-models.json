@@ -234,7 +234,6 @@
         "label": "Call-to-actions",
         "name": "teaser-cta-container",
         "collapsible": true,
-        "multi": true,
         "fields": [
           {
             "component": "text",
