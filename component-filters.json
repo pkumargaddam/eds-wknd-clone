@@ -29,7 +29,6 @@
   {
     "id": "carousel",
     "components": [
-      "slide",
       "image",
       "teaser"
     ]
