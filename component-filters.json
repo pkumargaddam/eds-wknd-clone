@@ -20,12 +20,6 @@
     ]
   },
   {
-    "id": "accordion",
-    "components": [
-      "accordionitem"
-    ]
-  },
-  {
     "id": "cards",
     "components": [
       "card"
