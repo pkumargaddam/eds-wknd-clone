@@ -53,10 +53,6 @@
           "component": "select",
           "name": "iconlist",
           "label": "Icon List",
-          "condition": {
-            "name": "linkType",
-            "value": "primary"
-          },
           "options": [
             {
               "name": "Menu",
@@ -78,7 +74,10 @@
               "name": "Instagram",
               "value": "instagram"
             }
-          ]
+          ],
+          "visibleWhen": {
+            "linkType": "primary"
+          }
         }
       ]
     }
