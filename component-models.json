@@ -80,11 +80,11 @@
         "label": "Type",
         "options": [
           {
-            "name": "primary",
+            "name": "default",
             "value": "primary"
           },
           {
-            "name": "default",
+            "name": "icon",
             "value": ""
           }
         ]
