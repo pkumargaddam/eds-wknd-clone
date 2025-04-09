@@ -270,12 +270,17 @@ button:disabled:hover {
 /* Secondary Button */
 
 a.button.secondary {
+  box-sizing: border-box;
   background-color:var(--color-black); 
   color: white;
+  font-size: var(--font-size-small) ;
+  text-transform: uppercase;
+
 }
 
 .button.secondary:hover {
   background-color:var(--color-black); 
+  cursor: pointer;
 }
 
 /* image and icon style */
