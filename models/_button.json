@@ -53,6 +53,10 @@
           "component": "select",
           "name": "iconlist",
           "label": "Icon List",
+          "condition": {
+            "name": "linkType",
+            "value": "primary"
+          },
           "options": [
             {
               "name": "Menu",
