@@ -408,12 +408,19 @@ function wrapTextNodes(block) {
  */
 function decorateButtons(element) {
   const socialIcons = {
-    Facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
-    Twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
-    Instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
+    facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
+    twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
+    instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
+    google: '<i class="wknd-icon wkndicon-google"></i>',
+    menu: '<i class="wknd-icon wkndicon-menu"></i>',
   };
+
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
+
+    // Extract icon type from data attribute or fallback to text content
+    const iconType = a.getAttribute('data-iconlist') || a.dataset.iconlist || a.textContent.trim().toLowerCase();
+
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
@@ -442,9 +449,10 @@ function decorateButtons(element) {
         }
       }
     }
-    const textContent = a.textContent.trim();
-    if (socialIcons[textContent]) {
-      a.innerHTML = socialIcons[textContent];
+
+    // Apply icon if available in the icon list
+    if (socialIcons[iconType]) {
+      a.innerHTML = socialIcons[iconType];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
