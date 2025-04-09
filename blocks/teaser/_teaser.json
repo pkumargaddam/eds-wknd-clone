@@ -27,48 +27,47 @@
           },
           {
             "component": "text",
-            "name": "main_title",
+            "name": "title",
             "label": "Title"
           },
           {
             "component": "text",
-            "name": "main_subtitle",
+            "name": "subtitle",
             "label": "Subtitle"
           },
           {
             "component": "richtext",
-            "name": "main_description",
+            "name": "description",
             "label": "Description"
           },
           {
             "component": "tab",
-            "label": "Actions",
-            "name": "actions"
+            "label": "CTAs",
+            "name": "ctas"
           },
           {
             "component": "text",
             "name": "cta1_label",
-            "label": "CTA 1 Label"
+            "label": "CTA-1 Label"
           },
           {
             "component": "aem-content",
             "name": "cta1_link",
-            "label": "CTA 1 Link"
+            "label": "CTA-1 Link"
           },
           {
             "component": "text",
             "name": "cta2_label",
-            "label": "CTA 2 Label"
+            "label": "CTA-2 Label"
           },
           {
             "component": "aem-content",
             "name": "cta2_link",
-            "label": "CTA 2 Link"
+            "label": "CTA-2 Link"
           }
         ]
       }
-      
-    ],
+    ],  
     "filters": [
     ]
   }
