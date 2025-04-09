@@ -74,7 +74,11 @@
               "name": "Instagram",
               "value": "instagram"
             }
-          ]
+          ],
+          "condition": {
+            "field": "linkType",
+            "equals": "primary"
+          }
         }
       ]
     }
