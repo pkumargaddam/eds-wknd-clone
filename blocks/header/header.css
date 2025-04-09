@@ -217,6 +217,10 @@ footer {
   text-decoration: none;
 }
 
+.nav-wrapper-mobile .nav-sections a:hover {
+  color: var(--color-yellow);
+}
+
 /* ============================================================
   Hamburger Button & Icon Styling
 ============================================================ */
