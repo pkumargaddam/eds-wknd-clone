@@ -36,6 +36,15 @@
             }
           },
           {
+            "component": "checkbox-group",
+            "label": "",
+            "name": "open-teaser-link",
+            "valueType": "string[]",
+            "options": [
+              { "name": "Open link in new tab", "value": "true" }
+            ]
+          },
+          {
             "component": "container",
             "label": "",
             "name": "dynamic-link-container",
