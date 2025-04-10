@@ -267,7 +267,7 @@
       },
       {
         "component": "container",
-        "label": "Call-to-actions",
+        "label": "Teaser Call-to-action",
         "name": "teaser-cta-container",
         "valueType": "string",
         "fields": [
@@ -297,15 +297,7 @@
       {
         "component": "tab",
         "label": "Asset",
-        "name": "asset",
-        "condition": {
-          "===": [
-            {
-              "var": "inherit-page-link"
-            },
-            false
-          ]
-        }
+        "name": "asset"
       },
       {
         "component": "container",
