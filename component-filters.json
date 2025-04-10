@@ -29,10 +29,17 @@
   {
     "id": "carousel",
     "components": [
-      "slide",
-      "teaser",
+      "columnone"
+    ]
+  },
+  {
+    "id": "columnone",
+    "components": [
+      "text",
       "image",
-      "title"
+      "button",
+      "title",
+      "teaser"
     ]
   },
   {
