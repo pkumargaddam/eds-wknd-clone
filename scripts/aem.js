@@ -419,9 +419,12 @@ function decorateButtons(element) {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
-    // Get variation from dataset
-    const variation = a.dataset.variation || 'withtext';
-    a.setAttribute('data-variation', variation);
+    // Ensure data-variation is correctly set
+    let variation = a.getAttribute('data-variation');
+    if (!variation) {
+      variation = 'withtext'; // Default to withtext only if variation is not set
+      a.setAttribute('data-variation', variation);
+    }
 
     if (a.href !== a.textContent) {
       const up = a.parentElement;
@@ -453,8 +456,9 @@ function decorateButtons(element) {
     }
     if (socialIcons[iconKey]) {
       a.classList.add('social-icon', 'social-button', 'button');
+
       if (variation === 'withouttext') {
-        a.innerHTML = socialIcons[iconKey]; // Only the icon, no text
+        a.innerHTML = socialIcons[iconKey]; // Only icon
       } else {
         a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${a.title}</span>`; // Icon + text
       }
