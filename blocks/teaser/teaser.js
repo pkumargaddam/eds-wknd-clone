@@ -1,99 +1,124 @@
-export default async function decorate(block) {
+export default async function decorateTeaser(blockEl) {
   const [
-    pageLinkWrapper,
-    inheritPageLinkWrapper,
-    pretitleWrapper,
-    titleWrapper,
-    descriptionWrapper,
-    ctaLabelWrapper,
-    ctaLinkWrapper,
-    openInNewTabWrapper,
-    imageWrapper,
-  ] = [...block.children];
+    pageLinkEl,
+    inheritPageLinkEl,
+    pretitleEl,
+    titleEl,
+    descriptionEl,
+    ctaLabelEl,
+    ctaLinkEl,
+    ctaLinkOpenEl,
+    imageRowEl,
+  ] = [...blockEl.children];
 
-  const pageLinkEl = pageLinkWrapper.querySelector('a');
-  const inheritPageLinkEl = inheritPageLinkWrapper?.querySelector('p');
-  const pretitleEl = pretitleWrapper?.querySelector('p');
-  const titleEl = titleWrapper?.querySelector('p');
-  const descriptionEl = descriptionWrapper?.querySelector('p');
-  const ctaLabelEl = ctaLabelWrapper?.querySelector('p');
-  const ctaLinkEl = ctaLinkWrapper?.querySelector('a');
-  const openInNewTabEl = openInNewTabWrapper?.querySelector('p');
-  const pictureEl = imageWrapper?.querySelector('picture');
+  const pageLink = pageLinkEl?.querySelector('a')?.getAttribute('href') || '';
+  const inheritPageLink = inheritPageLinkEl?.textContent.trim() === 'true';
+  const ctaLabel = ctaLabelEl?.textContent || '';
+  const ctaLink = ctaLinkEl?.querySelector('a')?.getAttribute('href') || '';
+  const openInNewTab = ctaLinkOpenEl?.textContent.trim() === 'true';
+  const pretitle = pretitleEl?.textContent || '';
 
-  let inheritedTitle = '';
-  let inheritedDescription = '';
-  let inheritedImageURL = '';
-  let inheritedAlt = '';
+  // Initialize content
+  let inheritedTitle = null;
+  let inheritedDescription = null;
+  let inheritedImageURL = null;
+  let inheritedImageAlt = null;
 
-  if (inheritPageLinkEl?.textContent.trim() === 'true' && pageLinkEl?.href) {
+  if (inheritPageLink && pageLink) {
     try {
-      const pagePath = pageLinkEl.getAttribute('href');
-      const infinityURL = `https://author-p51328-e442308.adobeaemcloud.com${pagePath}.infinity.json`;
-      const resp = await fetch(infinityURL);
-      if (resp.ok) {
-        const pageData = await resp.json();
-        const content = pageData['jcr:content'];
-        inheritedTitle = content?.pageTitle || '';
-        inheritedDescription = content?.['jcr:description'] || '';
-        inheritedImageURL = content?.image?.fileReference || '';
-        inheritedAlt = content?.image?.alt || '';
+      const url = `https://author-p51328-e442308.adobeaemcloud.com${pageLink}.infinity.json`;
+      const res = await fetch(url);
+      const json = await res.json();
+      const content = json?.['jcr:content'];
+      if (content) {
+        inheritedTitle = content.pageTitle ?? '';
+        inheritedDescription = content['jcr:description'] ?? '';
+        inheritedImageURL = content.image?.fileReference ?? '';
+        inheritedImageAlt = content.image?.alt ?? '';
       }
     } catch (e) {
-      console.warn('Failed to fetch or parse inherited page data', e);
+      console.warn('Failed to fetch inherited page data:', e);
     }
   }
 
-  const teaser = document.createElement('div');
-  teaser.className = 'cmp-teaser';
+  const title = inheritPageLink ? inheritedTitle || '' : titleEl?.textContent || '';
+  const description = inheritPageLink ? inheritedDescription || '' : descriptionEl?.textContent || '';
+
+  // Build DOM
+  const teaserEl = document.createElement('div');
+  teaserEl.className = 'teaser';
+
+  const cmpTeaser = document.createElement('div');
+  cmpTeaser.className = 'cmp-teaser';
 
   const content = document.createElement('div');
   content.className = 'cmp-teaser__content';
 
-  const pretitle = document.createElement('p');
-  pretitle.className = 'cmp-teaser__pretitle';
-  pretitle.textContent = pretitleEl?.textContent || '';
-  content.append(pretitle);
-
-  const title = document.createElement('h2');
-  title.className = 'cmp-teaser__title';
-  title.textContent = inheritedTitle || titleEl?.textContent || '';
-  content.append(title);
-
-  const description = document.createElement('div');
-  description.className = 'cmp-teaser__description';
-  description.textContent = inheritedDescription || descriptionEl?.textContent || '';
-  content.append(description);
-
-  const ctaContainer = document.createElement('div');
-  ctaContainer.className = 'cmp-teaser__action-container';
-
-  const ctaLink = document.createElement('a');
-  ctaLink.className = 'cmp-teaser__action-link';
-  ctaLink.href = ctaLinkEl?.getAttribute('href') || '#';
-  ctaLink.textContent = ctaLabelEl?.textContent || '';
-  if (openInNewTabEl?.textContent.trim() === 'true') {
-    ctaLink.setAttribute('target', '_blank');
+  if (pretitle) {
+    const pre = document.createElement('p');
+    pre.className = 'cmp-teaser__pretitle';
+    pre.textContent = pretitle;
+    content.appendChild(pre);
   }
-  ctaContainer.append(ctaLink);
-  content.append(ctaContainer);
 
-  const imageContainer = document.createElement('div');
-  imageContainer.className = 'cmp-teaser__image';
+  if (title) {
+    const h2 = document.createElement('h2');
+    h2.className = 'cmp-teaser__title';
+    h2.textContent = title;
+    content.appendChild(h2);
+  }
 
-  if (inheritedImageURL) {
+  if (description) {
+    const desc = document.createElement('div');
+    desc.className = 'cmp-teaser__description';
+    desc.textContent = description;
+    content.appendChild(desc);
+  }
+
+  if (ctaLink && ctaLabel) {
+    const actionContainer = document.createElement('div');
+    actionContainer.className = 'cmp-teaser__action-container';
+
+    const actionLink = document.createElement('a');
+    actionLink.className = 'cmp-teaser__action-link';
+    actionLink.href = ctaLink;
+    actionLink.textContent = ctaLabel;
+    if (openInNewTab) {
+      actionLink.target = '_blank';
+      actionLink.rel = 'noopener noreferrer';
+    }
+
+    actionContainer.appendChild(actionLink);
+    content.appendChild(actionContainer);
+  }
+
+  cmpTeaser.appendChild(content);
+
+  // Image logic
+  const imageWrapper = document.createElement('div');
+  imageWrapper.className = 'cmp-teaser__image';
+
+  if (inheritPageLink) {
+    // Render image from inherited page data
+    const picture = document.createElement('picture');
     const img = document.createElement('img');
     img.src = inheritedImageURL;
-    img.alt = inheritedAlt || '';
-    imageContainer.append(img);
-  } else if (pictureEl) {
-    imageContainer.append(pictureEl);
+    img.alt = inheritedImageAlt || '';
+    img.loading = 'lazy';
+    picture.appendChild(img);
+    imageWrapper.appendChild(picture);
+  } else {
+    // Grab original <picture> from DOM
+    const pictureEl = imageRowEl?.querySelector('picture');
+    if (pictureEl) {
+      imageWrapper.appendChild(pictureEl.cloneNode(true));
+    }
   }
 
-  teaser.append(content, imageContainer);
+  if (imageWrapper.children.length) {
+    cmpTeaser.appendChild(imageWrapper);
+  }
 
-  // Clear and rebuild block content
-  block.textContent = '';
-  block.classList.remove('block');
-  block.append(teaser);
+  teaserEl.appendChild(cmpTeaser);
+  blockEl.replaceWith(teaserEl);
 }
