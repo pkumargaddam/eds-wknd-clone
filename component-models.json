@@ -220,12 +220,51 @@
             "value": "teaser-featured"
           },
           {
+            "name": "Teaser Banner",
+            "value": "teaser-banner"
+          },
+          {
             "name": "Teaser Banner - Image Top",
             "value": "teaser-banner--img-top"
           },
           {
             "name": "Teaser Banner - Image Bottom",
             "value": "teaser-banner--img-bottom"
+          }
+        ]
+      },
+      {
+        "component": "multiselect",
+        "name": "property",
+        "label": "Teaser Variation",
+        "valueType": "string",
+        "required": true,
+        "options": [
+          {
+            "name": "Teaser Type",
+            "children": [
+              {
+                "name": "Teaser Featured",
+                "value": "teaser-featured"
+              },
+              {
+                "name": "Teaser Banner",
+                "value": "teaser-banner"
+              }
+            ]
+          },
+          {
+            "name": "Teaser Banner Image Focus",
+            "children": [
+              {
+                "name": "Image Focus Top",
+                "value": "img-top"
+              },
+              {
+                "name": "Image Focus Bottom",
+                "value": "img-bottom"
+              }
+            ]
           }
         ]
       },
