@@ -95,8 +95,8 @@
       },
       {
         "component": "select",
-        "name": "Options",
-        "label": "Type",
+        "name": "linkType",
+        "label": "Variations",
         "options": [
           {
             "name": "Icon with Text",
