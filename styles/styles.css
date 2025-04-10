@@ -370,20 +370,29 @@ img {
 }
  
 /* Ensure "icon without text" only shows the icon */
-a.button[data-variation="withouttext"] .button-text {
-  display: none; /* Hide text but keep icon */
-}
 
+/* Ensure the button container is centered properly */
 a.button[data-variation="withouttext"] {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 48px; /* Adjust width to match icon size */
-  height: 48px; /* Adjust height to match icon size */
-  padding: 0; /* Remove padding to fit the icon */
+  width: 48px; /* Maintain fixed size */
+  height: 48px;
+  padding: 0;
+  overflow: hidden; /* Prevent text from appearing */
 }
 
+/* Hide button text properly */
+a.button[data-variation="withouttext"] .button-text {
+  display: none !important; /* Force hiding */
+  visibility: hidden;
+}
+
+/* Ensure the icon is properly displayed */
 a.button[data-variation="withouttext"] .wknd-icon {
-  text-indent: 0; /* Ensure icon is visible */
-  font-size: 18px; /* Set appropriate icon size */
+  display: inline-block;
+  font-size: 24px; /* Adjust if needed */
+  line-height: 1;
+  text-indent: 0;
+  color: var(--color-black);
 }
