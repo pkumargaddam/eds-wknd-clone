@@ -385,14 +385,21 @@ a.button[data-variation="withouttext"] {
 
 /* Hide button text properly */
 
+/* Ensure the button container is centered properly */
+/* stylelint-disable-next-line no-duplicate-selectors */
+a.button[data-variation="withouttext"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px; /* Maintain fixed size */
+  height: 48px;
+  padding: 0;
+}
+
 /* Hide text when "withouttext" variation is selected */
 a.button[data-variation="withouttext"] .button-text {
   display: none !important;
-  visibility: hidden; /* Extra safeguard */
-  width: 0; /* Prevent space allocation */
-  height: 0;
 }
-
 
 /* Ensure the icon is properly displayed */
 a.button[data-variation="withouttext"] .wknd-icon {
