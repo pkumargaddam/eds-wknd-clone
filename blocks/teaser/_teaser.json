@@ -57,9 +57,8 @@
             "label": "Call-to-actions",
             "name": "teaser-cta-container",
             "valueType": "string",
-            "collapsible": false,
+            "collapsible": true,
             "multi": true,
-            "required": true,
             "fields": [
               {
                 "component": "text",
