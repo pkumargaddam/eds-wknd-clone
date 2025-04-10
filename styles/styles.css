@@ -370,22 +370,18 @@ img {
   color:var(--color-white);
 }
  
-/* Ensure "icon without text" only shows the icon */
-
-/* Ensure the button container is centered properly */
+ 
 a.button[data-variation="withouttext"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 48px; /* Maintain fixed size */
+  width: 48px; 
   height: 48px;
   padding: 0;
-  overflow: hidden; /* Prevent text from appearing */
+  overflow: hidden; 
 }
 
-/* Hide button text properly */
 
-/* Ensure the button container is centered properly */
 /* stylelint-disable-next-line no-duplicate-selectors */
 a.button[data-variation="withouttext"] {
   display: flex;
@@ -396,15 +392,13 @@ a.button[data-variation="withouttext"] {
   padding: 0;
 }
 
-/* Hide text when "withouttext" variation is selected */
 a.button[data-variation="withouttext"] .button-text {
   display: none !important;
 }
 
-/* Ensure the icon is properly displayed */
 a.button[data-variation="withouttext"] .wknd-icon {
   display: inline-block;
-  font-size: 24px; /* Adjust if needed */
+  font-size: 24px; 
   line-height: 1;
   text-indent: 0;
   color: var(--color-black);
