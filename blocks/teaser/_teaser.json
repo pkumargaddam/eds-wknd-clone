@@ -43,7 +43,7 @@
               },
               {
                 "component": "boolean",
-                "label": "Inherit info from linked page",
+                "label": "Inherit title, pretitle and description from linked page",
                 "name": "inherit-page-link",
                 "valueType": "boolean"
               }
@@ -94,8 +94,9 @@
                 "label": "Pretitle",
                 "name": "pretitle",
                 "valueType": "string",
-                "readOnly": {
-                  "===": [{ "var": "inherit-page-link" }, true]
+                "validation" : {
+                  "inherit-page-link" : true,
+                  "readonly": true
                 }
               },
               {
