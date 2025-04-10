@@ -29,7 +29,7 @@ export default async function decorate(block) {
   if (inheritPageLinkEl?.textContent.trim() === 'true' && pageLinkEl?.href) {
     try {
       const pagePath = pageLinkEl.getAttribute('href');
-      const infinityURL = `https://author-p51328-e442308.adobeaemcloud.com${pagePath}.infinity.json`;
+      const infinityURL = `https://author-p51328-e442308.adobeaemcloud.com${pagePath}.model.infinity.json`;
       const resp = await fetch(infinityURL);
       if (resp.ok) {
         const pageData = await resp.json();
