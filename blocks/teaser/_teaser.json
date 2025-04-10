@@ -83,6 +83,37 @@
                 ]
               }
             ]
+          },
+          {
+            "component": "tab",
+            "label": "Text",
+            "name": "text"
+          },
+          {
+            "component": "container",
+            "label": "",
+            "name": "teaser-text-container",
+            "valueType": "string",
+            "fields": [
+              {
+                "component": "text",
+                "label": "Pretitle",
+                "name": "pretitle-label",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "Title",
+                "name": "title-label",
+                "valueType": "string"
+              },
+              {
+                "component": "richtext",
+                "label": "Description",
+                "name": "description-label",
+                "valueType": "string"
+              }
+            ]
           }
         ]
       }
