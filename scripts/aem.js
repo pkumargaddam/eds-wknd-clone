@@ -418,6 +418,7 @@ function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
+    const variation = a.dataset.variation || ''; // Get the variation from dataset
 
     if (a.href !== a.textContent) {
       const up = a.parentElement;
@@ -449,9 +450,14 @@ function decorateButtons(element) {
     }
 
     if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey];
+      a.innerHTML = socialIcons[iconKey]; // Set the icon first
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
+
+      // Handle text based on variation
+      if (variation === 'withtext') {
+        a.innerHTML += ` <span>${a.title}</span>`; // Add text next to the icon
+      }
     }
   });
 }
