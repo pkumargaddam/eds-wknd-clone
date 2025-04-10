@@ -200,6 +200,25 @@
         "name": "content"
       },
       {
+        "component": "select",
+        "name": "classes",
+        "label": "Variation",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Teaser Banner - Image Top",
+            "value": "teaser-banner--img-top"
+          },
+          {
+            "name": "Teaser Banner - Image Bottom",
+            "value": "teaser-banner--img-bottom"
+          }
+        ]
+      },
+      {
         "component": "container",
         "label": "",
         "name": "teaser-link-container",
