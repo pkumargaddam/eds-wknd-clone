@@ -384,10 +384,15 @@ a.button[data-variation="withouttext"] {
 }
 
 /* Hide button text properly */
+
+/* Hide text when "withouttext" variation is selected */
 a.button[data-variation="withouttext"] .button-text {
-  display: none !important; /* Force hiding */
-  visibility: hidden;
+  display: none !important;
+  visibility: hidden; /* Extra safeguard */
+  width: 0; /* Prevent space allocation */
+  height: 0;
 }
+
 
 /* Ensure the icon is properly displayed */
 a.button[data-variation="withouttext"] .wknd-icon {
