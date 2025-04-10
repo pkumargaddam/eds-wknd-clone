@@ -135,10 +135,7 @@
               "component": "reference",
               "valueType": "string",
               "name": "image",
-              "label": "Image",
-              "validation": {
-                "rootPath": "/content/eds-wknd"
-              }
+              "label": "Image"
             },
             {
               "component": "text",
