@@ -1,4 +1,4 @@
-export default async function decorateTeaser(blockEl) {
+export default async function decorate(block) {
   const [
     pageLinkEl,
     inheritPageLinkEl,
@@ -9,7 +9,7 @@ export default async function decorateTeaser(blockEl) {
     ctaLinkEl,
     ctaLinkOpenEl,
     imageRowEl,
-  ] = [...blockEl.children];
+  ] = [...block.children];
 
   const pageLink = pageLinkEl?.querySelector('a')?.getAttribute('href') || '';
   const inheritPageLink = inheritPageLinkEl?.textContent.trim() === 'true';
@@ -120,5 +120,5 @@ export default async function decorateTeaser(blockEl) {
   }
 
   teaserEl.appendChild(cmpTeaser);
-  blockEl.replaceWith(teaserEl);
+  block.replaceWith(teaserEl);
 }
