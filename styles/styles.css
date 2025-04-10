@@ -370,13 +370,20 @@ img {
 }
  
 /* Ensure "icon without text" only shows the icon */
+a.button[data-variation="withouttext"] .button-text {
+  display: none; /* Hide text but keep icon */
+}
+
 a.button[data-variation="withouttext"] {
-  text-indent: -9999px; /* Hide text */
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  width: 48px; /* Adjust width to match icon size */
+  height: 48px; /* Adjust height to match icon size */
+  padding: 0; /* Remove padding to fit the icon */
 }
 
 a.button[data-variation="withouttext"] .wknd-icon {
-  text-indent: 0; /* Keep icon visible */
+  text-indent: 0; /* Ensure icon is visible */
+  font-size: 18px; /* Set appropriate icon size */
 }

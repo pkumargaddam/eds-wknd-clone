@@ -421,6 +421,7 @@ function decorateButtons(element) {
 
     // Get variation from dataset
     const variation = a.dataset.variation || 'withtext';
+    a.setAttribute('data-variation', variation); // Ensure data-variation is present in the DOM
 
     if (a.href !== a.textContent) {
       const up = a.parentElement;
@@ -453,12 +454,14 @@ function decorateButtons(element) {
 
     // Handle social icons
     if (socialIcons[iconKey]) {
+      a.classList.add('social-icon', 'social-button', 'button');
+
       if (variation === 'withouttext') {
         a.innerHTML = socialIcons[iconKey]; // Show only icon
       } else {
-        a.innerHTML = `${socialIcons[iconKey]} ${a.textContent.trim()}`; // Show icon + text
+        a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${a.textContent.trim()}</span>`; // Show icon + text
       }
-      a.classList.add('social-icon', 'social-button', 'button');
+
       a.parentElement.classList.add('social-container');
     }
   });
