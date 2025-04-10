@@ -419,13 +419,6 @@ function decorateButtons(element) {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
-    // Ensure data-variation is correctly set
-    let variation = a.getAttribute('data-variation');
-    if (!variation) {
-      variation = 'withtext'; // Default to withtext only if variation is not set
-      a.setAttribute('data-variation', variation);
-    }
-
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
@@ -454,19 +447,27 @@ function decorateButtons(element) {
         }
       }
     }
-    if (socialIcons[iconKey]) {
-      a.classList.add('social-icon', 'social-button', 'button');
 
-      if (variation === 'withouttext') {
-        a.innerHTML = socialIcons[iconKey]; // Only icon
-      } else {
-        a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${a.title}</span>`; // Icon + text
-      }
+    // Apply social icon styling
+    if (socialIcons[iconKey]) {
+      a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.textContent}</span>`;
+      a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
+    }
+
+    // Handle "withouttext" variation
+    if (a.dataset.variation === 'withouttext') {
+      a.classList.add('icon-only'); // Add helper class
+      const textSpan = a.querySelector('.button-text');
+      if (textSpan) textSpan.remove(); // Remove text span if present
     }
   });
 }
 
+// Run function on page load
+document.addEventListener('DOMContentLoaded', () => {
+  decorateButtons(document.body);
+});
 /**
  * Add <img> for icon, prefixed with codeBasePath and optional prefix.
  * @param {Element} [span] span element with icon classes
