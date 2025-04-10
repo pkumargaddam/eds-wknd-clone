@@ -54,7 +54,8 @@
                 "label": "CTA Label",
                 "name": "cta-label",
                 "valueType": "string",
-                "placeholder": "enter label"
+                "placeholder": "Enter label",
+                "raw": "testig this "
               },
               {
                 "component": "aem-content",
@@ -63,7 +64,8 @@
                 "valueType": "string",
                 "validation": {
                   "rootPath": "/content/eds-wknd"
-                }
+                },
+                "placeholder": "Enter Path"
               },
               {
                 "component": "checkbox-group",
