@@ -1,11 +1,7 @@
 .seperator-wrapper {
-   border: none;
-    height: 2px;
-    background: grey;
-    margin: 2rem 0;
-    opacity: 0.8;
-    border-top: 1px;
-    border-style: solid;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
     border-width: 1px;
-    color: #ebebeb;
+    border-style: solid;
+    color: $gray-light;
 }
