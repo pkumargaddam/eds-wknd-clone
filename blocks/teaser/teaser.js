@@ -37,6 +37,7 @@ export default async function decorate(block) {
         inheritedDescription = pageData['jcr:description'] || '';
         inheritedImageURL = pageData.image?.fileReference || '';
         inheritedAlt = pageData.image?.alt || '';
+        console.log('pageData: ', pageData);
         console.log('Inherit DATA: ', inheritedTitle, inheritedDescription, inheritedImageURL, inheritedAlt);
       }
     } catch (e) {
