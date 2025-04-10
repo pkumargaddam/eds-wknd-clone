@@ -247,7 +247,8 @@ button {
   background-color: var(--color-yellow);
   color: var(--color-black);
   cursor: pointer;
-  overflow: hidden;
+
+  /* overflow: hidden; */
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: var(--font-size-small) ;
