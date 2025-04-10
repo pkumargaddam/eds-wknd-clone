@@ -95,7 +95,7 @@
       },
       {
         "component": "select",
-        "name": "linkType",
+        "name": "linkVariations",
         "label": "Variations",
         "options": [
           {
