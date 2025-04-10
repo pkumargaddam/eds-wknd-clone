@@ -45,8 +45,8 @@ export default async function decorate(block) {
   const description = inheritPageLink ? inheritedDescription || '' : descriptionEl?.textContent || '';
 
   // Build DOM
-  const teaserEl = document.createElement('div');
-  teaserEl.className = 'teaser';
+  // const teaserEl = document.createElement('div');
+  // teaserEl.className = 'teaser';
 
   const cmpTeaser = document.createElement('div');
   cmpTeaser.className = 'cmp-teaser';
@@ -119,6 +119,7 @@ export default async function decorate(block) {
     cmpTeaser.appendChild(imageWrapper);
   }
 
-  teaserEl.appendChild(cmpTeaser);
-  block.replaceWith(teaserEl);
+  block.innerHTML = '';
+  block.appendChild(cmpTeaser);
+  // block.replaceWith(teaserEl);
 }
