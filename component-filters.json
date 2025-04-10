@@ -15,13 +15,8 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
-    ]
-  },
-  {
-    "id": "accordion",
-    "components": [
-      "accordionitem"
+      "fragment",
+      "seperator"
     ]
   },
   {
