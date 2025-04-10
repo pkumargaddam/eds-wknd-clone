@@ -451,17 +451,13 @@ function decorateButtons(element) {
         }
       }
     }
-
-    // Handle social icons
     if (socialIcons[iconKey]) {
       a.classList.add('social-icon', 'social-button', 'button');
-
       if (variation === 'withouttext') {
-        a.innerHTML = socialIcons[iconKey];
+        a.innerHTML = socialIcons[iconKey]; // Only the icon, no text
       } else {
-        a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${a.textContent.trim()}</span>`;
+        a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${a.title}</span>`; // Icon + text
       }
-
       a.parentElement.classList.add('social-container');
     }
   });
