@@ -34,12 +34,18 @@
             "fields": [
               {
                 "component": "aem-content",
-                "name": "teaser-page-link",
+                "name": "page-link",
                 "label": "Page link",
                 "valueType": "string",
                 "validation": {
                   "rootPath": "/content/eds-wknd"
                 }
+              },
+              {
+                "component": "boolean",
+                "label": "Inherit info from linked page",
+                "name": "inherit-page-link",
+                "valueType": "boolean"
               }
             ]
           },
@@ -87,7 +93,17 @@
                 "component": "text",
                 "label": "Pretitle",
                 "name": "pretitle",
-                "valueType": "string"
+                "valueType": "string",
+                "readOnly": {
+                  "===": [{ "var": "inherit-page-link" }, true]
+                },
+                "value": {
+                  "if": [
+                    { "===": [{ "var": "inherit-page-link" }, true] },
+                    { "var": "link-page-value" },
+                    { "var": "hidden-text" }
+                  ]
+                }
               },
               {
                 "component": "text",
@@ -120,14 +136,15 @@
                 "name": "image",
                 "label": "Image",
                 "validation": {
-                  "rootPath": "/content/dam/eds-wknd"
+                  "rootPath": "/content/eds-wknd"
                 }
               },
               {
                 "component": "text",
                 "valueType": "string",
                 "name": "imageAlt",
-                "label": "Alternative text for accessibility *"
+                "label": "Alternative text for accessibility",
+                "required": true
               }
             ]
           }
