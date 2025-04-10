@@ -369,3 +369,14 @@ img {
   color:var(--color-white);
 }
  
+/* Ensure "icon without text" only shows the icon */
+a.button[data-variation="withouttext"] {
+  text-indent: -9999px; /* Hide text */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a.button[data-variation="withouttext"] .wknd-icon {
+  text-indent: 0; /* Keep icon visible */
+}

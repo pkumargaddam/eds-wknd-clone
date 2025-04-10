@@ -418,7 +418,9 @@ function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
-    const variation = a.dataset.variation || ''; // Get the variation from dataset
+
+    // Get variation from dataset
+    const variation = a.dataset.variation || 'withtext';
 
     if (a.href !== a.textContent) {
       const up = a.parentElement;
@@ -449,15 +451,15 @@ function decorateButtons(element) {
       }
     }
 
+    // Handle social icons
     if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey]; // Set the icon first
+      if (variation === 'withouttext') {
+        a.innerHTML = socialIcons[iconKey]; // Show only icon
+      } else {
+        a.innerHTML = `${socialIcons[iconKey]} ${a.textContent.trim()}`; // Show icon + text
+      }
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
-
-      // Handle text based on variation
-      if (variation === 'withtext') {
-        a.innerHTML += ` <span>${a.title}</span>`; // Add text next to the icon
-      }
     }
   });
 }
