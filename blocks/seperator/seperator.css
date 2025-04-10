@@ -1,7 +1,8 @@
 .seperator-wrapper {
    border: none;
     height: 2px;
-    background: black;
+    background: grey;
     margin: 2rem 0;
     opacity: 0.8;
+    border-top: 1px;
 }
