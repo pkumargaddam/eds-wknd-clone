@@ -227,14 +227,14 @@
             "component": "text",
             "label": "CTA Label",
             "name": "cta-label",
-            "valueType": "string"
+            "valueType": "string",
+            "placeholder": "enter label"
           },
           {
             "component": "aem-content",
             "label": "Link",
             "name": "cta-link",
             "valueType": "string",
-            "placeholder": "enter label",
             "validation": {
               "rootPath": "/content/eds-wknd"
             }
