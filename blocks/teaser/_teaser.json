@@ -96,13 +96,6 @@
                 "valueType": "string",
                 "readOnly": {
                   "===": [{ "var": "inherit-page-link" }, true]
-                },
-                "value": {
-                  "if": [
-                    { "===": [{ "var": "inherit-page-link" }, true] },
-                    { "var": "link-page-value" },
-                    { "var": "hidden-text" }
-                  ]
                 }
               },
               {
