@@ -31,8 +31,8 @@
           "label": "Variation",
           "options": [
             {
-              "name": "Default",
-              "value": ""
+              "name": "Teaser Featured",
+              "value": "teaser-featured"
             },
             {
               "name": "Teaser Banner - Image Top",
