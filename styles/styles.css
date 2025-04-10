@@ -147,10 +147,15 @@ main {
   }  
 }
 
-main > .section > div {
+main > .section {
   max-width: var(--max-width);
   margin: auto;
   padding: 0 var(--gutter-padding);
+}
+
+main > .section.full-width {
+  max-width: var(--max-body-width);
+  padding: 0;
 }
 
 /* headings */
