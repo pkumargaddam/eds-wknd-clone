@@ -1,4 +1,4 @@
-seperatorblock .seperator-wrapper {
+.seperator-wrapper {
    border: none;
     height: 2px;
     background: linear-gradient(to right, #ff7e5f, #feb47b);
