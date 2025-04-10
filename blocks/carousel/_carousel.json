@@ -17,22 +17,34 @@
     }
   ],
   "models": [
+    {
+      "id": "slide",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Content",
+          "valueType": "string"
+        }
+      ]
+    }
   ],
   "filters": [
     {
       "id": "carousel",
       "components": [
-        "columnone"
-      ]
-    },
-    {
-      "id": "columnone",
-      "components": [
-        "text",
+        "slide",
+        "teaser",
         "image",
-        "button",
-        "title",
-        "teaser"
+        "title"
       ]
     }
   ]
