@@ -211,29 +211,6 @@
         "name": "content"
       },
       {
-        "component": "select",
-        "name": "classes",
-        "label": "Variation",
-        "options": [
-          {
-            "name": "Teaser Featured",
-            "value": "teaser-featured"
-          },
-          {
-            "name": "Teaser Banner",
-            "value": "teaser-banner"
-          },
-          {
-            "name": "Teaser Banner - Image Top",
-            "value": "teaser-banner--img-top"
-          },
-          {
-            "name": "Teaser Banner - Image Bottom",
-            "value": "teaser-banner--img-bottom"
-          }
-        ]
-      },
-      {
         "component": "multiselect",
         "name": "classes",
         "label": "Teaser Variation",
