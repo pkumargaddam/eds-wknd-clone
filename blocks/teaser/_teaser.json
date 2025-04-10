@@ -50,7 +50,7 @@
         },
         {
           "component": "multiselect",
-          "name": "property",
+          "name": "classes",
           "label": "Teaser Variation",
           "valueType": "string",
           "required": true,
