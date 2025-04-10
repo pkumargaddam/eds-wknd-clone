@@ -34,8 +34,8 @@
             "fields": [
               {
                 "component": "aem-content",
-                "name": "teaser-link",
-                "label": "Link",
+                "name": "teaser-page-link",
+                "label": "Page link",
                 "valueType": "string",
                 "validation": {
                   "rootPath": "/content/eds-wknd"
@@ -53,28 +53,22 @@
                 "component": "text",
                 "label": "CTA Label",
                 "name": "cta-label",
-                "valueType": "string",
-                "placeholder": "Enter label",
-                "raw": "testig this "
+                "valueType": "string"
               },
               {
                 "component": "aem-content",
-                "label": "Link",
+                "label": "CTA Link",
                 "name": "cta-link",
                 "valueType": "string",
                 "validation": {
                   "rootPath": "/content/eds-wknd"
-                },
-                "placeholder": "Enter Path"
+                }
               },
               {
-                "component": "checkbox-group",
-                "label": "",
+                "component": "boolean",
+                "label": "Open link in new tab",
                 "name": "cta-link-open",
-                "valueType": "string",
-                "options": [
-                  { "name": "Open link in new tab", "value": "true" }
-                ]
+                "valueType": "boolean"
               }
             ]
           },
@@ -92,20 +86,48 @@
               {
                 "component": "text",
                 "label": "Pretitle",
-                "name": "pretitle-label",
+                "name": "pretitle",
                 "valueType": "string"
               },
               {
                 "component": "text",
                 "label": "Title",
-                "name": "title-label",
+                "name": "title",
                 "valueType": "string"
               },
               {
                 "component": "richtext",
                 "label": "Description",
-                "name": "description-label",
+                "name": "description",
                 "valueType": "string"
+              }
+            ]
+          },
+          {
+            "component": "tab",
+            "label": "Asset",
+            "name": "asset"
+          },
+          {
+            "component": "container",
+            "label": "",
+            "name": "teaser-img-container",
+            "valueType": "string",
+            "fields": [
+              {
+                "component": "reference",
+                "valueType": "string",
+                "name": "image",
+                "label": "Image",
+                "validation": {
+                  "rootPath": "/content/dam/eds-wknd"
+                }
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "imageAlt",
+                "label": "Alternative text for accessibility *"
               }
             ]
           }
