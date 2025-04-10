@@ -46,6 +46,33 @@
                 "label": "Inherit title, pretitle and description from linked page",
                 "name": "inherit-page-link",
                 "valueType": "boolean"
+              },
+              {
+                "component": "container",
+                "label": "Teaser Text",
+                "name": "teaser-text-container",
+                "valueType": "string",
+                "fields": [
+                  {
+                    "component": "text",
+                    "label": "Pretitle",
+                    "name": "pretitle",
+                    "valueType": "string"
+                  },
+                  {
+                    "component": "text",
+                    "label": "Title",
+                    "name": "title",
+                    "valueType": "string"
+                  },
+                  {
+                    "component": "richtext",
+                    "label": "Description",
+                    "name": "description",
+                    "valueType": "string"
+                  }
+                ],
+                "condition": { "===": [{"var" : "inherit-page-link"}, true] }
               }
             ]
           },
@@ -75,41 +102,6 @@
                 "label": "Open link in new tab",
                 "name": "cta-link-open",
                 "valueType": "boolean"
-              }
-            ]
-          },
-          {
-            "component": "tab",
-            "label": "Text",
-            "name": "text"
-          },
-          {
-            "component": "container",
-            "label": "",
-            "name": "teaser-text-container",
-            "valueType": "string",
-            "fields": [
-              {
-                "component": "text",
-                "label": "Pretitle",
-                "name": "pretitle",
-                "valueType": "string",
-                "validation" : {
-                  "inherit-page-link" : true,
-                  "readonly": true
-                }
-              },
-              {
-                "component": "text",
-                "label": "Title",
-                "name": "title",
-                "valueType": "string"
-              },
-              {
-                "component": "richtext",
-                "label": "Description",
-                "name": "description",
-                "valueType": "string"
               }
             ]
           },
