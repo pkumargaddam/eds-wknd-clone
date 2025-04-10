@@ -88,8 +88,23 @@
             "value": "secondary"
           },
           {
-            "name": "IconType",
+            "name": "Default",
             "value": ""
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "Options",
+        "label": "Type",
+        "options": [
+          {
+            "name": "Icon with Text",
+            "value": "withtext"
+          },
+          {
+            "name": "Icon without Text",
+            "value": "withouttext"
           }
         ]
       }
