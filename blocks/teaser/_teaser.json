@@ -22,8 +22,8 @@
         "fields": [
           {
             "component": "tab",
-            "label": "Link",
-            "name": "link"
+            "label": "Content",
+            "name": "content"
           },
           {
             "component": "container",
@@ -72,7 +72,7 @@
                     "valueType": "string"
                   }
                 ],
-                "condition": { "===": [{"var" : "inherit-page-link"}, true] }
+                "condition": { "===": [{"var" : "inherit-page-link"}, false] }
               }
             ]
           },

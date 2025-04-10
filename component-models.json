@@ -196,8 +196,8 @@
     "fields": [
       {
         "component": "tab",
-        "label": "Link",
-        "name": "link"
+        "label": "Content",
+        "name": "content"
       },
       {
         "component": "container",
@@ -251,7 +251,7 @@
                 {
                   "var": "inherit-page-link"
                 },
-                true
+                false
               ]
             }
           }
