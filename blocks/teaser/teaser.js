@@ -29,19 +29,18 @@ export default async function decorate(block) {
   if (inheritPageLinkEl?.textContent.trim() === 'true' && pageLinkEl?.href) {
     try {
       const pagePath = pageLinkEl.getAttribute('href');
-      const infinityURL = `https://author-p51328-e442308.adobeaemcloud.com${pagePath}.model.infinity.json`;
+      const infinityURL = `https://author-p51328-e442308.adobeaemcloud.com${pagePath}.infinity.json`;
       const resp = await fetch(infinityURL);
       if (resp.ok) {
         const pageData = await resp.json();
-        inheritedTitle = pageData.pageTitle || '';
-        inheritedDescription = pageData['jcr:description'] || '';
-        inheritedImageURL = pageData.image?.fileReference || '';
-        inheritedAlt = pageData.image?.alt || '';
-        console.log('pageData: ', pageData);
-        console.log('Inherit DATA: ', inheritedTitle, inheritedDescription, inheritedImageURL, inheritedAlt);
+        const content = pageData['jcr:content'];
+        inheritedTitle = content?.pageTitle || '';
+        inheritedDescription = content?.['jcr:description'] || '';
+        inheritedImageURL = content?.image?.fileReference || '';
+        inheritedAlt = content?.image?.alt || '';
       }
     } catch (e) {
-      console.warn('Failed to load page data from .infinity.json', e);
+      console.warn('Failed to fetch or parse inherited page data', e);
     }
   }
 
