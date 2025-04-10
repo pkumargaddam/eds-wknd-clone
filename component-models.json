@@ -217,7 +217,7 @@
           },
           {
             "component": "boolean",
-            "label": "Inherit title, pretitle and description from linked page",
+            "label": "Inherit data from linked page",
             "name": "inherit-page-link",
             "valueType": "boolean"
           },
@@ -237,23 +237,31 @@
                 "component": "text",
                 "label": "Title",
                 "name": "title",
-                "valueType": "string"
+                "valueType": "string",
+                "condition": {
+                  "===": [
+                    {
+                      "var": "inherit-page-link"
+                    },
+                    false
+                  ]
+                }
               },
               {
                 "component": "richtext",
                 "label": "Description",
                 "name": "description",
-                "valueType": "string"
+                "valueType": "string",
+                "condition": {
+                  "===": [
+                    {
+                      "var": "inherit-page-link"
+                    },
+                    false
+                  ]
+                }
               }
-            ],
-            "condition": {
-              "===": [
-                {
-                  "var": "inherit-page-link"
-                },
-                false
-              ]
-            }
+            ]
           }
         ]
       },
@@ -289,7 +297,15 @@
       {
         "component": "tab",
         "label": "Asset",
-        "name": "asset"
+        "name": "asset",
+        "condition": {
+          "===": [
+            {
+              "var": "inherit-page-link"
+            },
+            false
+          ]
+        }
       },
       {
         "component": "container",
@@ -313,7 +329,15 @@
             "label": "Alternative text for accessibility",
             "required": true
           }
-        ]
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "inherit-page-link"
+            },
+            false
+          ]
+        }
       }
     ]
   }
