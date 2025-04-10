@@ -30,7 +30,9 @@
     "id": "carousel",
     "components": [
       "image",
-      "teaser"
+      "teaser",
+      "title",
+      "hero"
     ]
   },
   {
