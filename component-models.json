@@ -216,6 +216,7 @@
         "label": "Teaser Variation",
         "valueType": "string",
         "required": true,
+        "maxSize": 2,
         "options": [
           {
             "name": "Teaser Type",
