@@ -49,8 +49,14 @@
             {
               "name": "Teaser Banner Image Focus",
               "children": [
-                { "name": "Image Focus Top", "value": "img-top" },
-                { "name": "Image Focus Bottom", "value": "img-bottom" }
+                {
+                  "name": "Image Focus Top",
+                  "value": "img-top"
+                },
+                {
+                  "name": "Image Focus Bottom",
+                  "value": "img-bottom"
+                }
               ]
             }
           ]
