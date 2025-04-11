@@ -1,4 +1,8 @@
+/* eslint-disable no-console */
+import { getAEMAuthor } from '../../scripts/endpointconfig.js';
+
 export default async function decorate(block) {
+  // Destructure block children assuming fixed column structure
   const [
     pageLinkEl,
     inheritPageLinkEl,
@@ -11,6 +15,7 @@ export default async function decorate(block) {
     imageRowEl,
   ] = [...block.children];
 
+  // Extract values from DOM
   const pageLink = pageLinkEl?.querySelector('a')?.getAttribute('href') || '';
   const inheritPageLink = inheritPageLinkEl?.textContent.trim() === 'true';
   const ctaLabel = ctaLabelEl?.textContent || '';
@@ -18,18 +23,20 @@ export default async function decorate(block) {
   const openInNewTab = ctaLinkOpenEl?.textContent.trim() === 'true';
   const pretitle = pretitleEl?.textContent || '';
 
-  // Initialize content
-  let inheritedTitle = null;
-  let inheritedDescription = null;
-  let inheritedImageURL = null;
-  let inheritedImageAlt = null;
+  // Default values for inherited content
+  let inheritedTitle = '';
+  let inheritedDescription = '';
+  let inheritedImageURL = '';
+  let inheritedImageAlt = '';
 
+  // Fetch page link metadata if inheritance is enabled
   if (inheritPageLink && pageLink) {
     try {
-      const url = `https://author-p51328-e442308.adobeaemcloud.com${pageLink}.infinity.json`;
-      const res = await fetch(url);
+      const aemAuthorURL = getAEMAuthor();
+      const res = await fetch(`${aemAuthorURL}${pageLink}.infinity.json`);
       const json = await res.json();
       const content = json?.['jcr:content'];
+
       if (content) {
         inheritedTitle = content.pageTitle ?? '';
         inheritedDescription = content['jcr:description'] ?? '';
@@ -41,19 +48,18 @@ export default async function decorate(block) {
     }
   }
 
-  const title = inheritPageLink ? inheritedTitle || '' : titleEl?.textContent || '';
-  const description = inheritPageLink ? inheritedDescription || '' : descriptionEl?.textContent || '';
+  // Resolve title and description from inherited or block content
+  const title = inheritPageLink ? inheritedTitle : (titleEl?.textContent || '');
+  const description = inheritPageLink ? inheritedDescription : (descriptionEl?.textContent || '');
 
-  // Build DOM
-  // const teaserEl = document.createElement('div');
-  // teaserEl.className = 'teaser';
-
+  // ─── Build Teaser DOM ───
   const cmpTeaser = document.createElement('div');
   cmpTeaser.className = 'cmp-teaser';
 
   const content = document.createElement('div');
   content.className = 'cmp-teaser__content';
 
+  // Add optional pretitle
   if (pretitle) {
     const pre = document.createElement('p');
     pre.className = 'cmp-teaser__pretitle';
@@ -61,6 +67,7 @@ export default async function decorate(block) {
     content.appendChild(pre);
   }
 
+  // Add title
   if (title) {
     const h2 = document.createElement('h2');
     h2.className = 'cmp-teaser__title';
@@ -68,6 +75,7 @@ export default async function decorate(block) {
     content.appendChild(h2);
   }
 
+  // Add description
   if (description) {
     const desc = document.createElement('div');
     desc.className = 'cmp-teaser__description';
@@ -75,14 +83,16 @@ export default async function decorate(block) {
     content.appendChild(desc);
   }
 
+  // Add CTA if defined
   if (ctaLink && ctaLabel) {
     const actionContainer = document.createElement('div');
-    actionContainer.className = 'cmp-teaser__action-container';
+    actionContainer.className = 'cmp-teaser__action-container button-container';
 
     const actionLink = document.createElement('a');
-    actionLink.className = 'cmp-teaser__action-link';
+    actionLink.className = 'cmp-teaser__action-link button';
     actionLink.href = ctaLink;
     actionLink.textContent = ctaLabel;
+
     if (openInNewTab) {
       actionLink.target = '_blank';
       actionLink.rel = 'noopener noreferrer';
@@ -94,12 +104,12 @@ export default async function decorate(block) {
 
   cmpTeaser.appendChild(content);
 
-  // Image logic
+  // ─── Handle Image Logic ────
   const imageWrapper = document.createElement('div');
   imageWrapper.className = 'cmp-teaser__image';
 
-  if (inheritPageLink) {
-    // Render image from inherited page data
+  if (inheritPageLink && inheritedImageURL) {
+    // If inherited image is available, create <picture><img></picture>
     const picture = document.createElement('picture');
     const img = document.createElement('img');
     img.src = inheritedImageURL;
@@ -108,18 +118,17 @@ export default async function decorate(block) {
     picture.appendChild(img);
     imageWrapper.appendChild(picture);
   } else {
-    // Grab original <picture> from DOM
+    // Use <picture> from the original DOM
     const pictureEl = imageRowEl?.querySelector('picture');
     if (pictureEl) {
       imageWrapper.appendChild(pictureEl.cloneNode(true));
     }
   }
 
-  if (imageWrapper.children.length) {
+  if (imageWrapper.children.length > 0) {
     cmpTeaser.appendChild(imageWrapper);
   }
 
   block.innerHTML = '';
   block.appendChild(cmpTeaser);
-  // block.replaceWith(teaserEl);
 }
