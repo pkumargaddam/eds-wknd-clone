@@ -107,11 +107,36 @@
       {
         "component": "multiselect",
         "name": "style",
-        "label": "Style",
+        "label": "Section Styles",
+        "valueType": "string",
+        "required": true,
+        "maxSize": 2,
         "options": [
           {
-            "name": "Highlight",
-            "value": "highlight"
+            "name": "Layout",
+            "children": [
+              {
+                "name": "Default Width",
+                "value": ""
+              },
+              {
+                "name": "Full Width",
+                "value": "full-width"
+              }
+            ]
+          },
+          {
+            "name": "Margin",
+            "children": [
+              {
+                "name": "Margin Top",
+                "value": "top-margin"
+              },
+              {
+                "name": "Margin Bottom",
+                "value": "bottom-margin"
+              }
+            ]
           }
         ]
       }
@@ -188,6 +213,181 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "teaser",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "Content",
+        "name": "content"
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Teaser Variation",
+        "valueType": "string",
+        "required": true,
+        "maxSize": 2,
+        "options": [
+          {
+            "name": "Teaser Type",
+            "children": [
+              {
+                "name": "Teaser Featured",
+                "value": "teaser-featured"
+              },
+              {
+                "name": "Teaser Banner",
+                "value": "teaser-banner"
+              }
+            ]
+          },
+          {
+            "name": "Teaser Banner Image Focus",
+            "children": [
+              {
+                "name": "Image Focus Top",
+                "value": "img-top"
+              },
+              {
+                "name": "Image Focus Bottom",
+                "value": "img-bottom"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "",
+        "name": "teaser-link-container",
+        "description": "The teaser title, description and image can be inherited from the linked page.",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "page-link",
+            "label": "Page link",
+            "valueType": "string",
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          },
+          {
+            "component": "boolean",
+            "label": "Inherit data from linked page",
+            "name": "inherit-page-link",
+            "valueType": "boolean"
+          },
+          {
+            "component": "container",
+            "label": "Teaser Text",
+            "name": "teaser-text-container",
+            "valueType": "string",
+            "fields": [
+              {
+                "component": "text",
+                "label": "Pretitle",
+                "name": "pretitle",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "Title",
+                "name": "title",
+                "valueType": "string",
+                "condition": {
+                  "===": [
+                    {
+                      "var": "inherit-page-link"
+                    },
+                    false
+                  ]
+                }
+              },
+              {
+                "component": "richtext",
+                "label": "Description",
+                "name": "description",
+                "valueType": "string",
+                "condition": {
+                  "===": [
+                    {
+                      "var": "inherit-page-link"
+                    },
+                    false
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Teaser Call-to-action",
+        "name": "teaser-cta-container",
+        "valueType": "string",
+        "fields": [
+          {
+            "component": "text",
+            "label": "CTA Label",
+            "name": "cta-label",
+            "valueType": "string"
+          },
+          {
+            "component": "aem-content",
+            "label": "CTA Link",
+            "name": "cta-link",
+            "valueType": "string",
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          },
+          {
+            "component": "boolean",
+            "label": "Open link in new tab",
+            "name": "cta-link-open",
+            "valueType": "boolean"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "Asset",
+        "name": "asset"
+      },
+      {
+        "component": "container",
+        "label": "",
+        "name": "teaser-img-container",
+        "valueType": "string",
+        "fields": [
+          {
+            "component": "reference",
+            "valueType": "string",
+            "name": "image",
+            "label": "Image"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "imageAlt",
+            "label": "Alternative text for accessibility",
+            "required": true
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "inherit-page-link"
+            },
+            false
+          ]
+        }
       }
     ]
   }
