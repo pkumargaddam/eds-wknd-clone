@@ -53,6 +53,7 @@
 }
 
 .teaser.teaser-featured .cmp-teaser .cmp-teaser__image img {
+    aspect-ratio: 1313 / 739;
     height: 100%;
     margin: 0;
     object-fit: cover;
@@ -136,6 +137,7 @@
 }
 
 .teaser.teaser-banner .cmp-teaser .cmp-teaser__image img {
+    aspect-ratio: 16 / 9;
     height: 100%;
     margin: 0;
     object-fit: cover;

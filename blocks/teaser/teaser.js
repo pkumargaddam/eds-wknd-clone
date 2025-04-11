@@ -18,10 +18,10 @@ export default async function decorate(block) {
   // Extract values from DOM
   const pageLink = pageLinkEl?.querySelector('a')?.getAttribute('href') || '';
   const inheritPageLink = inheritPageLinkEl?.textContent.trim() === 'true';
-  const ctaLabel = ctaLabelEl?.textContent || '';
+  const ctaLabel = ctaLabelEl?.textContent.trim() || '';
   const ctaLink = ctaLinkEl?.querySelector('a')?.getAttribute('href') || '';
   const openInNewTab = ctaLinkOpenEl?.textContent.trim() === 'true';
-  const pretitle = pretitleEl?.textContent || '';
+  const pretitle = pretitleEl?.textContent.trim() || '';
 
   // Default values for inherited content
   let inheritedTitle = '';
@@ -49,8 +49,8 @@ export default async function decorate(block) {
   }
 
   // Resolve title and description from inherited or block content
-  const title = inheritPageLink ? inheritedTitle : (titleEl?.textContent || '');
-  const description = inheritPageLink ? inheritedDescription : (descriptionEl?.textContent || '');
+  const title = inheritPageLink ? inheritedTitle : (titleEl?.textContent.trim() || '');
+  const description = inheritPageLink ? inheritedDescription : (descriptionEl?.textContent.trim() || '');
 
   // ─── Build Teaser DOM ───
   const cmpTeaser = document.createElement('div');
