@@ -448,18 +448,10 @@ function decorateButtons(element) {
       }
     }
 
-    // Apply social icon styling
     if (socialIcons[iconKey]) {
-      a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.textContent}</span>`;
+      a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
-    }
-
-    // Handle "withouttext" variation
-    if (a.dataset.variation === 'withouttext') {
-      a.classList.add('icon-only'); // Add helper class
-      const textSpan = a.querySelector('.button-text');
-      if (textSpan) textSpan.remove(); // Remove text span if present
     }
   });
 }
