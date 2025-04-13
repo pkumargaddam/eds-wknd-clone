@@ -419,9 +419,18 @@ function decorateButtons(element) {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
+    // Handle social icons
+    if (socialIcons[iconKey]) {
+      a.innerHTML = socialIcons[iconKey];
+      a.classList.add('social-icon', 'social-button', 'button');
+      a.parentElement.classList.add('social-container');
+    }
+
+    // Check parent element structure and add classes accordingly
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
+
       if (!a.querySelector('img')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button';
@@ -448,10 +457,14 @@ function decorateButtons(element) {
       }
     }
 
-    if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey];
-      a.classList.add('social-icon', 'social-button', 'button');
-      a.parentElement.classList.add('social-container');
+    // Get the alignment value from the dropdown in the AEM model
+    const block = element.closest('.block'); // Assuming the block is wrapped with this class
+    const alignment = block?.dataset?.alignment || 'left'; // Default to 'left' if not specified
+
+    // Apply the alignment class to the button container
+    const buttonContainer = a.closest('.button-container');
+    if (buttonContainer) {
+      buttonContainer.classList.add(alignment); // Directly use the value as class
     }
   });
 }

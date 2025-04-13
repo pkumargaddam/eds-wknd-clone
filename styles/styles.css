@@ -408,14 +408,14 @@ a.button[data-variation="withouttext"] .wknd-icon {
   color: var(--color-black);
 }
 
-.button-container.align-left {
+.button-container.left {
   text-align: left;
 }
 
-.button-container.align-center {
+.button-container.center {
   text-align: center;
 }
 
-.button-container.align-right {
+.button-container.right {
   text-align: right;
 }
