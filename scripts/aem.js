@@ -406,7 +406,7 @@ function wrapTextNodes(block) {
  * Decorates paragraphs containing a single link as buttons.
  * @param {Element} element container element
  */
-function decorateButtons(element) {
+function decorateButtons(element, alignment = 'left') {
   const socialIcons = {
     menu: '<i class="wknd-icon wkndicon-menu"></i>',
     google: '<i class="wknd-icon wkndicon-google"></i>',
@@ -419,25 +419,28 @@ function decorateButtons(element) {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
-    const up = a.parentElement;
-    const twoup = up?.parentElement;
-
     if (a.href !== a.textContent) {
+      const up = a.parentElement;
+      const twoup = up.parentElement;
       if (!a.querySelector('img')) {
-        if (up.tagName === 'P' || up.tagName === 'DIV') {
+        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button';
           up.classList.add('button-container');
         }
         if (
-          up.tagName === 'STRONG'
-          && twoup?.tagName === 'P'
+          up.childNodes.length === 1
+          && up.tagName === 'STRONG'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
         ) {
           a.className = 'button primary';
           twoup.classList.add('button-container');
         }
         if (
-          up.tagName === 'EM'
-          && twoup?.tagName === 'P'
+          up.childNodes.length === 1
+          && up.tagName === 'EM'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
         ) {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
@@ -445,19 +448,16 @@ function decorateButtons(element) {
       }
     }
 
+    // Apply social icon logic
     if (socialIcons[iconKey]) {
       a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
 
-    // Transfer alignment class from inner wrapper (strong/em) to outer container (p)
-    if (up && twoup?.classList.contains('button-container')) {
-      const alignmentClass = [...up.classList].find((cls) => cls.startsWith('align-'));
-      if (alignmentClass) {
-        twoup.classList.add(alignmentClass);
-      }
-    }
+    // Align the button based on the alignment option
+    const buttonContainer = a.parentElement;
+    buttonContainer.classList.add(`align-${alignment}`);
   });
 }
 
