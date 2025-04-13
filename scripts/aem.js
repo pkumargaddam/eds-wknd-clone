@@ -419,36 +419,39 @@ function decorateButtons(element) {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
-    const up = a.parentElement;
-    const twoup = up?.parentElement;
-
     if (a.href !== a.textContent) {
+      const up = a.parentElement;
+      const twoup = up.parentElement;
       if (!a.querySelector('img')) {
-        if (up.tagName === 'P' || up.tagName === 'DIV') {
+        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button';
           up.classList.add('button-container');
-        } else if (up.tagName === 'STRONG' && twoup?.tagName === 'P') {
+        }
+        if (
+          up.childNodes.length === 1
+          && up.tagName === 'STRONG'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
+        ) {
           a.className = 'button primary';
           twoup.classList.add('button-container');
-        } else if (up.tagName === 'EM' && twoup?.tagName === 'P') {
+        }
+        if (
+          up.childNodes.length === 1
+          && up.tagName === 'EM'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
+        ) {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
         }
       }
     }
 
-    // Social icon logic
     if (socialIcons[iconKey]) {
       a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
-    }
-
-    // ✅ Apply alignment from data attribute (e.g., data-alignment="center")
-    const container = twoup?.classList.contains('button-container') ? twoup : up;
-    const alignment = container?.dataset.alignment;
-    if (alignment) {
-      container.classList.add(`align-${alignment}`);
     }
   });
 }
