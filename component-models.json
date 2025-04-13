@@ -109,21 +109,19 @@
         ]
       },
       {
-        "component": "select",
-        "name": "alignment",
-        "label": "Alignment",
-        "options": [
+        "name": "Alignment",
+        "children": [
           {
             "name": "Left",
-            "value": "align-left"
+            "value": "btn-left-align"
           },
           {
             "name": "Center",
-            "value": "align-center"
+            "value": "btn-center-align"
           },
           {
             "name": "Right",
-            "value": "align-right"
+            "value": "btn-right-align"
           }
         ]
       }
