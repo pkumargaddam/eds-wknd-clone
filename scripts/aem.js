@@ -453,13 +453,11 @@ function decorateButtons(element) {
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
-    const block = element.closest('.block'); // Assuming the block is wrapped with this class
-    const alignment = block?.dataset?.alignment || 'left'; // Default to 'left' if not specified
-
-    // Apply the alignment class to the button container
+    const block = element.closest('.block');
+    const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
     if (buttonContainer) {
-      buttonContainer.classList.add(alignment); // Add the alignment class (left, center, or right)
+      buttonContainer.classList.add(alignment);
     }
   });
 }
