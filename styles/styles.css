@@ -370,6 +370,17 @@ img {
   color:var(--color-white);
 }
  
+ 
+a.button[data-variation="withouttext"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px; 
+  height: 48px;
+  padding: 0;
+  overflow: hidden; 
+}
+
 
 /* stylelint-disable-next-line no-duplicate-selectors */
 .button.icon-only {
@@ -381,14 +392,18 @@ img {
   padding: 0 !important;
 }
 
-.button-container.left {
-  text-align: left;
+.button.icon-only .button-text {
+  display: none !important;
 }
 
-.button-container.center {
-  text-align: center;
+a.button[data-variation="withouttext"] .button-text {
+  display: none !important;
 }
 
-.button-container.right {
-  text-align: right;
+a.button[data-variation="withouttext"] .wknd-icon {
+  display: inline-block;
+  font-size: 24px; 
+  line-height: 1;
+  text-indent: 0;
+  color: var(--color-black);
 }
