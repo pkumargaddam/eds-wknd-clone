@@ -456,6 +456,21 @@ function decorateButtons(element) {
   });
 }
 
+export default function decorate(block) {
+  // 1. Get the title element
+  const title = block.querySelector('[data-aue-model="title"]');
+
+  // 2. Get the model data (assuming blockConfig.model is available)
+  const model = block?.blockConfig?.model;
+
+  // 3. Add the class based on titleVersion from the model
+  if (title && model?.titleVersion) {
+    title.classList.add(model.titleVersion);
+  }
+
+  // 4. Your other block logic (e.g., for buttons) can go below...
+}
+
 // Run function on page load
 document.addEventListener('DOMContentLoaded', () => {
   decorateButtons(document.body);
