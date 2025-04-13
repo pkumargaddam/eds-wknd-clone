@@ -110,21 +110,6 @@
       },
       {
         "component": "select",
-        "name": "linkVariations",
-        "label": "Variations",
-        "options": [
-          {
-            "name": "Icon with Text",
-            "value": "withtext"
-          },
-          {
-            "name": "Icon without Text",
-            "value": "withouttext"
-          }
-        ]
-      },
-      {
-        "component": "select",
         "name": "alignment",
         "label": "Alignment",
         "options": [
