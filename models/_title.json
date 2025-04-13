@@ -57,17 +57,17 @@
         },
         {
           "component": "select",
-          "name": "titleVersion",
-          "label": "Version",
+          "name": "titleBorderOption",
+          "label": "Title with Border",
           "options": [
             {
-              "name": "withBorder",
-              "value": "withborder"
+              "name": "No Border",
+              "value": "noBorder"
             },
             {
-              "name": "withoutBorder",
-              "value": "withoutborder"
-            }     
+              "name": "Border",
+              "value": "withBorder"
+            }
           ]
         }
       ]
