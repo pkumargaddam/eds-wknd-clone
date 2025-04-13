@@ -456,19 +456,6 @@ function decorateButtons(element) {
   });
 }
 
-export default function decorate(block) {
-  const title = block.querySelector('[data-aue-model="title"]');
-  const model = block?.blockConfig?.model;
-
-  // ✅ This log will work because it's inside the function where model exists
-  // eslint-disable-next-line no-console
-  console.log('Title Version:', model?.titleVersion);
-
-  if (title && model?.titleVersion) {
-    title.classList.add(model.titleVersion);
-  }
-}
-
 // Run function on page load
 document.addEventListener('DOMContentLoaded', () => {
   decorateButtons(document.body);
