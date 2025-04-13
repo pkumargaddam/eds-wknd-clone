@@ -418,29 +418,26 @@ function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
+
     const up = a.parentElement;
     const twoup = up?.parentElement;
 
     if (a.href !== a.textContent) {
       if (!a.querySelector('img')) {
-        if (up?.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+        if (up.tagName === 'P' || up.tagName === 'DIV') {
           a.className = 'button';
           up.classList.add('button-container');
         }
         if (
-          up?.childNodes.length === 1
-          && up.tagName === 'STRONG'
-          && twoup?.childNodes.length === 1
-          && twoup.tagName === 'P'
+          up.tagName === 'STRONG'
+          && twoup?.tagName === 'P'
         ) {
           a.className = 'button primary';
           twoup.classList.add('button-container');
         }
         if (
-          up?.childNodes.length === 1
-          && up.tagName === 'EM'
-          && twoup?.childNodes.length === 1
-          && twoup.tagName === 'P'
+          up.tagName === 'EM'
+          && twoup?.tagName === 'P'
         ) {
           a.className = 'button secondary';
           twoup.classList.add('button-container');
@@ -454,10 +451,12 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
-    // Get alignment class from parent wrapper (strong/em) if exists
-    const alignmentClass = [...a.parentElement.classList].find((c) => c.startsWith('align-'));
-    if (alignmentClass && twoup?.classList.contains('button-container')) {
-      twoup.classList.add(alignmentClass);
+    // Transfer alignment class from inner wrapper (strong/em) to outer container (p)
+    if (up && twoup?.classList.contains('button-container')) {
+      const alignmentClass = [...up.classList].find((cls) => cls.startsWith('align-'));
+      if (alignmentClass) {
+        twoup.classList.add(alignmentClass);
+      }
     }
   });
 }
