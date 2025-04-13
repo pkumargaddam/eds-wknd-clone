@@ -415,45 +415,46 @@ function decorateButtons(element) {
     instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
   };
 
-  // Loop through all <a> tags inside the element
   element.querySelectorAll('a').forEach((a) => {
+    // Set title from textContent if title is empty
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
-    // Handle social icons
+    // Social Icon Logic
     if (socialIcons[iconKey]) {
       a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
-    }
+    } else {
+      // Apply standard button classes
+      // eslint-disable-next-line no-lonely-if
+      if (a.href !== a.textContent) {
+        const up = a.parentElement;
+        const twoup = up.parentElement;
 
-    // Check the parent element's structure and apply button classes
-    if (a.href !== a.textContent) {
-      const up = a.parentElement;
-      const twoup = up.parentElement;
-
-      if (!a.querySelector('img')) {
-        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-          a.className = 'button';
-          up.classList.add('button-container');
-        }
-        if (
-          up.childNodes.length === 1
-          && up.tagName === 'STRONG'
-          && twoup.childNodes.length === 1
-          && twoup.tagName === 'P'
-        ) {
-          a.className = 'button primary';
-          twoup.classList.add('button-container');
-        }
-        if (
-          up.childNodes.length === 1
-          && up.tagName === 'EM'
-          && twoup.childNodes.length === 1
-          && twoup.tagName === 'P'
-        ) {
-          a.className = 'button secondary';
-          twoup.classList.add('button-container');
+        if (!a.querySelector('img')) {
+          if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+            a.className = 'button';
+            up.classList.add('button-container');
+          }
+          if (
+            up.childNodes.length === 1
+            && up.tagName === 'STRONG'
+            && twoup.childNodes.length === 1
+            && twoup.tagName === 'P'
+          ) {
+            a.className = 'button primary';
+            twoup.classList.add('button-container');
+          }
+          if (
+            up.childNodes.length === 1
+            && up.tagName === 'EM'
+            && twoup.childNodes.length === 1
+            && twoup.tagName === 'P'
+          ) {
+            a.className = 'button secondary';
+            twoup.classList.add('button-container');
+          }
         }
       }
     }
