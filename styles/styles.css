@@ -407,3 +407,18 @@ a.button[data-variation="withouttext"] .wknd-icon {
   text-indent: 0;
   color: var(--color-black);
 }
+
+/* Default (no class = no border) */
+[data-aue-model="title"] {
+  border: none;
+  background-color: transparent;
+  padding: 10px;
+}
+
+/* When the titleBorderOption value is "withBorder" and added as a class */
+/* stylelint-disable-next-line selector-class-pattern */
+[data-aue-model="title"].withBorder {
+  border: 2px solid #000;
+  background-color: #f5f5f5; /* optional */
+  padding: 10px;
+}
