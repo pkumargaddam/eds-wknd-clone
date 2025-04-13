@@ -465,8 +465,6 @@ function decorateButtons(element) {
   });
 }
 
-
-
 // Run function on page load
 document.addEventListener('DOMContentLoaded', () => {
   decorateButtons(document.body);
