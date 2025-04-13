@@ -457,18 +457,16 @@ function decorateButtons(element) {
 }
 
 export default function decorate(block) {
-  // 1. Get the title element
   const title = block.querySelector('[data-aue-model="title"]');
-
-  // 2. Get the model data (assuming blockConfig.model is available)
   const model = block?.blockConfig?.model;
 
-  // 3. Add the class based on titleVersion from the model
+  // ✅ This log will work because it's inside the function where model exists
+  // eslint-disable-next-line no-console
+  console.log('Title Version:', model?.titleVersion);
+
   if (title && model?.titleVersion) {
     title.classList.add(model.titleVersion);
   }
-
-  // 4. Your other block logic (e.g., for buttons) can go below...
 }
 
 // Run function on page load
