@@ -416,63 +416,56 @@ function decorateButtons(element) {
   };
 
   element.querySelectorAll('a').forEach((a) => {
-    // Set title from textContent if title is empty
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
-    // Social Icon Logic
+    // Handle social icons by checking if the title matches
     if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey];
-      a.classList.add('social-icon', 'social-button', 'button');
+      a.innerHTML = socialIcons[iconKey]; // Add the social icon HTML
+      a.classList.add('social-icon', 'social-button', 'button'); // Add necessary classes for social icon
       a.parentElement.classList.add('social-container');
     } else {
-      // Apply standard button classes
-      // eslint-disable-next-line no-lonely-if
-      if (a.href !== a.textContent) {
-        const up = a.parentElement;
-        const twoup = up.parentElement;
+      // Handle button behavior for regular buttons
+      const parent = a.parentElement;
+      const grandParent = parent.parentElement;
 
-        if (!a.querySelector('img')) {
-          if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-            a.className = 'button';
-            up.classList.add('button-container');
-          }
-          if (
-            up.childNodes.length === 1
-            && up.tagName === 'STRONG'
-            && twoup.childNodes.length === 1
-            && twoup.tagName === 'P'
-          ) {
-            a.className = 'button primary';
-            twoup.classList.add('button-container');
-          }
-          if (
-            up.childNodes.length === 1
-            && up.tagName === 'EM'
-            && twoup.childNodes.length === 1
-            && twoup.tagName === 'P'
-          ) {
-            a.className = 'button secondary';
-            twoup.classList.add('button-container');
-          }
+      if (!a.querySelector('img')) {
+        if (parent.childNodes.length === 1 && (parent.tagName === 'P' || parent.tagName === 'DIV')) {
+          a.className = 'button'; // Standard button class
+          parent.classList.add('button-container');
+        }
+        if (
+          parent.childNodes.length === 1
+          && parent.tagName === 'STRONG'
+          && grandParent.childNodes.length === 1
+          && grandParent.tagName === 'P'
+        ) {
+          a.className = 'button primary'; // Primary button class
+          grandParent.classList.add('button-container');
+        }
+        if (
+          parent.childNodes.length === 1
+          && parent.tagName === 'EM'
+          && grandParent.childNodes.length === 1
+          && grandParent.tagName === 'P'
+        ) {
+          a.className = 'button secondary'; // Secondary button class
+          grandParent.classList.add('button-container');
         }
       }
     }
 
-    // Get the alignment value from the AEM model and apply to the container
-    const block = element.closest('.block'); // Assuming the block is wrapped with this class
-    const alignment = block?.dataset?.alignment || 'left'; // Default to 'left' if not specified
+    // Apply the alignment class based on the dropdown selection
+    const alignment = a.closest('.button-container')?.dataset?.alignment || 'left'; // Default to 'left'
 
-    // Update the button container class with the correct alignment
     const buttonContainer = a.closest('.button-container');
     if (buttonContainer) {
-      // Remove any previous alignment classes
-      buttonContainer.classList.remove('left', 'center', 'right');
-      // Add the new alignment class
-      buttonContainer.classList.add(alignment);
+      buttonContainer.classList.add(alignment); // Add the alignment class (left, center, or right)
     }
   });
 }
+
+
 
 // Run function on page load
 document.addEventListener('DOMContentLoaded', () => {
