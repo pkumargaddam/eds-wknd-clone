@@ -418,10 +418,10 @@ function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
+
     const up = a.parentElement;
     const twoup = up?.parentElement;
 
-    // Button style detection
     if (a.href !== a.textContent) {
       if (!a.querySelector('img')) {
         if (up.tagName === 'P' || up.tagName === 'DIV') {
@@ -437,22 +437,22 @@ function decorateButtons(element) {
       }
     }
 
-    // Social icon handling
+    // Social icon logic
     if (socialIcons[iconKey]) {
       a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
 
-    // Extract alignment class from the wrapper (e.g., <strong>) and apply to container
-    if (up && twoup?.classList.contains('button-container')) {
-      const alignClass = [...up.classList].find((c) => c.startsWith('align-'));
-      if (alignClass) {
-        twoup.classList.add(alignClass);
-      }
+    // ✅ Apply alignment from data attribute (e.g., data-alignment="center")
+    const container = twoup?.classList.contains('button-container') ? twoup : up;
+    const alignment = container?.dataset.alignment;
+    if (alignment) {
+      container.classList.add(`align-${alignment}`);
     }
   });
 }
+
 // Run function on page load
 document.addEventListener('DOMContentLoaded', () => {
   decorateButtons(document.body);
