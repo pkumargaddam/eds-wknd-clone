@@ -399,7 +399,7 @@ a.button[data-variation="withouttext"] {
 
 [data-aue-model="title"] {
   border: none;
-  background-color: transparent;
+  background-color:pink;
   padding: 10px;
 }
 
