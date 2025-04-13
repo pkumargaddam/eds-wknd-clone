@@ -408,14 +408,12 @@ a.button[data-variation="withouttext"] .wknd-icon {
   color: var(--color-black);
 }
 
-/* Default styling (no border) */
 [data-aue-model="title"] {
   border: none;
   background-color: transparent;
   padding: 10px;
 }
 
-/* Title with border - only applies when class 'withborder' is added */
 [data-aue-model="title"].withborder {
   border: 2px solid #000;
   background-color: #f5f5f5;
