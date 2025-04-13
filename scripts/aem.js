@@ -458,16 +458,11 @@ function decorateButtons(element) {
       }
     }
 
-    // Get the alignment value from the AEM model and apply to the container
-    const block = element.closest('.block'); // Assuming the block is wrapped with this class
-    const alignment = block?.dataset?.alignment || 'left'; // Default to 'left' if not specified
-
-    // Update the button container class with the correct alignment
+    const block = element.closest('.block');
+    const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
     if (buttonContainer) {
-      // Remove any previous alignment classes
       buttonContainer.classList.remove('left', 'center', 'right');
-      // Add the new alignment class
       buttonContainer.classList.add(alignment);
     }
   });
