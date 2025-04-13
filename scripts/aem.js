@@ -419,48 +419,39 @@ function decorateButtons(element) {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
-    // Handle social icons by checking if the title matches
-    if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey]; // Add the social icon HTML
-      a.classList.add('social-icon', 'social-button', 'button'); // Add necessary classes for social icon
-      a.parentElement.classList.add('social-container');
-    } else {
-      // Handle button behavior for regular buttons
-      const parent = a.parentElement;
-      const grandParent = parent.parentElement;
-
+    if (a.href !== a.textContent) {
+      const up = a.parentElement;
+      const twoup = up.parentElement;
       if (!a.querySelector('img')) {
-        if (parent.childNodes.length === 1 && (parent.tagName === 'P' || parent.tagName === 'DIV')) {
-          a.className = 'button'; // Standard button class
-          parent.classList.add('button-container');
+        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+          a.className = 'button';
+          up.classList.add('button-container');
         }
         if (
-          parent.childNodes.length === 1
-          && parent.tagName === 'STRONG'
-          && grandParent.childNodes.length === 1
-          && grandParent.tagName === 'P'
+          up.childNodes.length === 1
+          && up.tagName === 'STRONG'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
         ) {
-          a.className = 'button primary'; // Primary button class
-          grandParent.classList.add('button-container');
+          a.className = 'button primary';
+          twoup.classList.add('button-container');
         }
         if (
-          parent.childNodes.length === 1
-          && parent.tagName === 'EM'
-          && grandParent.childNodes.length === 1
-          && grandParent.tagName === 'P'
+          up.childNodes.length === 1
+          && up.tagName === 'EM'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
         ) {
-          a.className = 'button secondary'; // Secondary button class
-          grandParent.classList.add('button-container');
+          a.className = 'button secondary';
+          twoup.classList.add('button-container');
         }
       }
     }
 
-    // Apply the alignment class based on the dropdown selection
-    const alignment = a.closest('.button-container')?.dataset?.alignment || 'left'; // Default to 'left'
-
-    const buttonContainer = a.closest('.button-container');
-    if (buttonContainer) {
-      buttonContainer.classList.add(alignment); // Add the alignment class (left, center, or right)
+    if (socialIcons[iconKey]) {
+      a.innerHTML = socialIcons[iconKey];
+      a.classList.add('social-icon', 'social-button', 'button');
+      a.parentElement.classList.add('social-container');
     }
   });
 }
