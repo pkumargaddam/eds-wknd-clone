@@ -407,3 +407,11 @@ a.button[data-variation="withouttext"] .wknd-icon {
   text-indent: 0;
   color: var(--color-black);
 }
+
+.left{
+  justify-content: left;
+}
+
+.right{
+  justify-content: right;
+}
