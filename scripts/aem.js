@@ -415,6 +415,7 @@ function decorateButtons(element) {
     instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
   };
 
+  // Loop through all <a> tags inside the element
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
@@ -426,7 +427,7 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
-    // Check parent element structure and add classes accordingly
+    // Check the parent element's structure and apply button classes
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
@@ -457,14 +458,17 @@ function decorateButtons(element) {
       }
     }
 
-    // Get the alignment value from the dropdown in the AEM model
+    // Get the alignment value from the AEM model and apply to the container
     const block = element.closest('.block'); // Assuming the block is wrapped with this class
     const alignment = block?.dataset?.alignment || 'left'; // Default to 'left' if not specified
 
-    // Apply the alignment class to the button container
+    // Update the button container class with the correct alignment
     const buttonContainer = a.closest('.button-container');
     if (buttonContainer) {
-      buttonContainer.classList.add(alignment); // Directly use the value as class
+      // Remove any previous alignment classes
+      buttonContainer.classList.remove('left', 'center', 'right');
+      // Add the new alignment class
+      buttonContainer.classList.add(alignment);
     }
   });
 }
