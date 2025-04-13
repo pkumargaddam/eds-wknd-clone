@@ -415,23 +415,13 @@ function decorateButtons(element) {
     instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
   };
 
-  // Loop through all <a> tags inside the element
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
-    // Handle social icons
-    if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey];
-      a.classList.add('social-icon', 'social-button', 'button');
-      a.parentElement.classList.add('social-container');
-    }
-
-    // Check the parent element's structure and apply button classes
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
-
       if (!a.querySelector('img')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button';
@@ -458,12 +448,10 @@ function decorateButtons(element) {
       }
     }
 
-    const block = element.closest('.block');
-    const alignment = block?.dataset?.alignment || 'left';
-    const buttonContainer = a.closest('.button-container');
-    if (buttonContainer) {
-      buttonContainer.classList.remove('left', 'center', 'right');
-      buttonContainer.classList.add(alignment);
+    if (socialIcons[iconKey]) {
+      a.innerHTML = socialIcons[iconKey];
+      a.classList.add('social-icon', 'social-button', 'button');
+      a.parentElement.classList.add('social-container');
     }
   });
 }
