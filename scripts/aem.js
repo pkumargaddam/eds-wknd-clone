@@ -406,7 +406,7 @@ function wrapTextNodes(block) {
  * Decorates paragraphs containing a single link as buttons.
  * @param {Element} element container element
  */
-function decorateButtons(element, alignment = 'left') {
+function decorateButtons(element) {
   const socialIcons = {
     menu: '<i class="wknd-icon wkndicon-menu"></i>',
     google: '<i class="wknd-icon wkndicon-google"></i>',
@@ -418,28 +418,28 @@ function decorateButtons(element, alignment = 'left') {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
+    const up = a.parentElement;
+    const twoup = up?.parentElement;
 
     if (a.href !== a.textContent) {
-      const up = a.parentElement;
-      const twoup = up.parentElement;
       if (!a.querySelector('img')) {
-        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+        if (up?.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'button';
           up.classList.add('button-container');
         }
         if (
-          up.childNodes.length === 1
+          up?.childNodes.length === 1
           && up.tagName === 'STRONG'
-          && twoup.childNodes.length === 1
+          && twoup?.childNodes.length === 1
           && twoup.tagName === 'P'
         ) {
           a.className = 'button primary';
           twoup.classList.add('button-container');
         }
         if (
-          up.childNodes.length === 1
+          up?.childNodes.length === 1
           && up.tagName === 'EM'
-          && twoup.childNodes.length === 1
+          && twoup?.childNodes.length === 1
           && twoup.tagName === 'P'
         ) {
           a.className = 'button secondary';
@@ -448,16 +448,17 @@ function decorateButtons(element, alignment = 'left') {
       }
     }
 
-    // Apply social icon logic
     if (socialIcons[iconKey]) {
       a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
 
-    // Align the button based on the alignment option
-    const buttonContainer = a.parentElement;
-    buttonContainer.classList.add(`align-${alignment}`);
+    // Get alignment class from parent wrapper (strong/em) if exists
+    const alignmentClass = [...a.parentElement.classList].find((c) => c.startsWith('align-'));
+    if (alignmentClass && twoup?.classList.contains('button-container')) {
+      twoup.classList.add(alignmentClass);
+    }
   });
 }
 
