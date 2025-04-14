@@ -480,14 +480,12 @@ function decorateButtons(element) {
 
     // Get closest .block element and check if it has data-alignment
     const buttonContainer = a.closest('.button-container');
-    if (buttonContainer) {
-      if (buttonContainer.classList.contains('center')) {
-        buttonContainer.style.textAlign = 'center';
-      } else if (buttonContainer.classList.contains('right')) {
-        buttonContainer.style.textAlign = 'right';
-      } else {
-        buttonContainer.style.textAlign = 'left';
-      }
+    const block = a.closest('.block') || buttonContainer?.closest('.block');
+    // Try reading from `data-alignment`
+    const alignment = block?.dataset?.alignment || buttonContainer?.dataset?.alignment;
+    if (buttonContainer && alignment) {
+      buttonContainer.classList.remove('left', 'center', 'right'); // Clean old ones
+      buttonContainer.classList.add(alignment); // Apply new
     }
     console.log('Alignment Applied:', a.closest('.button-container').classList);
   });

@@ -375,10 +375,6 @@ img {
   
 }
  
-.button-container {
-  display: inline-block;
-}
-
 .button-container.left {
   text-align: left;
 }
