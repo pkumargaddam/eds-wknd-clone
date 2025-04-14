@@ -1,7 +1,4 @@
 .seperator-wrapper .seperator {
-    border-style: solid;
-    border-width: 1px;
-    color: #ebebeb;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    border: 1px solid var(--color-gray-light);
+    margin: 4rem 0;
 }
