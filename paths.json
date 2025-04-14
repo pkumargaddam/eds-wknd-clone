@@ -2,7 +2,8 @@
   "mappings": [
     "/content/eds-wknd/:/",
     "/content/eds-wknd/configuration:/.helix/config.json",
-    "/content/eds-wknd/metadata:/metadata.json"
+    "/content/eds-wknd/metadata:/metadata.json",
+    "/content/eds-wknd.resource/icons/:/icons/"
   ],
   "includes": [
     "/content/eds-wknd/"
