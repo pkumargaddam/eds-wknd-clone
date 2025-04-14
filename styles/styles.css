@@ -118,7 +118,8 @@ body {
   margin: 0;
   padding: 0;
   font-size: var(--font-size-base);
-  text-align: left;
+  
+  /* text-align: left; */
   color: var(--text-color);
   line-height: var(--line-height-base);
 }

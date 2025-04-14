@@ -475,21 +475,22 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
-    // 💡 ALIGNMENT FIX WITHOUT data-alignment
+    // 🧠 FLEXBOX ALIGNMENT FIX
     const buttonContainer = a.closest('.button-container');
     const block = a.closest('.block');
 
     const getAlignmentFromClass = (el) => {
       if (!el) return null;
       if (el.classList.contains('center')) return 'center';
-      if (el.classList.contains('right')) return 'right';
-      return 'left'; // default
+      if (el.classList.contains('right')) return 'flex-end';
+      return 'flex-start'; // default is left
     };
 
-    const alignment = getAlignmentFromClass(buttonContainer) || getAlignmentFromClass(block);
+    const justifyContent = getAlignmentFromClass(buttonContainer) || getAlignmentFromClass(block);
 
     if (buttonContainer) {
-      buttonContainer.style.textAlign = alignment;
+      buttonContainer.style.display = 'flex';
+      buttonContainer.style.justifyContent = justifyContent;
     }
   });
 }
