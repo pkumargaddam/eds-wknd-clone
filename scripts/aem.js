@@ -451,7 +451,6 @@ function decorateButtons(element) {
         }
       }
     }
-
     if (type) {
       a.classList.add(type);
     }
@@ -475,15 +474,15 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
+    // ✅ Alignment logic
     const buttonContainer = a.closest('.button-container');
     const block = a.closest('.block');
 
     const alignment = buttonContainer?.dataset?.alignment
       || ['left', 'center', 'right'].find((cls) => buttonContainer?.classList.contains(cls))
       || block?.dataset?.alignment
+      || ['left', 'center', 'right'].find((cls) => block?.classList.contains(cls))
       || 'left';
-
-    console.log('Alignment for button:', alignment);
 
     if (buttonContainer) {
       buttonContainer.classList.remove('left', 'center', 'right');
