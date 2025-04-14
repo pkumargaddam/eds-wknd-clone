@@ -427,8 +427,8 @@ function decorateButtons(element) {
 
       if (variation === 'icon-only') {
         // Set only the icon and add the icon-only class
-        a.innerHTML = socialIcons[iconKey];
-        a.classList.add('icon-only');
+        a.innerHTML = socialIcons[iconKey]; // Only the icon, no text
+        a.classList.add('icon-only'); // Add the icon-only class
 
         // Remove .button-text if it exists
         const buttonText = a.querySelector('.button-text');
