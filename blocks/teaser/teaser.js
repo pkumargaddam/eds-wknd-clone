@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { getAEMAuthor } from '../../scripts/endpointconfig.js';
+import ffetch from '../../scripts/ffetch.js';
 
 export default async function decorate(block) {
   // Destructure block children assuming fixed column structure
@@ -32,10 +32,14 @@ export default async function decorate(block) {
   // Fetch page link metadata if inheritance is enabled
   if (inheritPageLink && pageLink) {
     try {
-      const aemAuthorURL = getAEMAuthor();
-      const res = await fetch(`${aemAuthorURL}${pageLink}.infinity.json`);
-      const json = await res.json();
-      const content = json?.['jcr:content'];
+      // const aemAuthorURL = getAEMAuthor();
+      // const res = await fetch(`${aemAuthorURL}${pageLink}.infinity.json`);
+      // const json = await res.json();
+      // const content = json?.['jcr:content'];
+
+      const teaserIndex = await ffetch('/teaser-index.json').all();
+      console.log('teaser INDEX: ', teaserIndex);
+      const content = '';
 
       if (content) {
         inheritedTitle = content.pageTitle ?? '';
