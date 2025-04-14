@@ -33,16 +33,8 @@ export default async function decorate(block) {
   // Fetch page link metadata if inheritance is enabled
   if (inheritPageLink && pageLink) {
     try {
-      // const aemAuthorURL = getAEMAuthor();
-      // const res = await fetch(`${aemAuthorURL}${pageLink}.infinity.json`);
-      // const json = await res.json();
-      // const content = json?.['jcr:content'];
-
-      console.log('pageLink: ', pageLink);
       const teaserPath = cleanUrl(pageLink);
-      console.log('clean Path', teaserPath);
       const teaserJSON = await ffetch('/teaser-index.json').filter(({ path }) => path === teaserPath).first();
-      console.log('teaser INDEX: ', teaserJSON);
 
       if (teaserJSON) {
         inheritedTitle = teaserJSON.title ?? '';
