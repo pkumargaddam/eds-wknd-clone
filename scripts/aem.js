@@ -420,7 +420,7 @@ function decorateButtons(element) {
     const iconKey = a.dataset.icon || a.title.toLowerCase();
     const type = a.dataset.type || '';
 
-    // Check if .button-text is missing or empty
+    // Check if .button-text is missing or empty (for icon-only)
     const buttonText = a.querySelector('.button-text');
     const isIconOnly = !buttonText || buttonText.textContent.trim() === '';
 
@@ -462,20 +462,20 @@ function decorateButtons(element) {
     if (socialIcons[iconKey]) {
       a.classList.add('social-icon', 'social-button', 'button');
 
-      // If it's an icon-only button, remove the text and add the icon
+      // Handle Icon-Only Scenario
       if (isIconOnly) {
         console.log('Adding icon-only class'); // Debugging
-        a.innerHTML = socialIcons[iconKey];
+        a.innerHTML = socialIcons[iconKey]; // Only the icon, no text
         a.classList.add('icon-only'); // Add the icon-only class
 
-        // Remove the .button-text if it exists
+        // Remove .button-text if it exists
         // eslint-disable-next-line no-shadow
         const buttonText = a.querySelector('.button-text');
         if (buttonText) {
-          buttonText.remove(); // Remove .button-text
+          buttonText.remove(); // Remove any text in the button
         }
       } else {
-        // If it's not icon-only, add the icon and keep the text
+        // Default: Add icon + text
         a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
       }
 
