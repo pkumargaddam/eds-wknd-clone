@@ -479,14 +479,15 @@ function decorateButtons(element) {
     }
 
     // Get closest .block element and check if it has data-alignment
-    const buttonContainer = a.closest('.button-container');
-    const block = a.closest('.block') || buttonContainer?.closest('.block');
-    // Try reading from `data-alignment`
-    const alignment = block?.dataset?.alignment || buttonContainer?.dataset?.alignment;
-    if (buttonContainer && alignment) {
-      buttonContainer.classList.remove('left', 'center', 'right'); // Clean old ones
-      buttonContainer.classList.add(alignment); // Apply new
+    const block = element.closest('.block');
+    if (block) {
+      const alignment = block.dataset.alignment || 'left'; // Fallback to 'left'
+      const buttonContainer = a.closest('.button-container');
+      if (buttonContainer) {
+        buttonContainer.classList.add(alignment); // Add alignment class
+      }
     }
+
     console.log('Alignment Applied:', a.closest('.button-container').classList);
   });
 }
