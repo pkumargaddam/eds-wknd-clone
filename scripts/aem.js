@@ -475,7 +475,7 @@ function decorateButtons(element) {
           buttonText.remove(); // Remove any text in the button
         }
       } else {
-        // Default: Add icon + text
+        // Default: Add icon + text (span with button-text class)
         a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
       }
 
