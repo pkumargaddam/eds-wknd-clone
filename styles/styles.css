@@ -387,7 +387,12 @@ img {
   text-align: right;
 }
 
+.button .button-text {
+  display: inline-block;
+  margin-left: 10px; /* Space between the icon and the text */
+}
+
+/* When the button is icon-only, hide the text */
 .button.icon-only .button-text {
   display: none !important;
 }
-

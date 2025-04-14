@@ -416,60 +416,21 @@ function decorateButtons(element) {
   };
 
   element.querySelectorAll('a').forEach((a) => {
+    // Ensure the title attribute is set
     a.title = a.title || a.textContent.trim();
     const iconKey = a.dataset.icon || a.title.toLowerCase();
-    const type = a.dataset.type || '';
+    const variation = (a.dataset.variation || 'default').toLowerCase();
 
-    // Check if .button-text is missing or empty (for icon-only)
-    const buttonText = a.querySelector('.button-text');
-    const isIconOnly = !buttonText || buttonText.textContent.trim() === '';
-
-    console.log('Is Icon-Only: ', isIconOnly); // Debugging
-
-    if (a.href !== a.textContent) {
-      const up = a.parentElement;
-      const twoup = up.parentElement;
-      if (!a.querySelector('img')) {
-        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-          a.className = 'button';
-          up.classList.add('button-container');
-        }
-        if (
-          up.childNodes.length === 1
-          && up.tagName === 'STRONG'
-          && twoup.childNodes.length === 1
-          && twoup.tagName === 'P'
-        ) {
-          a.className = 'button primary';
-          twoup.classList.add('button-container');
-        }
-        if (
-          up.childNodes.length === 1
-          && up.tagName === 'EM'
-          && twoup.childNodes.length === 1
-          && twoup.tagName === 'P'
-        ) {
-          a.className = 'button secondary';
-          twoup.classList.add('button-container');
-        }
-      }
-    }
-
-    if (type) {
-      a.classList.add(type);
-    }
-
+    // If the icon is available, process accordingly
     if (socialIcons[iconKey]) {
       a.classList.add('social-icon', 'social-button', 'button');
 
-      // Handle Icon-Only Scenario
-      if (isIconOnly) {
-        console.log('Adding icon-only class'); // Debugging
-        a.innerHTML = socialIcons[iconKey]; // Only the icon, no text
-        a.classList.add('icon-only'); // Add the icon-only class
+      if (variation === 'icon-only') {
+        // Set only the icon and add the icon-only class
+        a.innerHTML = socialIcons[iconKey];
+        a.classList.add('icon-only');
 
         // Remove .button-text if it exists
-        // eslint-disable-next-line no-shadow
         const buttonText = a.querySelector('.button-text');
         if (buttonText) {
           buttonText.remove(); // Remove any text in the button
@@ -482,7 +443,7 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
-    // Ensure correct alignment
+    // Ensure alignment is preserved (optional)
     const block = element.closest('.block');
     const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
