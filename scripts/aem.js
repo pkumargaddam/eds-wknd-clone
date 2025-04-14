@@ -459,12 +459,20 @@ function decorateButtons(element) {
 
       if (variation === 'icon-only') {
         a.innerHTML = socialIcons[iconKey];
-        a.classList.add('icon-only'); // 👈 Add this class
+        a.classList.add('icon-only'); // Add the icon-only class
       } else {
         a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
       }
 
       a.parentElement.classList.add('social-container');
+    }
+
+    // Hide the .button-text for icon-only buttons using JavaScript
+    if (a.classList.contains('icon-only')) {
+      const buttonText = a.querySelector('.button-text');
+      if (buttonText) {
+        buttonText.style.display = 'none'; // Hides the button text
+      }
     }
 
     const block = element.closest('.block');
