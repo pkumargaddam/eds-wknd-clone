@@ -416,7 +416,7 @@ function decorateButtons(element) {
   };
 
   element.querySelectorAll('a').forEach((a) => {
-    a.title = a.title || a.textContent.trim();
+    a.text = a.text || a.textContent.trim();
     const iconKey = a.title.toLowerCase();
 
     if (a.href !== a.textContent) {
