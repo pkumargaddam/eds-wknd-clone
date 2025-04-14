@@ -421,6 +421,7 @@ function decorateButtons(element) {
     const variation = (a.dataset.variation || 'default').toLowerCase();
     const type = a.dataset.type || '';
 
+    // Ensuring correct structure for the button
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
@@ -450,31 +451,35 @@ function decorateButtons(element) {
       }
     }
 
+    // Add class based on the type if present
     if (type) {
       a.classList.add(type);
     }
 
+    // Handle social icon buttons
     if (socialIcons[iconKey]) {
       a.classList.add('social-icon', 'social-button', 'button');
 
+      // When the button is icon-only
       if (variation === 'icon-only') {
+        // Set the innerHTML to just the icon
         a.innerHTML = socialIcons[iconKey];
         a.classList.add('icon-only'); // Add the icon-only class
+
+        // Ensure no .button-text is added
+        const buttonText = a.querySelector('.button-text');
+        if (buttonText) {
+          buttonText.remove(); // Remove any existing .button-text
+        }
       } else {
+        // Add both icon and text
         a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
       }
 
       a.parentElement.classList.add('social-container');
     }
 
-    // Hide the .button-text for icon-only buttons using JavaScript
-    if (a.classList.contains('icon-only')) {
-      const buttonText = a.querySelector('.button-text');
-      if (buttonText) {
-        buttonText.style.display = 'none'; // Hides the button text
-      }
-    }
-
+    // Ensure correct alignment
     const block = element.closest('.block');
     const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');

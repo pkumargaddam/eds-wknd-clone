@@ -387,6 +387,7 @@ img {
   text-align: right;
 }
 
-.button.social-icon .button-text {
-  display: none;
+.button.icon-only .button-text {
+  display: none !important;
 }
+
