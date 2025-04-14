@@ -1,3 +1,10 @@
+.excludes: &excludes
+  - '**/drafts/**'
+  - '**/images/**'
+  - '**/icons/**'
+  - '**/test/**'
+  - '**/fragments/**'
+
 version: 1
 
 indices:
@@ -14,3 +21,33 @@ indices:
       robots:
         select: head > meta[name="robots"]
         value: attribute(el, "content")
+
+  teaser:
+    include:
+      - /**
+    exclude: 
+      - '/**.json'
+      - /configuration/**
+      - /nav/**
+      - /footer/**
+      - /metadata/**
+      - /fragments/**
+      - /style-guide/**
+      - /spreadsheets/**
+      - /content/mysite/en
+      - *excludes
+    target: /teaser-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "^(https?:\/\/.*?(pricefx.com))+(.*)|^(.*)")
+      imageAlt:
+        select: head > meta[property="og:image:alt"]
+        value: attribute(el, "content")
+  
