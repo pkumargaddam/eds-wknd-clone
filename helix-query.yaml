@@ -35,7 +35,6 @@ indices:
       - /style-guide/**
       - /spreadsheets/**
       - /content/mysite/en
-      - *excludes
     target: /teaser-index.json
     properties:
       title:
