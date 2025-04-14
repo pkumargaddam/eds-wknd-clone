@@ -416,37 +416,28 @@ function decorateButtons(element) {
   };
 
   element.querySelectorAll('a').forEach((a) => {
-    // Ensure the title attribute is set correctly
     a.title = a.title || a.textContent.trim();
     const iconKey = a.dataset.icon || a.title.toLowerCase();
     const variation = (a.dataset.variation || 'default').toLowerCase();
 
-    // Check if the icon exists in the socialIcons object
     if (socialIcons[iconKey]) {
       a.classList.add('social-icon', 'social-button', 'button');
 
       if (variation === 'icon-only') {
-        console.log('Adding icon-only to:', a); // Debugging line
-
-        // Only set the icon, remove the text
         a.innerHTML = socialIcons[iconKey];
         a.classList.add('icon-only');
 
-        // Ensure that the button-text is removed for icon-only buttons
         const buttonText = a.querySelector('.button-text');
         if (buttonText) {
           buttonText.remove();
         }
       } else {
-        // Default: Add both icon and text
         a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
       }
 
-      // Add the 'social-container' class to the parent element
       a.parentElement.classList.add('social-container');
     }
 
-    // Ensure button alignment is handled correctly
     const block = element.closest('.block');
     const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
