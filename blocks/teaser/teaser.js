@@ -37,6 +37,7 @@ export default async function decorate(block) {
       // const json = await res.json();
       // const content = json?.['jcr:content'];
 
+      console.log('pageLink: ', pageLink);
       const teaserIndex = await ffetch('/teaser-index.json').all();
       console.log('teaser INDEX: ', teaserIndex);
       const content = '';
