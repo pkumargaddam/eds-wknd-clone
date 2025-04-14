@@ -416,43 +416,58 @@ function decorateButtons(element) {
   };
 
   element.querySelectorAll('a').forEach((a) => {
-    a.title = a.title || a.textContent.trim();
-    const iconKey = a.title.toLowerCase();
+    const iconKey = a.dataset.icon?.toLowerCase();
+    const variation = a.dataset.variation || 'default';
+    const text = a.textContent.trim();
 
-    if (a.href !== a.textContent) {
-      const up = a.parentElement;
-      const twoup = up.parentElement;
-      if (!a.querySelector('img')) {
-        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-          a.className = 'button';
-          up.classList.add('button-container');
-        }
-        if (
-          up.childNodes.length === 1
-          && up.tagName === 'STRONG'
-          && twoup.childNodes.length === 1
-          && twoup.tagName === 'P'
-        ) {
-          a.className = 'button primary';
-          twoup.classList.add('button-container');
-        }
-        if (
-          up.childNodes.length === 1
-          && up.tagName === 'EM'
-          && twoup.childNodes.length === 1
-          && twoup.tagName === 'P'
-        ) {
-          a.className = 'button secondary';
-          twoup.classList.add('button-container');
-        }
+    // Reset inner content
+    a.innerHTML = '';
+
+    // Base classes
+    a.classList.add('button');
+    if (iconKey && socialIcons[iconKey]) {
+      a.classList.add('social-button', 'social-icon');
+
+      if (variation === 'icon-only') {
+        a.classList.add('icon-only');
+        a.innerHTML = socialIcons[iconKey];
+      } else {
+        a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${text}</span>`;
+      }
+
+      a.parentElement.classList.add('social-container');
+    } else {
+      a.textContent = text;
+    }
+
+    // Determine primary/secondary
+    const up = a.parentElement;
+    const twoup = up.parentElement;
+    if (!a.querySelector('img')) {
+      if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+        up.classList.add('button-container');
+      }
+      if (
+        up.childNodes.length === 1
+        && up.tagName === 'STRONG'
+        && twoup.childNodes.length === 1
+        && twoup.tagName === 'P'
+      ) {
+        a.classList.add('primary');
+        twoup.classList.add('button-container');
+      }
+      if (
+        up.childNodes.length === 1
+        && up.tagName === 'EM'
+        && twoup.childNodes.length === 1
+        && twoup.tagName === 'P'
+      ) {
+        a.classList.add('secondary');
+        twoup.classList.add('button-container');
       }
     }
 
-    if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey];
-      a.classList.add('social-icon', 'social-button', 'button');
-      a.parentElement.classList.add('social-container');
-    }
+    // Alignment class from block
     const block = element.closest('.block');
     const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
