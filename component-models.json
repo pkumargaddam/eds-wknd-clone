@@ -85,7 +85,7 @@
         "label": "Text"
       },
       {
-        "component": "title",
+        "component": "text",
         "name": "linkIcon",
         "label": "Icon"
       },
