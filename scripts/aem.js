@@ -416,28 +416,34 @@ function decorateButtons(element) {
   };
 
   element.querySelectorAll('a').forEach((a) => {
+    // Ensure the title attribute is set
     a.title = a.title || a.textContent.trim();
     const iconKey = a.dataset.icon || a.title.toLowerCase();
     const variation = (a.dataset.variation || 'default').toLowerCase();
 
+    // If the icon is available, process accordingly
     if (socialIcons[iconKey]) {
       a.classList.add('social-icon', 'social-button', 'button');
 
       if (variation === 'icon-only') {
+        // Set only the icon and add the icon-only class
         a.innerHTML = socialIcons[iconKey];
         a.classList.add('icon-only');
 
+        // Remove .button-text if it exists
         const buttonText = a.querySelector('.button-text');
         if (buttonText) {
-          buttonText.remove();
+          buttonText.remove(); // Remove any text in the button
         }
       } else {
+        // Default: Add icon + text (span with button-text class)
         a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
       }
 
       a.parentElement.classList.add('social-container');
     }
 
+    // Ensure alignment is preserved (optional)
     const block = element.closest('.block');
     const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
