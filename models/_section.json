@@ -76,7 +76,8 @@
         "cards",
         "columns",
         "fragment",
-        "teaser"
+        "teaser",
+        "seperator"
       ]
     }
   ]
