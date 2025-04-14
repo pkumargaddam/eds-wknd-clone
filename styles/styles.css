@@ -147,10 +147,33 @@ main {
   }  
 }
 
-main > .section > div {
+main > .section {
   max-width: var(--max-width);
   margin: auto;
   padding: 0 var(--gutter-padding);
+}
+
+main > .section.full-width {
+  max-width: var(--max-body-width);
+  padding: 0;
+}
+
+main > .section.top-margin {
+  margin-top: 24px;
+}
+
+main > .section.bottom-margin {
+  margin-bottom: 24px;
+}
+
+@media (width >=1024px) {
+  main > .section.top-margin {
+    margin-top: 40px;
+  }
+  
+  main > .section.bottom-margin {
+    margin-bottom: 40px;
+  }
 }
 
 /* headings */
