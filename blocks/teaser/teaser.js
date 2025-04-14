@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import ffetch from '../../scripts/ffetch.js';
+import { cleanUrl } from '../../scripts/helper.js';
 
 export default async function decorate(block) {
   // Destructure block children assuming fixed column structure
@@ -38,6 +39,8 @@ export default async function decorate(block) {
       // const content = json?.['jcr:content'];
 
       console.log('pageLink: ', pageLink);
+      const currentPath = cleanUrl(pageLink);
+      console.log('clean Path', currentPath);
       const teaserIndex = await ffetch('/teaser-index.json').all();
       console.log('teaser INDEX: ', teaserIndex);
       const content = '';
