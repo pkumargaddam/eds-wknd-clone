@@ -56,8 +56,8 @@
     {
       "id": "carousel",
       "components": [
-        "teaser",
-        "slide"
+        "slide",
+        "teaser"
       ]
     }
   ]
