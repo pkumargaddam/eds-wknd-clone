@@ -86,8 +86,8 @@
       },
       {
         "component": "text",
-        "name": "linkTitle",
-        "label": "Title"
+        "name": "linkIcon",
+        "label": "Icon"
       },
       {
         "component": "select",
@@ -95,16 +95,16 @@
         "label": "Type",
         "options": [
           {
+            "name": "Default",
+            "value": ""
+          },
+          {
             "name": "Primary",
             "value": "primary"
           },
           {
             "name": "Secondary",
             "value": "secondary"
-          },
-          {
-            "name": "Default",
-            "value": ""
           }
         ]
       },
@@ -124,6 +124,21 @@
           {
             "name": "Right",
             "value": "right"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "variation",
+        "label": "Variation",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Icon Only",
+            "value": "icon-only"
           }
         ]
       }
