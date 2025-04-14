@@ -420,11 +420,10 @@ function decorateButtons(element) {
     const iconKey = a.dataset.icon || a.title.toLowerCase();
     const type = a.dataset.type || '';
 
-    // Check if .button-text is missing or empty (for icon-only)
     const buttonText = a.querySelector('.button-text');
     const isIconOnly = !buttonText || buttonText.textContent.trim() === '';
 
-    console.log('Is Icon-Only: ', isIconOnly); // Debugging
+    console.log('Is Icon-Only: ', isIconOnly);
 
     if (a.href !== a.textContent) {
       const up = a.parentElement;
@@ -462,27 +461,23 @@ function decorateButtons(element) {
     if (socialIcons[iconKey]) {
       a.classList.add('social-icon', 'social-button', 'button');
 
-      // Handle Icon-Only Scenario
       if (isIconOnly) {
-        console.log('Adding icon-only class'); // Debugging
-        a.innerHTML = socialIcons[iconKey]; // Only the icon, no text
-        a.classList.add('icon-only'); // Add the icon-only class
+        console.log('Adding icon-only class');
+        a.innerHTML = socialIcons[iconKey];
+        a.classList.add('icon-only');
 
-        // Remove .button-text if it exists
         // eslint-disable-next-line no-shadow
         const buttonText = a.querySelector('.button-text');
         if (buttonText) {
-          buttonText.remove(); // Remove any text in the button
+          buttonText.remove();
         }
       } else {
-        // Default: Add icon + text (span with button-text class)
         a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
       }
 
       a.parentElement.classList.add('social-container');
     }
 
-    // Ensure correct alignment
     const block = element.closest('.block');
     const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
@@ -492,7 +487,6 @@ function decorateButtons(element) {
   });
 }
 
-// Run function on page load
 document.addEventListener('DOMContentLoaded', () => {
   decorateButtons(document.body);
 });
