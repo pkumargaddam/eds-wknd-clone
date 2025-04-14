@@ -81,7 +81,7 @@
       },
       {
         "component": "text",
-        "name": "linkTitle",
+        "name": "linkText",
         "label": "Text"
       },
       {
