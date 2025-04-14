@@ -1,0 +1,4 @@
+.seperator-wrapper .seperator {
+    border: 1px solid var(--color-gray-light);
+    margin: 4rem 0;
+}
