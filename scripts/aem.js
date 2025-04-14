@@ -417,8 +417,11 @@ function decorateButtons(element) {
 
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
-    const iconKey = a.title.toLowerCase();
+    const iconKey = a.dataset.icon || a.title.toLowerCase(); // get icon from dataset or title
+    const variation = a.dataset.variation || 'default'; // get variation from dataset
+    const type = a.dataset.type || ''; // for primary/secondary
 
+    // Assign button class based on structure
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
@@ -448,11 +451,26 @@ function decorateButtons(element) {
       }
     }
 
+    // Add primary/secondary class if defined in dataset
+    if (type) {
+      a.classList.add(type);
+    }
+
+    // Handle icon + variation logic
     if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
+
+      if (variation === 'icon-only') {
+        a.innerHTML = socialIcons[iconKey];
+      } else {
+        a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
+      }
+
+      // For social icon alignment container
       a.parentElement.classList.add('social-container');
     }
+
+    // Handle alignment class
     const block = element.closest('.block');
     const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
