@@ -451,6 +451,7 @@ function decorateButtons(element) {
         }
       }
     }
+
     if (type) {
       a.classList.add(type);
     }
@@ -474,19 +475,21 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
-    // ✅ Alignment logic
+    // 💡 ALIGNMENT FIX WITHOUT data-alignment
     const buttonContainer = a.closest('.button-container');
     const block = a.closest('.block');
 
-    const alignment = buttonContainer?.dataset?.alignment
-      || ['left', 'center', 'right'].find((cls) => buttonContainer?.classList.contains(cls))
-      || block?.dataset?.alignment
-      || ['left', 'center', 'right'].find((cls) => block?.classList.contains(cls))
-      || 'left';
+    const getAlignmentFromClass = (el) => {
+      if (!el) return null;
+      if (el.classList.contains('center')) return 'center';
+      if (el.classList.contains('right')) return 'right';
+      return 'left'; // default
+    };
+
+    const alignment = getAlignmentFromClass(buttonContainer) || getAlignmentFromClass(block);
 
     if (buttonContainer) {
-      buttonContainer.classList.remove('left', 'center', 'right');
-      buttonContainer.classList.add(alignment);
+      buttonContainer.style.textAlign = alignment;
     }
   });
 }
