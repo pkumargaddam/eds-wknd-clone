@@ -39,17 +39,16 @@ export default async function decorate(block) {
       // const content = json?.['jcr:content'];
 
       console.log('pageLink: ', pageLink);
-      const currentPath = cleanUrl(pageLink);
-      console.log('clean Path', currentPath);
-      const teaserIndex = await ffetch('/teaser-index.json').all();
-      console.log('teaser INDEX: ', teaserIndex);
-      const content = '';
+      const teaserPath = cleanUrl(pageLink);
+      console.log('clean Path', teaserPath);
+      const teaserJSON = await ffetch('/teaser-index.json').filter(({ path }) => path === teaserPath).first();
+      console.log('teaser INDEX: ', teaserJSON);
 
-      if (content) {
-        inheritedTitle = content.pageTitle ?? '';
-        inheritedDescription = content['jcr:description'] ?? '';
-        inheritedImageURL = content.image?.fileReference ?? '';
-        inheritedImageAlt = content.image?.alt ?? '';
+      if (teaserJSON) {
+        inheritedTitle = teaserJSON.title ?? '';
+        inheritedDescription = teaserJSON.description ?? '';
+        inheritedImageURL = teaserJSON.image ?? '';
+        inheritedImageAlt = teaserJSON.imageAlt ?? '';
       }
     } catch (e) {
       console.warn('Failed to fetch inherited page data:', e);
