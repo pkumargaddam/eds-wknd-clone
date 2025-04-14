@@ -478,17 +478,12 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
-    // Get closest .block element and check if it has data-alignment
     const block = element.closest('.block');
-    if (block) {
-      const alignment = block.dataset.alignment || 'left'; // Fallback to 'left'
-      const buttonContainer = a.closest('.button-container');
-      if (buttonContainer) {
-        buttonContainer.classList.add(alignment); // Add alignment class
-      }
+    const alignment = block?.dataset?.alignment || 'left';
+    const buttonContainer = a.closest('.button-container');
+    if (buttonContainer) {
+      buttonContainer.classList.add(alignment);
     }
-
-    console.log('Alignment Applied:', a.closest('.button-container').classList);
   });
 }
 
