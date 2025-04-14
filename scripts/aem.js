@@ -475,13 +475,15 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
-    // ✅ FIXED ALIGNMENT LOGIC
     const buttonContainer = a.closest('.button-container');
+    const block = a.closest('.block');
 
-    // Check both container and block for alignment info
     const alignment = buttonContainer?.dataset?.alignment
-      || a.closest('.block')?.dataset?.alignment
+      || ['left', 'center', 'right'].find((cls) => buttonContainer?.classList.contains(cls))
+      || block?.dataset?.alignment
       || 'left';
+
+    console.log('Alignment for button:', alignment);
 
     if (buttonContainer) {
       buttonContainer.classList.remove('left', 'center', 'right');
