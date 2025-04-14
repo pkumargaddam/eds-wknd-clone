@@ -387,6 +387,6 @@ img {
   text-align: right;
 }
 
-a.icon-only .button-text {
+.button.social-icon .button-text {
   display: none;
 }
