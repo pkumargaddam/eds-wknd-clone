@@ -423,8 +423,6 @@ function decorateButtons(element) {
     const buttonText = a.querySelector('.button-text');
     const isIconOnly = !buttonText || buttonText.textContent.trim() === '';
 
-    console.log('Is Icon-Only: ', isIconOnly);
-
     if (a.href !== a.textContent) {
       const up = a.parentElement;
       const twoup = up.parentElement;
@@ -462,7 +460,6 @@ function decorateButtons(element) {
       a.classList.add('social-icon', 'social-button', 'button');
 
       if (isIconOnly) {
-        console.log('Adding icon-only class');
         a.innerHTML = socialIcons[iconKey];
         a.classList.add('icon-only');
 
@@ -478,10 +475,16 @@ function decorateButtons(element) {
       a.parentElement.classList.add('social-container');
     }
 
-    const block = element.closest('.block');
-    const alignment = block?.dataset?.alignment || 'left';
+    // ✅ FIXED ALIGNMENT LOGIC
     const buttonContainer = a.closest('.button-container');
+
+    // Check both container and block for alignment info
+    const alignment = buttonContainer?.dataset?.alignment
+      || a.closest('.block')?.dataset?.alignment
+      || 'left';
+
     if (buttonContainer) {
+      buttonContainer.classList.remove('left', 'center', 'right');
       buttonContainer.classList.add(alignment);
     }
   });
