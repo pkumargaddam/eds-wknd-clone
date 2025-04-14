@@ -30,7 +30,7 @@
           "label": "Text"
         },
         {
-          "component": "text",
+          "component": "title",
           "name": "linkIcon",
           "label": "Icon"
         },
