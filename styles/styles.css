@@ -375,6 +375,10 @@ img {
   
 }
  
+.button-container {
+  display: inline-block;
+}
+
 .button-container.left {
   text-align: left;
 }
@@ -387,13 +391,12 @@ img {
   text-align: right;
 }
 
-/* Default button styles (icon + text visible) */
+
 .button .button-text {
   display: inline-block;
-  margin-left: 10px; /* Space between the icon and the text */
+  margin-left: 10px; 
 }
 
-/* When the button has the icon-only class, hide the text */
 .button.icon-only .button-text {
   display: none !important;
 }
