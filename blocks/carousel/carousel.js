@@ -1,4 +1,3 @@
-/*
 // import { fetchPlaceholders, getMetadata } from '../../scripts/aem.js';
 
 // const placeholders = await fetchPlaceholders(getMetadata('locale'));
@@ -82,4 +81,3 @@ export default function decorate(block) {
     });
   });
 }
-*/
