@@ -49,7 +49,7 @@
               }
             }
           ],
-          "condition": { "===": [{"var" : "layout-type"}, "child-article-container"] }
+          "condition": { "===": [{"var" : "layout-type"}, "child-article"] }
         },
         {
           "component": "container",
@@ -69,28 +69,19 @@
               }
             }
           ],
-          "condition": { "===": [{"var" : "layout-type"}, "child-article-tag-container"] }
+          "condition": { "===": [{"var" : "layout-type"}, "child-article-tag"] }
         },
         {
-          "component": "container",
+          "component": "aem-content",
+          "name": "fixed-article",
           "label": "Provide Page Path to Display Articles",
-          "name": "manual-link-container",
           "valueType": "string",
-          "collapsible": false,
-          "fields": [
-            {
-              "component": "aem-content",
-              "name": "fixed-article",
-              "label": "Specify Page Path",
-              "valueType": "string",
-              "multi": true,
-              "required": true,
-              "validation": {
-                "rootPath": "/content/eds-wknd"
-              }
-            }
-          ],
-          "condition": { "===": [{"var" : "layout-type"}, "fixed-article"] }
+          "multi": true,
+          "required": true,
+          "validation": {
+            "rootPath": "/content/eds-wknd"
+          },
+          "condition": { "===": [{"var" : "layout-type"}, "fixed-article"]}
         }
       ]
     }

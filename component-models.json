@@ -188,7 +188,7 @@
             {
               "var": "layout-type"
             },
-            "child-article-container"
+            "child-article"
           ]
         }
       },
@@ -215,29 +215,20 @@
             {
               "var": "layout-type"
             },
-            "child-article-tag-container"
+            "child-article-tag"
           ]
         }
       },
       {
-        "component": "container",
+        "component": "aem-content",
+        "name": "fixed-article",
         "label": "Provide Page Path to Display Articles",
-        "name": "manual-link-container",
         "valueType": "string",
-        "collapsible": false,
-        "fields": [
-          {
-            "component": "aem-content",
-            "name": "fixed-article",
-            "label": "Specify Page Path",
-            "valueType": "string",
-            "multi": true,
-            "required": true,
-            "validation": {
-              "rootPath": "/content/eds-wknd"
-            }
-          }
-        ],
+        "multi": true,
+        "required": true,
+        "validation": {
+          "rootPath": "/content/eds-wknd"
+        },
         "condition": {
           "===": [
             {
