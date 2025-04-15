@@ -33,7 +33,7 @@
         },
         {
           "component": "container",
-          "label": "List All Articles Under the Selected Parent Page",
+          "label": "List all Articles under the Selected Parent Page",
           "name": "child-article-container",
           "valueType": "string",
           "collapsible": false,
@@ -53,7 +53,7 @@
         },
         {
           "component": "container",
-          "label": "List All Articles with Tag Filter Under Selected Parent Page",
+          "label": "List all Articles with Tag filter under Selected Parent Page",
           "name": "child-article-tag-container",
           "valueType": "string",
           "collapsible": false,
