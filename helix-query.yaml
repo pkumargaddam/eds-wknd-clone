@@ -52,17 +52,9 @@ indices:
 
   articles:
     include:
-      - /**
-    exclude: 
-      - '/**.json'
-      - /configuration/**
-      - /nav/**
-      - /footer/**
-      - /metadata/**
-      - /fragments/**
-      - /style-guide/**
-      - /spreadsheets/**
-      - /content/mysite/en
+      - /index/magazine/**
+      - /index/adventures/**
+    exclude: *excludes
     target: /article-index.json
     properties:
       title:
