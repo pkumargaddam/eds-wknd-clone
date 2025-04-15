@@ -220,15 +220,30 @@
         }
       },
       {
-        "component": "aem-content",
-        "name": "fixed-article",
-        "label": "Provide Page Path to Display Articles",
-        "valueType": "string[]",
-        "multi": true,
-        "required": true,
-        "minSize": 2,
-        "validation": {
-          "rootPath": "/content/eds-wknd"
+        "component": "container",
+        "label": "List all Articles with Tag filter under Selected Parent Page",
+        "name": "fixed-article-container",
+        "valueType": "string",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "child-article-tag-parent",
+            "label": "Choose Article Parent Page",
+            "valueType": "string",
+            "required": true,
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "layout-type"
+            },
+            "fixed-article"
+          ]
         }
       }
     ]
