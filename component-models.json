@@ -223,7 +223,7 @@
         "component": "aem-content",
         "name": "fixed-article",
         "label": "Provide Page Path to Display Articles",
-        "valueType": "string",
+        "valueType": "string[]",
         "multi": true,
         "required": true,
         "validation": {
