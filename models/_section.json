@@ -77,7 +77,8 @@
         "columns",
         "fragment",
         "teaser",
-        "seperator"
+        "seperator",
+        "article"
       ]
     }
   ]
