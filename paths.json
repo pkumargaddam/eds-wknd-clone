@@ -4,7 +4,9 @@
     "/content/eds-wknd/configuration:/.helix/config.json",
     "/content/eds-wknd/metadata:/metadata.json",
     "/content/eds-wknd.resource/icons/:/icons/",
-    "/content/eds-wknd.resource/teaser-index.json:/teaser-index.json"
+    "/content/eds-wknd.resource/teaser-index.json:/teaser-index.json",
+    "/content/eds-wknd.resource/article-index.json:/article-index.json",
+    "/content/eds-helium-xwalk/taxonomy:/taxonomy.json"
   ],
   "includes": [
     "/content/eds-wknd/"
