@@ -55,8 +55,8 @@
           "component": "container",
           "label": "List all Articles with Tag filter under Selected Parent Page",
           "name": "child-article-tag-container",
-          "collapsible": true,
-          "multi":true,
+          "valueType": "string",
+          "collapsible": false,
           "fields": [
             {
               "component": "aem-content",
@@ -75,7 +75,7 @@
           "component": "aem-content",
           "name": "fixed-article",
           "label": "Provide Page Path to Display Articles",
-          "valueType": "string[]",
+          "valueType": "link",
           "multi": true,
           "required": true,
           "validation": {
