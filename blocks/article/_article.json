@@ -72,11 +72,10 @@
           "condition": { "===": [{"var" : "layout-type"}, "child-article-tag"] }
         },
         {
-          "component": "aem-content",
+          "component": "multi-aem-content",
           "name": "fixed-article",
           "label": "Provide Page Path to Display Articles",
           "valueType": "link",
-          "multi": true,
           "required": true,
           "validation": {
             "rootPath": "/content/eds-wknd"
