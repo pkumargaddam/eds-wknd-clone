@@ -198,6 +198,7 @@
         "name": "child-article-tag-container",
         "valueType": "string",
         "collapsible": false,
+        "multi": true,
         "fields": [
           {
             "component": "aem-content",
