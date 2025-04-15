@@ -105,21 +105,12 @@
               "name": "fixed-article",
               "label": "Provide Page Path to Display Articles",
               "valueType": "string[]",
-              "multi": true,
               "required": true,
               "validation": {
                 "rootPath": "/content/eds-wknd"
               }
             }
-          ],
-          "condition": {
-            "===": [
-              {
-                "var": "layout-type"
-              },
-              "fixed-article"
-            ]
-          }
+          ]
         }
       ]
     }
