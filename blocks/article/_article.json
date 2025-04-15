@@ -26,9 +26,18 @@
           "name": "layout-type",
           "valueType": "string",
           "options": [
-            { "name": "All Articles", "value": "child-article" },
-            { "name": "All Articles with tags", "value": "child-article-tag" },
-            { "name": "Fetch Articles Manually", "value": "fixed-article" }
+            {
+              "name": "All Articles",
+              "value": "child-article"
+            },
+            {
+              "name": "All Articles with tags",
+              "value": "child-article-tag"
+            },
+            {
+              "name": "Fetch Articles Manually",
+              "value": "fixed-article"
+            }
           ]
         },
         {
@@ -49,7 +58,14 @@
               }
             }
           ],
-          "condition": { "===": [{"var" : "layout-type"}, "child-article"] }
+          "condition": {
+            "===": [
+              {
+                "var": "layout-type"
+              },
+              "child-article"
+            ]
+          }
         },
         {
           "component": "container",
@@ -69,18 +85,41 @@
               }
             }
           ],
-          "condition": { "===": [{"var" : "layout-type"}, "child-article-tag"] }
+          "condition": {
+            "===": [
+              {
+                "var": "layout-type"
+              },
+              "child-article-tag"
+            ]
+          }
         },
         {
-          "component": "multiaem-content",
-          "name": "fixed-article",
-          "label": "Provide Page Path to Display Articles",
-          "valueType": "link",
-          "required": true,
-          "validation": {
-            "rootPath": "/content/eds-wknd"
-          },
-          "condition": { "===": [{"var" : "layout-type"}, "fixed-article"]}
+          "label": "tester",
+          "name": "tester",
+          "valueType": "string",
+          "multi": true,
+          "fields": [
+            {
+              "component": "aem-content",
+              "name": "fixed-article",
+              "label": "Provide Page Path to Display Articles",
+              "valueType": "string[]",
+              "multi": true,
+              "required": true,
+              "validation": {
+                "rootPath": "/content/eds-wknd"
+              }
+            }
+          ],
+          "condition": {
+            "===": [
+              {
+                "var": "layout-type"
+              },
+              "fixed-article"
+            ]
+          }
         }
       ]
     }

@@ -220,14 +220,23 @@
         }
       },
       {
-        "component": "multiaem-content",
-        "name": "fixed-article",
-        "label": "Provide Page Path to Display Articles",
-        "valueType": "link",
-        "required": true,
-        "validation": {
-          "rootPath": "/content/eds-wknd"
-        },
+        "label": "tester",
+        "name": "tester",
+        "valueType": "string",
+        "multi": true,
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "fixed-article",
+            "label": "Provide Page Path to Display Articles",
+            "valueType": "string[]",
+            "multi": true,
+            "required": true,
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          }
+        ],
         "condition": {
           "===": [
             {
