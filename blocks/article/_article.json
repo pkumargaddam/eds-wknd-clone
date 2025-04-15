@@ -55,7 +55,7 @@
           "component": "container",
           "label": "List all Articles with Tag filter under Selected Parent Page",
           "name": "child-article-tag-container",
-          "valueType": "string",
+          "collapsible": true,
           "multi":true,
           "fields": [
             {
