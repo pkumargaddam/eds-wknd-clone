@@ -72,7 +72,7 @@
           "condition": { "===": [{"var" : "layout-type"}, "child-article-tag"] }
         },
         {
-          "component": "multi-aem-content",
+          "component": "multiaem-content",
           "name": "fixed-article",
           "label": "Provide Page Path to Display Articles",
           "valueType": "link",
