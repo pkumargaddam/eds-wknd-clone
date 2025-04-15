@@ -226,6 +226,7 @@
         "valueType": "string[]",
         "multi": true,
         "required": true,
+        "minSize": 2,
         "validation": {
           "rootPath": "/content/eds-wknd"
         }
