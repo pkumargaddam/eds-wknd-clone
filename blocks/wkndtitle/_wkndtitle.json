@@ -9,7 +9,7 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "model": "title",
-              "name":"Wkndtitle"
+              "name": "Wkndtitle"
             }
           }
         }
@@ -30,41 +30,87 @@
           "name": "titleType",
           "label": "Title Type",
           "options": [
-            { "name": "H1", "value": "h1" },
-            { "name": "H2", "value": "h2" },
-            { "name": "H3", "value": "h3" },
-            { "name": "H4", "value": "h4" },
-            { "name": "H5", "value": "h5" },
-            { "name": "H6", "value": "h6" }
+            {
+              "name": "H1",
+              "value": "h1"
+            },
+            {
+              "name": "H2",
+              "value": "h2"
+            },
+            {
+              "name": "H3",
+              "value": "h3"
+            },
+            {
+              "name": "H4",
+              "value": "h4"
+            },
+            {
+              "name": "H5",
+              "value": "h5"
+            },
+            {
+              "name": "H6",
+              "value": "h6"
+            }
           ]
         },
         {
-          "component": "select",
-          "name": "linkAlignment",
-          "label": "Text Alignment",
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Title Variation",
+          "valueType": "string",
+          "required": true,
+          "maxSize": 2,
           "options": [
-            { "name": "Left", "value": "left" },
-            { "name": "Center", "value": "center" },
-            { "name": "Right", "value": "right" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "linkColors",
-          "label": "Text Color",
-          "options": [
-            { "name": "Black", "value": "black" },
-            { "name": "White", "value": "white" },
-            { "name": "Gray", "value": "gray" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "linkVariations",
-          "label": "Text Style",
-          "options": [
-            { "name": "Default", "value": "default" },
-            { "name": "Underline", "value": "underline" }
+            {
+              "name": "Text Alignment",
+              "children": [
+                {
+                  "name": "Left",
+                  "value": "left"
+                },
+                {
+                  "name": "Center",
+                  "value": "center"
+                },
+                {
+                  "name": "Right",
+                  "value": "right"
+                }
+              ]
+            },
+            {
+              "name": "Text Color",
+              "children": [
+                {
+                  "name": "Black",
+                  "value": "black"
+                },
+                {
+                  "name": "White",
+                  "value": "white"
+                },
+                {
+                  "name": "Gray",
+                  "value": "gray"
+                }
+              ]
+            },
+            {
+              "name": "Text Style",
+              "children": [
+                {
+                  "name": "Default",
+                  "value": "default"
+                },
+                {
+                  "name": "Underline",
+                  "value": "underline"
+                }
+              ]
+            }
           ]
         }
       ]

@@ -477,55 +477,59 @@
         ]
       },
       {
-        "component": "select",
-        "name": "linkAlignment",
-        "label": "Text Alignment",
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Title Variation",
+        "valueType": "string",
+        "required": true,
+        "maxSize": 2,
         "options": [
           {
-            "name": "Left",
-            "value": "left"
+            "name": "Text Alignment",
+            "children": [
+              {
+                "name": "Left",
+                "value": "left"
+              },
+              {
+                "name": "Center",
+                "value": "center"
+              },
+              {
+                "name": "Right",
+                "value": "right"
+              }
+            ]
           },
           {
-            "name": "Center",
-            "value": "center"
+            "name": "Text Color",
+            "children": [
+              {
+                "name": "Black",
+                "value": "black"
+              },
+              {
+                "name": "White",
+                "value": "white"
+              },
+              {
+                "name": "Gray",
+                "value": "gray"
+              }
+            ]
           },
           {
-            "name": "Right",
-            "value": "right"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "name": "linkColors",
-        "label": "Text Color",
-        "options": [
-          {
-            "name": "Black",
-            "value": "black"
-          },
-          {
-            "name": "White",
-            "value": "white"
-          },
-          {
-            "name": "Gray",
-            "value": "gray"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "name": "linkVariations",
-        "label": "Text Style",
-        "options": [
-          {
-            "name": "Default",
-            "value": "default"
-          },
-          {
-            "name": "Underline",
-            "value": "underline"
+            "name": "Text Style",
+            "children": [
+              {
+                "name": "Default",
+                "value": "default"
+              },
+              {
+                "name": "Underline",
+                "value": "underline"
+              }
+            ]
           }
         ]
       }
