@@ -73,7 +73,7 @@
           ] 
         },
          {
-          "component": "multiselect",
+          "component": "multifield",
           "name": "style",
           "label": "Colors",
           "valueType": "string",
