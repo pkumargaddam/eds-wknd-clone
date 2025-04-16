@@ -56,14 +56,14 @@
       },
       {
         "component": "multiselect",
-        "name": "style",
+        "name": "classes",
         "label": "Styles",
         "valueType": "string",
         "required": true,
         "options": [
           {
             "name": "Underline",
-            "value": ""
+            "value": "underline"
           },
           {
             "name": "Align Right",
@@ -72,8 +72,8 @@
         ]
       },
       {
-        "component": "multifield",
-        "name": "style",
+        "component": "multiselect",
+        "name": "classes",
         "label": "Colors",
         "valueType": "string",
         "required": true,
