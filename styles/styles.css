@@ -93,8 +93,8 @@
   --icon-size: var(--font-size-large);
 
   /* page layout */
-  --header-height: 12.5rem; /* 200px */
-  --header-mobile-height: 8.125rem; /* 130px */
+  --header-height: 10.625rem; /* 170px */
+  --header-mobile-height: 5.625rem; /* 90px */
   --utility-nav-height: 1.5625rem; /* 25px */
 
   /* language switcher */
@@ -138,10 +138,43 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
-main > .section > div {
+main {
+  padding-top: var(--set-header-mobile-height, var(--header-mobile-height));
+}
+
+@media (width >=1024px) {
+  main {
+    padding-top: var(--set-header-height, var(--header-height));
+  }  
+}
+
+main > .section {
   max-width: var(--max-width);
   margin: auto;
   padding: 0 var(--gutter-padding);
+}
+
+main > .section.full-width {
+  max-width: var(--max-body-width);
+  padding: 0;
+}
+
+main > .section.top-margin {
+  margin-top: 24px;
+}
+
+main > .section.bottom-margin {
+  margin-bottom: 24px;
+}
+
+@media (width >=1024px) {
+  main > .section.top-margin {
+    margin-top: 40px;
+  }
+  
+  main > .section.bottom-margin {
+    margin-bottom: 40px;
+  }
 }
 
 /* headings */
