@@ -70,31 +70,6 @@
             "value": "align-right"
           }
         ]
-      },
-      {
-        "component": "multiselect",
-        "name": "classes",
-        "label": "Colors",
-        "valueType": "string",
-        "required": true,
-        "options": [
-          {
-            "name": "Black",
-            "value": "black"
-          },
-          {
-            "name": "White",
-            "value": "white"
-          },
-          {
-            "name": "Gray",
-            "value": "gray"
-          },
-          {
-            "name": "None",
-            "value": "none"
-          }
-        ]
       }
     ]
   },
