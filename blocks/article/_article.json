@@ -115,6 +115,7 @@
           "name": "fixed-article-container",
           "valueType": "string",
           "collapsible": true,
+          "multi":true,
           "fields": [
             {
               "component": "aem-content",
