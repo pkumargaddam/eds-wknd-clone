@@ -1,58 +1,53 @@
-.carousel {
-    width: 100%;
-    max-width: 960px;
-    height: 450px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    margin: auto;
+.carousel.block {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+.slides-wrapper {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
 }
 
 .slide {
-    width: 100%;
-    max-width: 960px;
-    height: 350px;
-    position: absolute;
-    transition: all 0.5s;
-
-    img {
-        width: 100%;
-    }
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-div.slide-text {
-    position: absolute;
-    width: 100%;
-    top: 60%;
-    color: #fff;
-    text-align: center;
-    text-shadow: 1px 1px 2px #b8b5b5c2, 0 0 1em black, 0 0 0.2em black;
+.slide picture img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.slide-text {
+  padding: 1rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .btn {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    border: none;
-    border-radius: 50%;
-    z-index: 10;
-    cursor: pointer;
-    background-color: #fff;
-    font-size: 18px;
-    color: black;
-}
-
-.btn:active {
-    *transform: scale(1.1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 
 .btn-prev {
-    top: 45%;
-    left: 2%;
+  left: 10px;
 }
 
 .btn-next {
-    top: 45%;
-    right: 2%;
+  right: 10px;
 }

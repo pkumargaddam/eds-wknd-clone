@@ -1,58 +1,133 @@
-/* /blocks/teaser/teaser.js */
+/* eslint-disable no-console */
+import ffetch from '../../scripts/ffetch.js';
+import { cleanUrl } from '../../scripts/helper.js';
 
-/**
- * Adds a zoom effect to image using event listeners.
- *
- * When the CTA button is hovered over, the image zooms in.
- *
- * @param {HTMLElement} block represents the block's' DOM tree
- */
-function addEventListeners(block) {
-  block.querySelector('.button').addEventListener('mouseover', () => {
-    block.querySelector('.image').classList.add('zoom');
-  });
+export default async function decorate(block) {
+  // Destructure block children assuming fixed column structure
+  const [
+    pageLinkEl,
+    inheritPageLinkEl,
+    pretitleEl,
+    titleEl,
+    descriptionEl,
+    ctaLabelEl,
+    ctaLinkEl,
+    ctaLinkOpenEl,
+    imageRowEl,
+  ] = [...block.children];
 
-  block.querySelector('.button').addEventListener('mouseout', () => {
-    block.querySelector('.image').classList.remove('zoom');
-  });
-}
+  // Extract values from DOM
+  const pageLink = pageLinkEl?.querySelector('a')?.getAttribute('href') || '';
+  const inheritPageLink = inheritPageLinkEl?.textContent.trim() === 'true';
+  const ctaLabel = ctaLabelEl?.textContent.trim() || '';
+  const ctaLink = ctaLinkEl?.querySelector('a')?.getAttribute('href') || '';
+  const openInNewTab = ctaLinkOpenEl?.textContent.trim() === 'true';
+  const pretitle = pretitleEl?.textContent.trim() || '';
 
-/**
-   * Entry point to block's JavaScript.
-   * Must be exported as default and accept a block's DOM element.
-   * This function is called by the project's style.js, and passed the block's element.
-   *
-   * @param {HTMLElement} block represents the block's' DOM element/tree
-   */
-export default function decorate(block) {
-  /* This JavaScript makes minor adjustments to the block's DOM */
+  // Default values for inherited content
+  let inheritedTitle = '';
+  let inheritedDescription = '';
+  let inheritedImageURL = '';
+  let inheritedImageAlt = '';
 
-  // Dress the DOM elements with semantic CSS classes so it's obvious what they are.
-  // If needed we could also add ARIA roles and attributes, or add/remove/move DOM elements.
+  // Fetch page link metadata if inheritance is enabled
+  if (inheritPageLink && pageLink) {
+    try {
+      const teaserPath = cleanUrl(pageLink);
+      const teaserJSON = await ffetch('/teaser-index.json').filter(({ path }) => path === teaserPath).first();
 
-  // Add a class to the first picture element to target it with CSS
-  block.querySelector('picture').classList.add('image-wrapper');
-
-  // Use previously applied classes to target new elements
-  block.querySelector('.image-wrapper img').classList.add('image');
-
-  // Mark the second/last div as the content area (white, bottom aligned box w/ text and cta)
-  block.querySelector(':scope > div:last-child').classList.add('content');
-
-  // Mark the first H1-H6 as a title
-  block.querySelector('h1,h2,h3,h4,h5,h6').classList.add('title');
-
-  // Process each paragraph and mark it as text or terms-and-conditions
-  block.querySelectorAll('p').forEach((p) => {
-    const innerHTML = p.innerHTML?.trim();
-
-    // If the paragraph starts with Terms and conditions: then style it as such
-    if (innerHTML?.startsWith('Terms and conditions:')) {
-      /* If a paragraph starts with '*', add a special CSS class. */
-      p.classList.add('terms-and-conditions');
+      if (teaserJSON) {
+        inheritedTitle = teaserJSON.title ?? '';
+        inheritedDescription = teaserJSON.description ?? '';
+        inheritedImageURL = teaserJSON.image ?? '';
+        inheritedImageAlt = teaserJSON.imageAlt ?? '';
+      }
+    } catch (e) {
+      console.warn('Failed to fetch inherited page data:', e);
     }
-  });
+  }
 
-  // Add event listeners to the block
-  addEventListeners(block);
+  // Resolve title and description from inherited or block content
+  const title = inheritPageLink ? inheritedTitle : (titleEl?.textContent.trim() || '');
+  const description = inheritPageLink ? inheritedDescription : (descriptionEl?.textContent.trim() || '');
+
+  // ─── Build Teaser DOM ───
+  const cmpTeaser = document.createElement('div');
+  cmpTeaser.className = 'cmp-teaser';
+
+  const content = document.createElement('div');
+  content.className = 'cmp-teaser__content';
+
+  // Add optional pretitle
+  if (pretitle) {
+    const pre = document.createElement('p');
+    pre.className = 'cmp-teaser__pretitle';
+    pre.textContent = pretitle;
+    content.appendChild(pre);
+  }
+
+  // Add title
+  if (title) {
+    const h2 = document.createElement('h2');
+    h2.className = 'cmp-teaser__title';
+    h2.textContent = title;
+    content.appendChild(h2);
+  }
+
+  // Add description
+  if (description) {
+    const desc = document.createElement('div');
+    desc.className = 'cmp-teaser__description';
+    desc.textContent = description;
+    content.appendChild(desc);
+  }
+
+  // Add CTA if defined
+  if (ctaLink && ctaLabel) {
+    const actionContainer = document.createElement('div');
+    actionContainer.className = 'cmp-teaser__action-container button-container';
+
+    const actionLink = document.createElement('a');
+    actionLink.className = 'cmp-teaser__action-link button';
+    actionLink.href = ctaLink;
+    actionLink.textContent = ctaLabel;
+
+    if (openInNewTab) {
+      actionLink.target = '_blank';
+      actionLink.rel = 'noopener noreferrer';
+    }
+
+    actionContainer.appendChild(actionLink);
+    content.appendChild(actionContainer);
+  }
+
+  cmpTeaser.appendChild(content);
+
+  // ─── Handle Image Logic ────
+  const imageWrapper = document.createElement('div');
+  imageWrapper.className = 'cmp-teaser__image';
+
+  if (inheritPageLink && inheritedImageURL) {
+    // If inherited image is available, create <picture><img></picture>
+    const picture = document.createElement('picture');
+    const img = document.createElement('img');
+    img.src = inheritedImageURL;
+    img.alt = inheritedImageAlt || '';
+    img.loading = 'lazy';
+    picture.appendChild(img);
+    imageWrapper.appendChild(picture);
+  } else {
+    // Use <picture> from the original DOM
+    const pictureEl = imageRowEl?.querySelector('picture');
+    if (pictureEl) {
+      imageWrapper.appendChild(pictureEl.cloneNode(true));
+    }
+  }
+
+  if (imageWrapper.children.length > 0) {
+    cmpTeaser.appendChild(imageWrapper);
+  }
+
+  block.innerHTML = '';
+  block.appendChild(cmpTeaser);
 }

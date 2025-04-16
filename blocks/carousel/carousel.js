@@ -1,85 +1,61 @@
 /*
-// import { fetchPlaceholders, getMetadata } from '../../scripts/aem.js';
-
-// const placeholders = await fetchPlaceholders(getMetadata('locale'));
-// const { btnNxt, btnPre } = placeholders;
-
 export default function decorate(block) {
-  // console.log('placeholders ---> ', placeholders, btnNxt, btnPre);
-  const rows = [...block.children];
-  [...block.children].forEach((row, r) => {
-    if (r === 0) {
-      const nextbtn = document.createElement('button');
-      nextbtn.classList.add('btn');
-      nextbtn.classList.add('btn-next');
-      const node = document.createTextNode('>');
-      nextbtn.append(node);
-      row.replaceWith(nextbtn);
-    } else if (r === rows.length - 1) {
-      const prebtn = document.createElement('button');
-      prebtn.classList.add('btn');
-      prebtn.classList.add('btn-prev');
-      const node = document.createTextNode('<');
-      prebtn.append(node);
-      row.replaceWith(prebtn);
-    } else {
-      row.classList.add('slide');
-      [...row.children].forEach((col, c) => {
-        if (c === 1) {
-          col.classList.add('slide-text');
-        }
-      });
+  const slides = [...block.children];
+
+  // Add classes to each slide and slide text
+  slides.forEach((slide) => {
+    slide.classList.add('slide');
+    const cols = [...slide.children];
+    if (cols.length > 1) {
+      cols[1].classList.add('slide-text');
     }
   });
 
-  const slides = document.querySelectorAll('.slide');
+  // Wrap slides in a container for sliding effect
+  const slidesWrapper = document.createElement('div');
+  slidesWrapper.classList.add('slides-wrapper');
+  slides.forEach((slide) => slidesWrapper.appendChild(slide));
 
-  // loop through slides and set each slides translateX
-  slides.forEach((slide, indx) => {
-    slide.style.transform = `translateX(${indx * 100}%)`;
+  // Clear original block and re-append structured content
+  block.innerHTML = '';
+  block.appendChild(slidesWrapper);
+
+  // Create navigation buttons
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'btn btn-prev';
+  prevBtn.innerText = '<';
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'btn btn-next';
+  nextBtn.innerText = '>';
+
+  block.appendChild(prevBtn);
+  block.appendChild(nextBtn);
+
+  // Set initial position of each slide
+  const allSlides = block.querySelectorAll('.slide');
+  allSlides.forEach((slide, i) => {
+    slide.style.transform = `translateX(${i * 100}%)`;
   });
 
-  // select next slide button
-  const nextSlide = document.querySelector('.btn-next');
+  let currentSlide = 0;
+  const maxSlide = allSlides.length - 1;
 
-  // current slide counter
-  let curSlide = 0;
-  // maximum number of slides
-  const maxSlide = slides.length - 1;
-
-  // add event listener and navigation functionality
-  nextSlide.addEventListener('click', () => {
-    // check if current slide is the last and reset current slide
-    if (curSlide === maxSlide) {
-      curSlide = 0;
-    } else {
-      // eslint-disable-next-line no-plusplus
-      curSlide++;
-    }
-
-    //   move slide by -100%
-    slides.forEach((slide, indx) => {
-      slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+  const moveToSlide = (index) => {
+    allSlides.forEach((slide, i) => {
+      slide.style.transform = `translateX(${100 * (i - index)}%)`;
     });
+  };
+
+  // Button click handlers
+  nextBtn.addEventListener('click', () => {
+    currentSlide = currentSlide === maxSlide ? 0 : currentSlide + 1;
+    moveToSlide(currentSlide);
   });
 
-  // select next slide button
-  const prevSlide = document.querySelector('.btn-prev');
-
-  // add event listener and navigation functionality
-  prevSlide.addEventListener('click', () => {
-    // check if current slide is the first and reset current slide to last
-    if (curSlide === 0) {
-      curSlide = maxSlide;
-    } else {
-      // eslint-disable-next-line no-plusplus
-      curSlide--;
-    }
-
-    //   move slide by 100%
-    slides.forEach((slide, indx) => {
-      slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
-    });
+  prevBtn.addEventListener('click', () => {
+    currentSlide = currentSlide === 0 ? maxSlide : currentSlide - 1;
+    moveToSlide(currentSlide);
   });
 }
 */

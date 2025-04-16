@@ -16,6 +16,7 @@
       "cards",
       "columns",
       "fragment",
+      "seperator",
       "teaser",
       "carousel"
     ]
@@ -29,8 +30,8 @@
   {
     "id": "carousel",
     "components": [
-      "slide",
-      "teaser"
+      "teaser",
+      "hero"
     ]
   },
   {
