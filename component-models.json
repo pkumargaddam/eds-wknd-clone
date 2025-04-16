@@ -329,21 +329,31 @@
         "valueType": "string",
         "name": "image",
         "label": "Image",
-        "multi": false
+        "multi": true
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
         "label": "Alt",
-        "value": ""
+        "value": "",
+        "multi": true
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
         "label": "Text",
-        "valueType": "string"
+        "valueType": "string",
+        "multi": true
+      },
+      {
+        "component": "aem-content",
+        "name": "aem-content",
+        "value": "",
+        "label": "Aem content",
+        "valueType": "string",
+        "multi": true
       }
     ]
   },
