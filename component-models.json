@@ -53,21 +53,6 @@
             "value": "h6"
           }
         ]
-      },
-      {
-        "component": "select",
-        "name": "titleVersion",
-        "label": "Version",
-        "options": [
-          {
-            "name": "withBorder",
-            "value": "withborder"
-          },
-          {
-            "name": "withoutBorder",
-            "value": "withoutborder"
-          }
-        ]
       }
     ]
   },
