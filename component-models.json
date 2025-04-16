@@ -53,23 +53,6 @@
             "value": "h6"
           }
         ]
-      },
-      {
-        "component": "multiselect",
-        "name": "classes",
-        "label": "Styles",
-        "valueType": "string",
-        "required": true,
-        "options": [
-          {
-            "name": "Underline",
-            "value": "underline"
-          },
-          {
-            "name": "Align Right",
-            "value": "align-right"
-          }
-        ]
       }
     ]
   },
@@ -239,6 +222,115 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "title",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "label": "Title Type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "linkTypes",
+        "label": "Types",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Underline",
+            "value": "underline"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "linkColors",
+        "label": "Colors",
+        "options": [
+          {
+            "name": "Black",
+            "value": "black"
+          },
+          {
+            "name": "White",
+            "value": "white"
+          },
+          {
+            "name": "Gray",
+            "value": "gray"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "linkVariations",
+        "label": "Variations",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Underline",
+            "value": "underline"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "linkAlignment",
+        "label": "Alignments",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          },
+          {
+            "name": "Center",
+            "value": "center"
+          }
+        ]
       }
     ]
   }

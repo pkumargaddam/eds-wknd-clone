@@ -54,23 +54,6 @@
               "value": "h6"
             }
           ]
-        },
-        {
-          "component": "multiselect",
-          "name": "classes",
-          "label": "Styles",
-          "valueType": "string",
-          "required": true,
-          "options":[
-            {
-            "name":"Underline",
-            "value":"underline"
-            },
-            {
-              "name":"Align Right",
-              "value":"align-right"
-            }
-          ] 
         }
       ]
     }
