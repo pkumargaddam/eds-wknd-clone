@@ -1,15 +1,17 @@
 export default function decorate(block) {
-  const titleText = block.querySelector('[data-aue-prop="title"]')?.textContent || 'Title';
-  const titleType = block.dataset.titleType || 'h2';
-  const alignment = block.dataset.linkAlignment || 'center';
-  const color = block.dataset.linkColors || 'black';
-  const variation = block.dataset.linkVariations || 'default';
+  // Extract Universal Editor data
+  const title = block.querySelector('[data-aue-prop="title"]')?.textContent || 'Title';
+  const titleType = block.dataset.aueTitleType || 'h2';
+  const alignment = block.dataset.aueLinkAlignment || 'center';
+  const color = block.dataset.aueLinkColors || 'black';
+  const variation = block.dataset.aueLinkVariations || 'default';
 
+  // Create title element dynamically
   const titleElement = document.createElement(titleType);
-  titleElement.className = `wknd-title ${alignment} ${color} ${variation}`;
-  titleElement.textContent = titleText;
+  titleElement.textContent = title;
+  titleElement.classList.add('wknd-title', alignment, color, variation);
 
-  // Clear the block and add the styled title
+  // Clear and append
   block.innerHTML = '';
   block.appendChild(titleElement);
 }

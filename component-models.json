@@ -239,27 +239,27 @@
         "label": "Title Type",
         "options": [
           {
-            "name": "h1",
+            "name": "H1",
             "value": "h1"
           },
           {
-            "name": "h2",
+            "name": "H2",
             "value": "h2"
           },
           {
-            "name": "h3",
+            "name": "H3",
             "value": "h3"
           },
           {
-            "name": "h4",
+            "name": "H4",
             "value": "h4"
           },
           {
-            "name": "h5",
+            "name": "H5",
             "value": "h5"
           },
           {
-            "name": "h6",
+            "name": "H6",
             "value": "h6"
           }
         ]
@@ -267,26 +267,26 @@
       {
         "component": "select",
         "name": "linkAlignment",
-        "label": "Alignments",
+        "label": "Text Alignment",
         "options": [
           {
             "name": "Left",
             "value": "left"
           },
           {
-            "name": "Right",
-            "value": "right"
-          },
-          {
             "name": "Center",
             "value": "center"
+          },
+          {
+            "name": "Right",
+            "value": "right"
           }
         ]
       },
       {
         "component": "select",
         "name": "linkColors",
-        "label": "Colors",
+        "label": "Text Color",
         "options": [
           {
             "name": "Black",
@@ -305,7 +305,7 @@
       {
         "component": "select",
         "name": "linkVariations",
-        "label": "Variations",
+        "label": "Text Style",
         "options": [
           {
             "name": "Default",

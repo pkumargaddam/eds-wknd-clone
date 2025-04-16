@@ -1,14 +1,15 @@
 .wknd-title {
-    margin: 0.5em 0;
-    font-weight: 700;
-    transition: all 0.3s ease-in-out;
+    margin: 1em 0;
+    font-weight: bold;
+    line-height: 1.2;
+    transition: all 0.2s ease-in-out;
   }
   
-  /* Alignment classes */
+  /* Alignment */
   .wknd-title.left {
     text-align: left;
   }
-  
+
   .wknd-title.center {
     text-align: center;
   }
@@ -17,25 +18,25 @@
     text-align: right;
   }
   
-  /* Color classes */
+  /* Colors */
   .wknd-title.black {
     color: black;
   }
-  
+  /* stylelint-disable-next-line rule-empty-line-before */
   .wknd-title.white {
     color: white;
   }
-  
+
   .wknd-title.gray {
     color: gray;
   }
   
-  /* Variation */
-  .wknd-title.underline {
-    text-decoration: underline;
-  }
-  
+  /* Variations */
   .wknd-title.default {
     text-decoration: none;
+  }
+
+  .wknd-title.underline {
+    text-decoration: underline;
   }
   
