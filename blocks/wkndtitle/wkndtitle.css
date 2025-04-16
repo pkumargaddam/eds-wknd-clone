@@ -30,7 +30,9 @@
     text-decoration: none;
   }
 
-  .wkndtitle.underline {
+  .wkndtitle.underline :is(h1, h2, h3, h4, h5, h6)::after {
+    content: "";
+    display: block;
     border-bottom: 2px solid var(--color-yellow);
     width: 84px;
     padding-top: 8px;
