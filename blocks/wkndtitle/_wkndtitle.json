@@ -2,7 +2,7 @@
     "definitions": [
       {
         "title": "WkndTitle",
-        "id": "wkndtitle",
+        "id": "title",
         "plugins": {
           "xwalk": {
             "page": {
@@ -17,7 +17,7 @@
     ],
     "models": [
       {
-        "id": "wkndtitle",
+        "id": "title",
         "fields": [
           {
             "component": "text",

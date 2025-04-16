@@ -159,7 +159,7 @@
         },
         {
           "title": "WkndTitle",
-          "id": "wkndtitle",
+          "id": "title",
           "plugins": {
             "xwalk": {
               "page": {
