@@ -448,18 +448,19 @@ function decorateButtons(element) {
       }
     }
 
-    const variation = a.dataset.variation || a.getAttribute('data-variation') || ''; // support variation via attribute
-
+    const variation = a.dataset.variation || ''; // check for data-variation
     if (socialIcons[iconKey]) {
       if (variation === 'icon-only') {
         a.innerHTML = socialIcons[iconKey];
       } else {
-        a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${a.textContent.trim()}</span>`;
+        const text = a.textContent.trim();
+        a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${text}</span>`;
       }
       a.classList.add('social-icon', 'social-button', 'button');
       a.parentElement.classList.add('social-container');
     }
 
+    // alignment logic (unchanged)
     const block = element.closest('.block');
     const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
