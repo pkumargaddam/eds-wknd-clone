@@ -1,7 +1,7 @@
 export default function decorate(block) {
   const slides = [...block.children];
 
-  // Add classes to slides and internal structure
+  // Add classes to each slide and slide text
   slides.forEach((slide) => {
     slide.classList.add('slide');
     const cols = [...slide.children];
@@ -10,18 +10,16 @@ export default function decorate(block) {
     }
   });
 
-  // Wrap slides in a container
+  // Wrap slides in a container for sliding effect
   const slidesWrapper = document.createElement('div');
   slidesWrapper.classList.add('slides-wrapper');
+  slides.forEach((slide) => slidesWrapper.appendChild(slide));
 
-  slides.forEach((slide) => {
-    slidesWrapper.appendChild(slide);
-  });
-
-  block.innerHTML = ''; // Clear original content
+  // Clear original block and re-append structured content
+  block.innerHTML = '';
   block.appendChild(slidesWrapper);
 
-  // Add navigation buttons
+  // Create navigation buttons
   const prevBtn = document.createElement('button');
   prevBtn.className = 'btn btn-prev';
   prevBtn.innerText = '<';
@@ -33,7 +31,7 @@ export default function decorate(block) {
   block.appendChild(prevBtn);
   block.appendChild(nextBtn);
 
-  // Set slide positions
+  // Set initial position of each slide
   const allSlides = block.querySelectorAll('.slide');
   allSlides.forEach((slide, i) => {
     slide.style.transform = `translateX(${i * 100}%)`;
@@ -48,7 +46,7 @@ export default function decorate(block) {
     });
   };
 
-  // Button event listeners
+  // Button click handlers
   nextBtn.addEventListener('click', () => {
     currentSlide = currentSlide === maxSlide ? 0 : currentSlide + 1;
     moveToSlide(currentSlide);
