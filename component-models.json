@@ -402,5 +402,54 @@
         }
       }
     ]
+  },
+  {
+    "id": "text",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Text Variations",
+        "valueType": "string",
+        "required": true,
+        "maxSize": 3,
+        "options": [
+          {
+            "name": "Text Style",
+            "children": [
+              {
+                "name": "Default",
+                "value": "default"
+              },
+              {
+                "name": "Quoteblock",
+                "value": "quoteblock"
+              }
+            ]
+          },
+          {
+            "name": "Pharagraph",
+            "children": [
+              {
+                "name": "ExtraSmal",
+                "value": "extrasmall"
+              },
+              {
+                "name": "Small",
+                "value": "small"
+              },
+              {
+                "name": "Default",
+                "value": "default"
+              },
+              {
+                "name": "Large",
+                "value": "large"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]
