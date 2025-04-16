@@ -416,30 +416,27 @@ function decorateButtons(element) {
   };
 
   element.querySelectorAll('.button-container a').forEach((a) => {
-    const buttonContainer = a.closest('.button-container');
+    const container = a.closest('.button-container');
 
-    // Get icon name and variation from sibling DOM elements or data attributes
-    const iconText = buttonContainer?.querySelector('.icon')?.textContent?.trim()?.toLowerCase();
-    const variation = buttonContainer?.querySelector('.variation')?.textContent?.trim()?.toLowerCase();
+    if (!container) return;
 
-    const iconHTML = socialIcons[iconText] || '';
-    const originalText = a.textContent.trim();
+    const iconText = container.querySelector('.icon')?.textContent?.trim().toLowerCase();
+    const variation = container.querySelector('.variation')?.textContent?.trim();
+    const alignment = container.querySelector('.alignment')?.textContent?.trim() || 'left';
 
-    if (iconHTML) {
+    // Clean previous styles
+    a.className = 'button';
+    container.classList.add('button-container', alignment);
+
+    // Add social icon logic
+    if (socialIcons[iconText]) {
+      a.classList.add('social-icon', 'social-button');
+
       if (variation === 'icon-only') {
-        a.innerHTML = iconHTML;
+        a.innerHTML = socialIcons[iconText];
       } else {
-        a.innerHTML = `${iconHTML} <span class="button-text">${originalText}</span>`;
+        a.innerHTML = `${socialIcons[iconText]} <span class="button-text">${a.textContent.trim()}</span>`;
       }
-
-      a.classList.add('social-icon', 'social-button', 'button');
-      buttonContainer.classList.add('social-container');
-    }
-
-    // Alignment (if set)
-    const alignment = buttonContainer?.querySelector('.alignment')?.textContent?.trim()?.toLowerCase();
-    if (alignment) {
-      buttonContainer.classList.add(alignment);
     }
   });
 }
