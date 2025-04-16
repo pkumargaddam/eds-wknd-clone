@@ -376,7 +376,7 @@ img {
   
 }
  
-.button-container.left {
+/* .button-container.left {
   text-align: left;
 }
 
@@ -396,4 +396,4 @@ img {
 
 [data-variation="icon-only"].button .button-text {
   display: none !important;
-}
+} */

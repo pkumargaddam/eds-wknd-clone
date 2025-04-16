@@ -52,40 +52,6 @@
               "value":"secondary"
             }
           ]
-        },
-        {
-          "component": "select",
-          "name": "alignment",
-          "label": "Alignment",
-          "options": [
-            {
-              "name": "Left",
-              "value": "left"
-            },
-            {
-              "name": "Center",
-              "value": "center"
-            },
-            {
-              "name": "Right",
-              "value": "right"
-            }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "variation",
-          "label": "Variation",
-          "options": [
-            {
-              "name": "Default",
-              "value": "default"
-            },
-            {
-              "name": "Icon Only",
-              "value": "icon-only"
-            }
-          ]
         }
       ]
     }

@@ -54,21 +54,6 @@
               "value": "h6"
             }
           ]
-        },
-        {
-          "component": "select",
-          "name": "titleBorderOption",
-          "label": "Title with Border",
-          "options": [
-            {
-              "name": "No Border",
-              "value": "noBorder"
-            },
-            {
-              "name": "Border",
-              "value": "withBorder"
-            }
-          ]
         }
       ]
     }
