@@ -84,7 +84,7 @@
       "components": [
         {
           "title": "Articles",
-          "id": "articles",
+          "id": "article",
           "plugins": {
             "xwalk": {
               "page": {
@@ -92,21 +92,6 @@
                 "template": {
                   "name": "Articles",
                   "model": "articles"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Article",
-          "id": "article",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Article",
-                  "model": "article"
                 }
               }
             }

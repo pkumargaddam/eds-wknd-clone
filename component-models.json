@@ -143,30 +143,6 @@
     ]
   },
   {
-    "id": "article",
-    "fields": [
-      {
-        "component": "container",
-        "label": "Select a Page to Create an Article Card",
-        "name": "article-container",
-        "valueType": "string",
-        "collapsible": false,
-        "fields": [
-          {
-            "component": "aem-content",
-            "name": "article-path",
-            "label": "Choose Page path",
-            "valueType": "string",
-            "required": true,
-            "validation": {
-              "rootPath": "/content/eds-wknd"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "articles",
     "fields": [
       {

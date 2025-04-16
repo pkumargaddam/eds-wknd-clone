@@ -22,12 +22,6 @@
     ]
   },
   {
-    "id": "articles",
-    "components": [
-      "article"
-    ]
-  },
-  {
     "id": "cards",
     "components": [
       "card"
