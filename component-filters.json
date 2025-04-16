@@ -18,6 +18,12 @@
       "fragment",
       "teaser",
       "seperator",
+      "articles"
+    ]
+  },
+  {
+    "id": "articles",
+    "components": [
       "article"
     ]
   },

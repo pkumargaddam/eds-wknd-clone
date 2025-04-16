@@ -143,7 +143,7 @@
     ]
   },
   {
-    "id": "article",
+    "id": "articles",
     "fields": [
       {
         "component": "select",
@@ -167,7 +167,7 @@
       },
       {
         "component": "container",
-        "label": "List all Articles under the Selected Parent Page",
+        "label": "List all Articles as card under the Selected Parent Page",
         "name": "child-article-container",
         "valueType": "string",
         "collapsible": false,
@@ -194,7 +194,7 @@
       },
       {
         "component": "container",
-        "label": "List all Articles with Tag filter under Selected Parent Page",
+        "label": "List all Articles as card with Tag filter under Selected Parent Page",
         "name": "child-article-tag-container",
         "valueType": "string",
         "collapsible": false,
@@ -221,16 +221,17 @@
       },
       {
         "component": "container",
-        "label": "List all Articles with Tag filter under Selected Parent Page",
+        "label": "List Article Cards from Selected Page",
         "name": "fixed-article-container",
         "valueType": "string",
         "collapsible": true,
         "fields": [
           {
             "component": "aem-content",
-            "name": "child-article-tag-parent",
-            "label": "Choose Article Parent Page",
-            "valueType": "string",
+            "name": "fixed-article-parent",
+            "label": "Choose Page path",
+            "valueType": "string[]",
+            "multi": true,
             "required": true,
             "validation": {
               "rootPath": "/content/eds-wknd"
@@ -244,8 +245,31 @@
             },
             "fixed-article"
           ]
-        },
-        "multi": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "article",
+    "fields": [
+      {
+        "component": "container",
+        "label": "Select a Page to Create an Article Card",
+        "name": "article-container",
+        "valueType": "string",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "article-path",
+            "label": "Choose Page path",
+            "valueType": "string",
+            "required": true,
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          }
+        ]
       }
     ]
   },
