@@ -1,0 +1,35 @@
+/* Alignment */
+.align-left {
+    text-align: left;
+  }
+  
+  .align-center {
+    text-align: center;
+  }
+  
+  .align-right {
+    text-align: right;
+  }
+  
+  /* Colors */
+  .color-black {
+    color: #000;
+  }
+  
+  .color-white {
+    color: #fff;
+  }
+  
+  .color-gray {
+    color: #666;
+  }
+  
+  /* Variations */
+  .variation-default {
+    text-decoration: none;
+  }
+  
+  .variation-underline {
+    text-decoration: underline;
+  }
+  
