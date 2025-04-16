@@ -482,7 +482,7 @@
         "label": "Title Variation",
         "valueType": "string",
         "required": true,
-        "maxSize": 2,
+        "maxSize": 3,
         "options": [
           {
             "name": "Text Alignment",
