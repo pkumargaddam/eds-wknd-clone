@@ -417,11 +417,7 @@ function decorateButtons(element) {
 
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent.trim();
-    const iconKey = a.dataset.icon || a.title.toLowerCase();
-    const type = a.dataset.type || '';
-
-    const buttonText = a.querySelector('.button-text');
-    const isIconOnly = !buttonText || buttonText.textContent.trim() === '';
+    const iconKey = a.title.toLowerCase();
 
     if (a.href !== a.textContent) {
       const up = a.parentElement;
@@ -452,45 +448,16 @@ function decorateButtons(element) {
       }
     }
 
-    if (type) {
-      a.classList.add(type);
-    }
-
     if (socialIcons[iconKey]) {
+      a.innerHTML = socialIcons[iconKey];
       a.classList.add('social-icon', 'social-button', 'button');
-
-      if (isIconOnly) {
-        a.innerHTML = socialIcons[iconKey];
-        a.classList.add('icon-only');
-
-        // eslint-disable-next-line no-shadow
-        const buttonText = a.querySelector('.button-text');
-        if (buttonText) {
-          buttonText.remove();
-        }
-      } else {
-        a.innerHTML = `${socialIcons[iconKey]}<span class="button-text">${a.title}</span>`;
-      }
-
       a.parentElement.classList.add('social-container');
     }
-
-    // 🧠 FLEXBOX ALIGNMENT FIX
+    const block = element.closest('.block');
+    const alignment = block?.dataset?.alignment || 'left';
     const buttonContainer = a.closest('.button-container');
-    const block = a.closest('.block');
-
-    const getAlignmentFromClass = (el) => {
-      if (!el) return null;
-      if (el.classList.contains('center')) return 'center';
-      if (el.classList.contains('right')) return 'flex-end';
-      return 'flex-start'; // default is left
-    };
-
-    const justifyContent = getAlignmentFromClass(buttonContainer) || getAlignmentFromClass(block);
-
     if (buttonContainer) {
-      buttonContainer.style.display = 'flex';
-      buttonContainer.style.justifyContent = justifyContent;
+      buttonContainer.classList.add(alignment);
     }
   });
 }
