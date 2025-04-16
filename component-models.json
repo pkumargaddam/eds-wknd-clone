@@ -248,8 +248,7 @@
         "label": "List Article Cards from Selected Page",
         "name": "fixed-article-container",
         "valueType": "string",
-        "collapsible": false,
-        "multi": true,
+        "collapsible": true,
         "fields": [
           {
             "component": "aem-content",
