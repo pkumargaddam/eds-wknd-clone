@@ -14,15 +14,15 @@
   
   /* Colors */
   .wkndtitle.black {
-    color: black;
+    color: var(--color-black);
   }
   /* stylelint-disable-next-line rule-empty-line-before */
   .wkndtitle.white {
-    color: white;
+    --text-color:var(--color-white);
   }
 
   .wkndtitle.gray {
-    color: gray;
+    --text-color: var(--color-gray);
   }
   
   /* Variations */
@@ -31,6 +31,8 @@
   }
 
   .wkndtitle.underline {
-    text-decoration: underline;
+    border-bottom: 2px solid var(--color-yellow);
+    width: 84px;
+    padding-top: 8px;
   }
   
