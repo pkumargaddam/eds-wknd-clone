@@ -58,7 +58,7 @@
         {
           "component": "multiselect",
           "name": "style",
-          "label": "Button Styles",
+          "label": "Styles",
           "valueType": "string",
           "required": true,
           "options":[
@@ -69,6 +69,31 @@
             {
               "name":"Align Right",
               "value":"align-right"
+            }
+          ] 
+        },
+         {
+          "component": "multiselect",
+          "name": "style",
+          "label": "Colors",
+          "valueType": "string",
+          "required": true,
+          "options":[
+            {
+            "name":"Black",
+            "value":"black"
+            },
+            {
+              "name":"White",
+              "value":"white"
+            },
+            {
+              "name":"Gray",
+              "value":"gray"
+            },
+            {
+              "name":"None",
+              "value":"none"
             }
           ] 
         }
