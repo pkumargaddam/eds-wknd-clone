@@ -394,6 +394,6 @@ img {
   margin-left: 10px; 
 }
 
-.button.icon-only .button-text {
+[data-variation="icon-only"].button .button-text {
   display: none !important;
 }
