@@ -415,48 +415,30 @@ function decorateButtons(element) {
     instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
   };
 
-  element.querySelectorAll('a').forEach((a) => {
-    a.title = a.title || a.textContent.trim();
-    const iconKey = a.title.toLowerCase();
-
-    if (a.href !== a.textContent) {
-      const up = a.parentElement;
-      const twoup = up.parentElement;
-      if (!a.querySelector('img')) {
-        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-          a.className = 'button';
-          up.classList.add('button-container');
-        }
-        if (
-          up.childNodes.length === 1
-          && up.tagName === 'STRONG'
-          && twoup.childNodes.length === 1
-          && twoup.tagName === 'P'
-        ) {
-          a.className = 'button primary';
-          twoup.classList.add('button-container');
-        }
-        if (
-          up.childNodes.length === 1
-          && up.tagName === 'EM'
-          && twoup.childNodes.length === 1
-          && twoup.tagName === 'P'
-        ) {
-          a.className = 'button secondary';
-          twoup.classList.add('button-container');
-        }
-      }
-    }
-
-    if (socialIcons[iconKey]) {
-      a.innerHTML = socialIcons[iconKey];
-      a.classList.add('social-icon', 'social-button', 'button');
-      a.parentElement.classList.add('social-container');
-    }
-    const block = element.closest('.block');
-    const alignment = block?.dataset?.alignment || 'left';
+  element.querySelectorAll('.button-container a').forEach((a) => {
     const buttonContainer = a.closest('.button-container');
-    if (buttonContainer) {
+
+    // Get icon name and variation from sibling DOM elements or data attributes
+    const iconText = buttonContainer?.querySelector('.icon')?.textContent?.trim()?.toLowerCase();
+    const variation = buttonContainer?.querySelector('.variation')?.textContent?.trim()?.toLowerCase();
+
+    const iconHTML = socialIcons[iconText] || '';
+    const originalText = a.textContent.trim();
+
+    if (iconHTML) {
+      if (variation === 'icon-only') {
+        a.innerHTML = iconHTML;
+      } else {
+        a.innerHTML = `${iconHTML} <span class="button-text">${originalText}</span>`;
+      }
+
+      a.classList.add('social-icon', 'social-button', 'button');
+      buttonContainer.classList.add('social-container');
+    }
+
+    // Alignment (if set)
+    const alignment = buttonContainer?.querySelector('.alignment')?.textContent?.trim()?.toLowerCase();
+    if (alignment) {
       buttonContainer.classList.add(alignment);
     }
   });
