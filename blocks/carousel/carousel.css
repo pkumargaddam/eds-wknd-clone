@@ -12,8 +12,6 @@
 }
 
 .slide {
-  min-width: 100%;
-  flex-shrink: 0;
   transition: transform 0.3s ease-in-out;
   display: flex;
   flex-direction: row;
