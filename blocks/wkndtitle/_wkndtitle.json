@@ -57,16 +57,20 @@
           },
           {
             "component": "select",
-            "name": "linkTypes",
-            "label": "Types",
+            "name": "linkAlignment",
+            "label": "Alignments",
             "options": [
               {
-                "name": "Default",
-                "value": "default"
+                "name": "Left",
+                "value": "left"
               },
               {
-                "name":"Underline",
-                "value":"underline"
+                "name":"Right",
+                "value":"right"
+              },
+              {
+                "name":"Center",
+                "value":"center"
               }
             ]
           },
@@ -102,25 +106,6 @@
               {
                 "name":"Underline",
                 "value":"underline"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "name": "linkAlignment",
-            "label": "Alignments",
-            "options": [
-              {
-                "name": "Left",
-                "value": "left"
-              },
-              {
-                "name":"Right",
-                "value":"right"
-              },
-              {
-                "name":"Center",
-                "value":"center"
               }
             ]
           }
