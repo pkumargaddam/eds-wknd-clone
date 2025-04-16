@@ -1,3 +1,4 @@
+/*
 export default function decorate(block) {
   const slides = [...block.children];
 
@@ -57,3 +58,4 @@ export default function decorate(block) {
     moveToSlide(currentSlide);
   });
 }
+*/
