@@ -1,35 +1,41 @@
-/* Alignment */
-.align-left {
+.wknd-title {
+    margin: 0.5em 0;
+    font-weight: 700;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Alignment classes */
+  .wknd-title.left {
     text-align: left;
   }
   
-  .align-center {
+  .wknd-title.center {
     text-align: center;
   }
   
-  .align-right {
+  .wknd-title.right {
     text-align: right;
   }
   
-  /* Colors */
-  .color-black {
-    color: #000;
+  /* Color classes */
+  .wknd-title.black {
+    color: black;
   }
   
-  .color-white {
-    color: #fff;
+  .wknd-title.white {
+    color: white;
   }
   
-  .color-gray {
-    color: #666;
+  .wknd-title.gray {
+    color: gray;
   }
   
-  /* Variations */
-  .variation-default {
-    text-decoration: none;
-  }
-  
-  .variation-underline {
+  /* Variation */
+  .wknd-title.underline {
     text-decoration: underline;
+  }
+  
+  .wknd-title.default {
+    text-decoration: none;
   }
   

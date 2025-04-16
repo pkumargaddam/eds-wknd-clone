@@ -226,7 +226,7 @@
     ]
   },
   {
-    "id": "wkndtitle",
+    "id": "title",
     "fields": [
       {
         "component": "text",
