@@ -1,4 +1,7 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-console */
+
 import ffetch from '../../scripts/ffetch.js';
 import { cleanUrl } from '../../scripts/helper.js';
 
@@ -10,8 +13,7 @@ export default async function decorate(block) {
 
   // Get root links for filtering
   const childArticleRoot = cleanUrl(childArticleEl?.querySelector('a')?.getAttribute('href') || '');
-  const childArticleTagRoot = cleanUrl(childArticleTagEl?.querySelector('a')?.getAttribute('href') || ''
-);
+  const childArticleTagRoot = cleanUrl(childArticleTagEl?.querySelector('a')?.getAttribute('href') || '');
 
   // Determine active root path based on layout type
   const activeRoot = layoutType === 'child-article' ? childArticleRoot : childArticleTagRoot;
@@ -23,8 +25,8 @@ export default async function decorate(block) {
 
     // Filter all child articles of the active root
     articleList = articleList.filter(({ path }) =>
-      path.startsWith(activeRoot) && path !== activeRoot
-    );
+      path.startsWith(activeRoot)
+      && path !== activeRoot);
   } catch (e) {
     console.warn('Failed to fetch or filter article data:', e);
     return;
