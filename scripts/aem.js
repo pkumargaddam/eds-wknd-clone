@@ -415,28 +415,56 @@ function decorateButtons(element) {
     instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
   };
 
-  element.querySelectorAll('.button-container a').forEach((a) => {
-    const container = a.closest('.button-container');
+  element.querySelectorAll('a').forEach((a) => {
+    a.title = a.title || a.textContent.trim();
+    const iconKey = a.title.toLowerCase();
 
-    if (!container) return;
-
-    const iconText = container.querySelector('.icon')?.textContent?.trim().toLowerCase();
-    const variation = container.querySelector('.variation')?.textContent?.trim();
-    const alignment = container.querySelector('.alignment')?.textContent?.trim() || 'left';
-
-    // Clean previous styles
-    a.className = 'button';
-    container.classList.add('button-container', alignment);
-
-    // Add social icon logic
-    if (socialIcons[iconText]) {
-      a.classList.add('social-icon', 'social-button');
-
-      if (variation === 'icon-only') {
-        a.innerHTML = socialIcons[iconText];
-      } else {
-        a.innerHTML = `${socialIcons[iconText]} <span class="button-text">${a.textContent.trim()}</span>`;
+    if (a.href !== a.textContent) {
+      const up = a.parentElement;
+      const twoup = up.parentElement;
+      if (!a.querySelector('img')) {
+        if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
+          a.className = 'button';
+          up.classList.add('button-container');
+        }
+        if (
+          up.childNodes.length === 1
+          && up.tagName === 'STRONG'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
+        ) {
+          a.className = 'button primary';
+          twoup.classList.add('button-container');
+        }
+        if (
+          up.childNodes.length === 1
+          && up.tagName === 'EM'
+          && twoup.childNodes.length === 1
+          && twoup.tagName === 'P'
+        ) {
+          a.className = 'button secondary';
+          twoup.classList.add('button-container');
+        }
       }
+    }
+
+    const variation = a.dataset.variation || a.getAttribute('data-variation') || ''; // support variation via attribute
+
+    if (socialIcons[iconKey]) {
+      if (variation === 'icon-only') {
+        a.innerHTML = socialIcons[iconKey];
+      } else {
+        a.innerHTML = `${socialIcons[iconKey]} <span class="button-text">${a.textContent.trim()}</span>`;
+      }
+      a.classList.add('social-icon', 'social-button', 'button');
+      a.parentElement.classList.add('social-container');
+    }
+
+    const block = element.closest('.block');
+    const alignment = block?.dataset?.alignment || 'left';
+    const buttonContainer = a.closest('.button-container');
+    if (buttonContainer) {
+      buttonContainer.classList.add(alignment);
     }
   });
 }
