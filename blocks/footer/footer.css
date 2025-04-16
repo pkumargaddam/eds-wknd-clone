@@ -79,6 +79,10 @@ footer {
   padding: 15px 17px;
 }
 
+.footer-links li a.active {
+  text-decoration: underline;
+}
+
 .footer-social {
   float: left;
   width: 33.3334%;
@@ -86,7 +90,8 @@ footer {
 
 .footer-social>div {
   display: flex;
-  flex-wrap: wrap;
+
+ /* flex-wrap: wrap; */
   padding-left: 14px;
 }
 

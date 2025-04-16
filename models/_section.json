@@ -28,11 +28,36 @@
         {
           "component": "multiselect",
           "name": "style",
-          "label": "Style",
+          "label": "Section Styles",
+          "valueType": "string",
+          "required": true,
+          "maxSize": 2,
           "options": [
             {
-              "name": "Highlight",
-              "value": "highlight"
+              "name": "Layout",
+              "children": [
+                {
+                  "name": "Default Width",
+                  "value": ""
+                },
+                {
+                  "name": "Full Width",
+                  "value": "full-width"
+                }
+              ]
+            },
+            {
+              "name": "Margin",
+              "children": [
+                {
+                  "name": "Margin Top",
+                  "value": "top-margin"
+                },
+                {
+                  "name": "Margin Bottom",
+                  "value": "bottom-margin"
+                }
+              ]
             }
           ]
         }
@@ -50,7 +75,9 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "teaser",
+        "seperator"
       ]
     }
   ]
