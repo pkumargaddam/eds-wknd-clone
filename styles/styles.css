@@ -397,13 +397,13 @@ img {
 .social-button .wknd-icon {
   font-size: 18px;
   color:var(--color-black);
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
  
 .button.secondary.social-button .wknd-icon {
   font-size: 18px;
   color:var(--color-white);
-  align-items: center;
-  display: flex;
-  justify-content: center;
 }
 
