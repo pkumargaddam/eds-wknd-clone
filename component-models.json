@@ -143,6 +143,83 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "field-group",
+        "name": "trail",
+        "label": "Breadcrumb Trail",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "text",
+            "label": "Label",
+            "required": true
+          },
+          {
+            "component": "text",
+            "name": "link",
+            "label": "Link (optional)",
+            "required": false
+          }
+        ]
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Breadcrumb Styling",
+        "valueType": "string",
+        "maxSize": 3,
+        "options": [
+          {
+            "name": "Text Alignment",
+            "children": [
+              {
+                "name": "Left",
+                "value": "left"
+              },
+              {
+                "name": "Center",
+                "value": "center"
+              },
+              {
+                "name": "Right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "name": "Separator Style",
+            "children": [
+              {
+                "name": "Arrow",
+                "value": "arrow"
+              },
+              {
+                "name": "Slash",
+                "value": "slash"
+              }
+            ]
+          },
+          {
+            "name": "Color Theme",
+            "children": [
+              {
+                "name": "Light",
+                "value": "light"
+              },
+              {
+                "name": "Dark",
+                "value": "dark"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {

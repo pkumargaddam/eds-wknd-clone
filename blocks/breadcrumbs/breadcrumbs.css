@@ -1,0 +1,51 @@
+.breadcrumb {
+    font-size: 14px;
+    padding: 0;
+  }
+  
+  .breadcrumb ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .breadcrumb li {
+    display: inline-block;
+    padding: 10px 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #202020;
+  }
+  
+  .breadcrumb li + li::before {
+    content: "▶";
+    color: #ffea00;
+    padding: 0 5px;
+  }
+  
+  /* Modifier classes */
+  .breadcrumb.left {
+    text-align: left;
+  }
+
+  .breadcrumb.center {
+    text-align: center;
+  }
+
+  .breadcrumb.right {
+    text-align: right;
+  }
+  
+  .breadcrumb.light {
+    color: #202020;
+  }
+
+  .breadcrumb.dark {
+    color: white;
+  }
+  
+  .breadcrumb.slash li + li::before {
+    content: "/";
+    color: #999;
+  }
+  
