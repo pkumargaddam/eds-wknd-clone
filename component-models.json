@@ -407,6 +407,29 @@
     "id": "text",
     "fields": [
       {
+        "component": "rte",
+        "name": "textContent",
+        "label": "Text Content",
+        "valueType": "string",
+        "config": {
+          "toolbar": [
+            "paragraph",
+            "heading1",
+            "heading2",
+            "heading3",
+            "heading4",
+            "heading5",
+            "heading6",
+            "preformatted",
+            "|",
+            "bold",
+            "italic",
+            "underline",
+            "link"
+          ]
+        }
+      },
+      {
         "component": "multiselect",
         "name": "classes",
         "label": "Text Variations",
@@ -428,10 +451,10 @@
             ]
           },
           {
-            "name": "Pharagraph",
+            "name": "Paragraph",
             "children": [
               {
-                "name": "ExtraSmal",
+                "name": "ExtraSmall",
                 "value": "extrasmall"
               },
               {

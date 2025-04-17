@@ -17,55 +17,78 @@
       }
     ],
     "models": [
-      {
-        "id": "text",
-        "fields": [
-          {
-            "component": "multiselect",
-            "name": "classes",
-            "label": "Text Variations",
-            "valueType": "string",
-            "required": true,
-            "maxSize": 3,
-            "options": [
+        {
+            "id": "text",
+            "fields": [
               {
-                "name": "Text Style",
-                "children": [
-                  {
-                    "name": "Default",
-                    "value": "default"
-                  },
-                  {
-                    "name": "Quoteblock",
-                    "value": "quoteblock"
-                  }
-                ]
+                "component": "rte",
+                "name": "textContent",
+                "label": "Text Content",
+                "valueType": "string",
+                "config": {
+                  "toolbar": [
+                    "paragraph",
+                    "heading1",
+                    "heading2",
+                    "heading3",
+                    "heading4",
+                    "heading5",
+                    "heading6",
+                    "preformatted",
+                    "|",
+                    "bold",
+                    "italic",
+                    "underline",
+                    "link"
+                  ]
+                }
               },
               {
-                "name": "Pharagraph",
-                "children": [
+                "component": "multiselect",
+                "name": "classes",
+                "label": "Text Variations",
+                "valueType": "string",
+                "required": true,
+                "maxSize": 3,
+                "options": [
                   {
-                    "name": "ExtraSmal",
-                    "value": "extrasmall"
+                    "name": "Text Style",
+                    "children": [
+                      {
+                        "name": "Default",
+                        "value": "default"
+                      },
+                      {
+                        "name": "Quoteblock",
+                        "value": "quoteblock"
+                      }
+                    ]
                   },
                   {
-                    "name": "Small",
-                    "value": "small"
-                  },
-                  {
-                    "name": "Default",
-                    "value": "default"
-                  },
-                  {
-                    "name": "Large",
-                    "value": "large"
+                    "name": "Paragraph",
+                    "children": [
+                      {
+                        "name": "ExtraSmall",
+                        "value": "extrasmall"
+                      },
+                      {
+                        "name": "Small",
+                        "value": "small"
+                      },
+                      {
+                        "name": "Default",
+                        "value": "default"
+                      },
+                      {
+                        "name": "Large",
+                        "value": "large"
+                      }
+                    ]
                   }
                 ]
               }
             ]
-          }
-        ]
-      }
+          }          
     ],
     "filters": []
   }
