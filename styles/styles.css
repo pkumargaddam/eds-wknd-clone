@@ -402,5 +402,8 @@ img {
 .button.secondary.social-button .wknd-icon {
   font-size: 18px;
   color:var(--color-white);
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
