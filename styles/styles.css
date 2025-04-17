@@ -118,7 +118,8 @@ body {
   margin: 0;
   padding: 0;
   font-size: var(--font-size-base);
-  text-align: left;
+  
+  /* text-align: left; */
   color: var(--text-color);
   line-height: var(--line-height-base);
 }
@@ -270,25 +271,28 @@ button {
   max-width: 100%;
   margin: 12px 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  padding: 1em 2.5em;
   font-family: var(--body-font-family);
   font-style: normal;
-  font-weight: 500;
+  font-weight:var(--font-weight-bold);
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: var(--color-yellow);
+  color: var(--color-black);
   cursor: pointer;
-  overflow: hidden;
+
+  /* overflow: hidden; */
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: var(--font-size-small) ;
+  text-transform: uppercase;
 }
+
 
 a.button:hover, a.button:focus,
 button:hover, button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var( --color-yellow);
   cursor: pointer;
 }
 
@@ -298,11 +302,20 @@ button:disabled:hover {
   cursor: unset;
 }
 
-a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+/* Secondary Button */
+
+a.button.secondary {
+  box-sizing: border-box;
+  background-color:var(--color-black); 
+  color:var(--color-white);
+  font-size: var(--font-size-small) ;
+  text-transform: uppercase;
+
+}
+
+.button.secondary:hover {
+  background-color:var(--color-black); 
+  cursor: pointer;
 }
 
 /* image and icon style */
@@ -323,3 +336,76 @@ img {
   height: 100%;
   width: 100%;
 }
+ 
+/* Social icons styling */
+.social-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+ 
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+ 
+.social-button i {
+  font-size: 18px;
+  color: var(--color-black);
+}
+ 
+.social-button:hover {
+  background-color:var(--color-white);
+}
+ 
+.button-container.social-container a.button.social-icon.social-button {
+  background:var( --color-gray-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 18px;
+}
+ 
+ 
+.wknd-icon {
+  font-family: var(--icomoon-font-family);
+  font-style: normal;
+  font-weight: normal;
+  display: inline-block;
+}
+ 
+.wkndicon-facebook::before {
+  content: var(--wkndicon-facebook);
+}
+ 
+.wkndicon-instagram::before {
+  content: var(--wkndicon-instagram);
+}
+ 
+.wkndicon-twitter::before {
+  content: var(--wkndicon-twitter);
+}
+ 
+.social-button .wknd-icon {
+  font-size: 18px;
+  color:var(--color-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ 
+.button.secondary.social-button .wknd-icon {
+  font-size: 18px;
+  color:var(--color-white);
+  
+}
+ 

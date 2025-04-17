@@ -31,8 +31,8 @@
         },
         {
           "component": "text",
-          "name": "linkTitle",
-          "label": "Title"
+          "name": "linkIcon",
+          "label": "Icon"
         },
         {
           "component": "select",
@@ -40,16 +40,16 @@
           "label": "Type",
           "options": [
             {
-              "name": "default",
+              "name": "Default",
               "value": ""
             },
             {
-              "name": "primary",
+              "name": "Primary",
               "value": "primary"
             },
             {
-              "name": "secondary",
-              "value": "secondary"
+              "name":"Secondary",
+              "value":"secondary"
             }
           ]
         }

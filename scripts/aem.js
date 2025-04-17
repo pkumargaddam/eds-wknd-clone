@@ -407,14 +407,24 @@ function wrapTextNodes(block) {
  * @param {Element} element container element
  */
 function decorateButtons(element) {
+  const socialIcons = {
+    menu: '<i class="wknd-icon wkndicon-menu"></i>',
+    google: '<i class="wknd-icon wkndicon-google"></i>',
+    twitter: '<i class="wknd-icon wkndicon-twitter"></i>',
+    facebook: '<i class="wknd-icon wkndicon-facebook"></i>',
+    instagram: '<i class="wknd-icon wkndicon-instagram"></i>',
+  };
+
   element.querySelectorAll('a').forEach((a) => {
-    a.title = a.title || a.textContent;
+    a.title = a.title || a.textContent.trim();
+    const iconKey = a.title.toLowerCase();
+
     if (a.href !== a.textContent) {
       const up = a.parentElement;
-      const twoup = a.parentElement.parentElement;
+      const twoup = up.parentElement;
       if (!a.querySelector('img')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
-          a.className = 'button'; // default
+          a.className = 'button';
           up.classList.add('button-container');
         }
         if (
@@ -437,9 +447,18 @@ function decorateButtons(element) {
         }
       }
     }
+
+    if (socialIcons[iconKey]) {
+      a.innerHTML = socialIcons[iconKey];
+      a.classList.add('social-icon', 'social-button', 'button');
+      a.parentElement.classList.add('social-container');
+    }
   });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  decorateButtons(document.body);
+});
 /**
  * Add <img> for icon, prefixed with codeBasePath and optional prefix.
  * @param {Element} [span] span element with icon classes
