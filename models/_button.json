@@ -31,8 +31,8 @@
         },
         {
           "component": "text",
-          "name": "linkTitle",
-          "label": "Title"
+          "name": "linkIcon",
+          "label": "Icon"
         },
         {
           "component": "select",
@@ -40,50 +40,16 @@
           "label": "Type",
           "options": [
             {
+              "name": "Default",
+              "value": ""
+            },
+            {
               "name": "Primary",
               "value": "primary"
             },
             {
               "name":"Secondary",
               "value":"secondary"
-            },
-            {
-              "name": "Default",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "component":"select",
-          "name":"linkVariations",
-          "label":"Variations",
-          "options":[
-            {
-              "name":"Icon with Text",
-              "value":"withtext"
-            },
-            {
-              "name":"Icon without Text",
-              "value":"withouttext"
-            }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "alignment",
-          "label": "Alignment",
-          "options": [
-            {
-              "name": "Left",
-              "value": "left"
-            },
-            {
-              "name": "Center",
-              "value": "center"
-            },
-            {
-              "name": "Right",
-              "value": "right"
             }
           ]
         }
