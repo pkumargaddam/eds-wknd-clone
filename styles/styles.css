@@ -397,15 +397,10 @@ img {
 .social-button .wknd-icon {
   font-size: 18px;
   color:var(--color-black);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
  
 .button.secondary.social-button .wknd-icon {
   font-size: 18px;
   color:var(--color-white);
-  
 }
- 
+
