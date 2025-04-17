@@ -367,10 +367,10 @@ img {
  
 .button-container.social-container a.button.social-icon.social-button {
   background:var( --color-gray-light);
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 14px 18px;
 }
  
  
