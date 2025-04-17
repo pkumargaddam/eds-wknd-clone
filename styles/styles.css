@@ -368,10 +368,10 @@ img {
  
 .button-container.social-container a.button.social-icon.social-button {
   background:var( --color-gray-light);
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 14px 35px;
 }
  
  
@@ -409,24 +409,3 @@ img {
   
 }
  
-/* .button-container.left {
-  text-align: left;
-}
-
-.button-container.center {
-  text-align: center;
-}
-
-.button-container.right {
-  text-align: right;
-}
-
-
-.button .button-text {
-  display: inline-block;
-  margin-left: 10px; 
-}
-
-[data-variation="icon-only"].button .button-text {
-  display: none !important;
-} */
