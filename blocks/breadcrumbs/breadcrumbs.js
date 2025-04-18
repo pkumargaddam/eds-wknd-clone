@@ -18,7 +18,9 @@ export default function decorate($block) {
       $a.textContent = text;
       $li.appendChild($a);
     } else {
-      $li.textContent = text;
+      const $span = document.createElement('span');
+      $span.textContent = text;
+      $li.appendChild($span);
     }
 
     $ul.appendChild($li);

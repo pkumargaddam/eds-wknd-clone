@@ -203,15 +203,15 @@
             ]
           },
           {
-            "name": "Color Theme",
+            "name": "Theme",
             "children": [
-              {
-                "name": "Light",
-                "value": "light"
-              },
               {
                 "name": "Dark",
                 "value": "dark"
+              },
+              {
+                "name": "Light",
+                "value": "light"
               }
             ]
           }
