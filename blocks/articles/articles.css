@@ -14,6 +14,7 @@ article {
   display: block;
   width: 100%;
   background: #ebebeb;
+  margin-bottom: 7px;
 }
 
 .article-image .cmp-image {
@@ -37,7 +38,7 @@ article {
   color: #202020;
 }
 
-.article-title--link {
+.article-title--link:hover {
   text-decoration: none;
 }
 
