@@ -1,37 +1,53 @@
+/* eslint-disable no-underscore-dangle */
 export default async function decorate(block) {
-  const endpoint = 'https://author-p51328-e442308.adobeaemcloud.com/graphql/execute.json/eds-wknd/faqs';
-  const url = `${endpoint}?ts=${Date.now()}`;
+  // Directly use the GraphQL endpoint URL
+  const url = 'https://author-p51328-e442308.adobeaemcloud.com/graphql/execute.json/eds-wknd/faqs';
 
-  try {
-    const res = await fetch(url);
-    const json = await res.json();
-    const items = json?.data?.faqModelList?.items || [];
+  // Prepare the GraphQL query
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: `
+          query {
+            faqModelList {
+              items {
+                question
+                answer {
+                  plaintext
+                }
+              }
+            }
+          }
+        `,
+    }),
+  };
 
-    if (!items.length) {
-      block.innerHTML = '<p>No FAQs found.</p>';
-      return;
-    }
+  // Fetch the FAQ data from the GraphQL endpoint
+  const faqResponse = await fetch(url, options);
+  const index = await faqResponse.json();
 
-    const listItems = items.map((item) => `
-        <li class="faq-item">
+  // Construct the FAQ items HTML
+  let itemsHTML = '';
+  index.data.faqModelList.items.forEach((item) => {
+    itemsHTML += `
+        <li>
           <details class="faq-details">
             <summary class="faq-heading">
               <span>${item.question}</span>
               <b></b>
             </summary>
-            <div class="faq-description">
-              ${item.answer?.plaintext || ''}
-            </div>
+            <div class="faq-description">${item.answer.plaintext}</div>
           </details>
-        </li>
-      `).join('');
+        </li>`;
+  });
 
-    block.innerHTML = `
-        <h2 class="section-heading">Frequently Asked Questions</h2>
-        <ul class="faq-list">${listItems}</ul>
-      `;
-  } catch (error) {
-    console.error('Error loading FAQs:', error);
-    block.innerHTML = '<p>Unable to load FAQ data. Please try again later.</p>';
-  }
+  // Inject the FAQ content into the block element
+  block.innerHTML = `
+      <h2 class='section-heading'>Frequently Asked Questions</h2>
+      <ul class="faq-list">
+        ${itemsHTML}
+      </ul>`;
 }

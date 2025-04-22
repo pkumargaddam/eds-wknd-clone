@@ -1,62 +1,44 @@
-.section > .faq-wrapper {
-    max-width: 1920px;
-    background-color: #F3F2F6;
-  }
-  
-  .section-heading {
-    text-align: center;
-    padding: 40px 20px;
-    font-size: 36px;
-    color: #2C2C2C;
-  }
-  
-  .faq-list {
+/* Basic styling for FAQ component */
+.faq-container {
     display: flex;
     flex-direction: column;
-    list-style: none;
-    padding: 0 0 50px;
-    max-width: 840px;
-    margin: 0 auto;
+    gap: 15px;
+    margin: 20px;
   }
   
-  .faq-list li {
-    background: white;
-    padding: 20px;
-    margin-bottom: 12px;
+  .faq-item {
+    background-color: #f9f9f9;
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px red;
-    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px red;
   }
   
-  .faq-list li:hover {
-    opacity: 1;
-    transform: translateY(-2px);
+  .faq-item h3 {
+    font-size: 1.2em;
+    margin: 0;
+    color: #333;
+  }
+  
+  .faq-item p {
+    font-size: 1em;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+  
+  .faq-details {
+    margin-bottom: 10px;
   }
   
   .faq-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    font-size: 18px;
-    color: #2C2C2C;
+    font-weight: bold;
     cursor: pointer;
   }
   
-  .faq-heading b::after {
-    content: "+";
-    font-size: 20px;
-    margin-left: 10px;
-  }
-  
-  details[open] summary b::after {
-    content: "-";
-  }
-  
   .faq-description {
-    font-size: 16px;
-    color: #2C2C2C;
     margin-top: 10px;
+    font-size: 1em;
+    color: #555;
     line-height: 1.6;
   }
   

@@ -185,21 +185,12 @@
     "fields": []
   },
   {
-    "id": "faq",
+    "id": "fragment",
     "fields": [
       {
-        "component": "text-input",
-        "name": "tags",
-        "value": "transactions",
-        "label": "Tag",
-        "valueType": "string"
-      },
-      {
-        "component": "text-input",
-        "name": "variation",
-        "value": "master",
-        "label": "Variation",
-        "valueType": "string"
+        "component": "aem-content",
+        "name": "reference",
+        "label": "Reference"
       }
     ]
   },
