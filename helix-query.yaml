@@ -54,8 +54,6 @@ indices:
     include:
       - /index/magazine/**
       - /index/adventures/**
-    exclude:
-      - /**
     target: /article-index.json
     properties:
       title:
