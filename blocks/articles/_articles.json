@@ -2,7 +2,7 @@
   "definitions": [
     {
       "title": "Articles",
-      "id": "Articles",
+      "id": "articles",
       "plugins": {
         "xwalk": {
           "page": {
