@@ -21,6 +21,13 @@
             "id": "text",
             "fields": [
               {
+                "component": "richtext",
+                "name": "text",
+                "value": "",
+                "label": "Text",
+                "valueType": "string"
+              },
+              {
                 "component": "multiselect",
                 "name": "classes",
                 "label": "Text Variation",
@@ -51,6 +58,10 @@
                       {
                         "name": "Small",
                         "value": "small"
+                      },
+                      {
+                        "name": "Default",
+                        "value": "default-para"
                       },
                       {
                         "name": "Large",
