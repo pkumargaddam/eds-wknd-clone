@@ -416,7 +416,7 @@
       {
         "component": "multiselect",
         "name": "classes",
-        "label": "Text Variations",
+        "label": "Text Variation",
         "valueType": "string",
         "required": true,
         "maxSize": 3,
