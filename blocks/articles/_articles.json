@@ -59,7 +59,7 @@
             },
             {
               "component": "number",
-              "name": "number",
+              "name": "child-article-depth",
               "label": "Child Depth",
               "valueType": "number",
               "value": 1
@@ -93,7 +93,7 @@
             },
             {
               "component": "number",
-              "name": "number",
+              "name": "child-article-tag-depth",
               "label": "Child Depth",
               "valueType": "number",
               "value": 1
