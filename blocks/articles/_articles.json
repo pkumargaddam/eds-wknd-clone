@@ -144,17 +144,6 @@
                 "numberMin": 1,
                 "customErrorMsg": "Value cannot be less than 1."
               }
-            },
-            {
-              "component": "number",
-              "name": "recent-article-parent-count",
-              "label": "Article Count",
-              "valueType": "number",
-              "value": 4,
-              "validation": {
-                "numberMin": 1,
-                "customErrorMsg": "Value cannot be less than 1."
-              }
             }
           ],
           "condition": {
