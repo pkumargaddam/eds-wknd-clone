@@ -125,7 +125,8 @@ export default async function decorate(block) {
 
   try {
     const taxonomy = await ffetch('/taxonomy.json').all();
-    tags = taxonomy.data || [];
+    console.log(taxonomy);
+    tags = taxonomy.default.data || [];
   } catch (e) {
     console.warn('Failed to fetch tags:', e);
     return;
