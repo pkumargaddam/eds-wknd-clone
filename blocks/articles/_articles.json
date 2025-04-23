@@ -135,6 +135,42 @@
               "fixed-article"
             ]
           }
+        },
+        {
+          "component": "select",
+          "label": "Order By",
+          "name": "order",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Default",
+              "value": ""
+            },
+            {
+              "name": "Title",
+              "value": "title"
+            },
+            {
+              "name": "Last modified date",
+              "value": "last-modified-date"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "Sort Order",
+          "name": "sort",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Ascending",
+              "value": "ascending"
+            },
+            {
+              "name": "Descending",
+              "value": "descending"
+            }
+          ]
         }
       ]
     }
