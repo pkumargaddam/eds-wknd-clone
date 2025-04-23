@@ -128,7 +128,6 @@
               "name": "recent-article-parent",
               "label": "Parent Page",
               "valueType": "string[]",
-              "multi": true,
               "required": true,
               "validation": {
                 "rootPath": "/content/eds-wknd"
@@ -140,6 +139,17 @@
               "label": "Child Depth",
               "valueType": "number",
               "value": 1,
+              "validation": {
+                "numberMin": 1,
+                "customErrorMsg": "Value cannot be less than 1."
+              }
+            },
+            {
+              "component": "number",
+              "name": "recent-article-parent-count",
+              "label": "Article Count",
+              "valueType": "number",
+              "value": 4,
               "validation": {
                 "numberMin": 1,
                 "customErrorMsg": "Value cannot be less than 1."
