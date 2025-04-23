@@ -54,6 +54,7 @@ indices:
     include:
       - /index/magazine/**
       - /index/adventures/**
+    exclude: *excludes
     target: /article-index.json
     properties:
       title:
@@ -71,4 +72,10 @@ indices:
       imageAlt:
         select: head > meta[property="og:image:alt"]
         value: attribute(el, "content")
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      lastPublished:
+        select: head > meta[name="published-time"]
+        value: parseTimestamp(attribute(el, "content"), "YYYY-MM-DDTHH:mm:ss.SSS[Z]")
         
