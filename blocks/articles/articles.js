@@ -1,11 +1,36 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable object-curly-newline */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
+
 import ffetch from '../../scripts/ffetch.js';
 import { cleanUrl } from '../../scripts/helper.js';
 
 function generateUID() {
   return Math.random().toString(36).slice(2, 10);
+}
+
+function getDepth(path = '') {
+  return path.split('/').filter(Boolean).length;
+}
+
+function sortArticles(articles, orderBy, sortDir) {
+  return articles.sort((a, b) => {
+    let valA;
+    let valB;
+
+    if (orderBy === 'title') {
+      valA = a.title?.toLowerCase() || '';
+      valB = b.title?.toLowerCase() || '';
+    } else {
+      valA = new Date(a.lastModified || 0);
+      valB = new Date(b.lastModified || 0);
+    }
+
+    const result = valA > valB ? 1 : valA < valB ? -1 : 0;
+    return sortDir === 'ascending' ? result : -result;
+  });
 }
 
 function createTab({ tag, title }, uid, isActive = false) {
@@ -93,19 +118,31 @@ function setupTabKeyboardNavigation(tabList) {
     }
   });
 
-  // Tab key should only land on the active tab
   tabs.forEach((tab) => {
     tab.setAttribute('tabindex', tab.classList.contains('tag--active') ? '0' : '-1');
   });
 }
 
 export default async function decorate(block) {
-  const [layoutTypeEl, childArticleEl, childArticleTagEl] = [...block.children];
-  const layoutType = layoutTypeEl?.querySelector('p')?.textContent.trim();
-  const childArticleRoot = cleanUrl(childArticleEl?.querySelector('a')?.getAttribute('href') || '');
-  const childArticleTagRoot = cleanUrl(childArticleTagEl?.querySelector('a')?.getAttribute('href') || '');
+  const [
+    layoutTypeEl,
+    childParentEl,
+    childDepthEl,
+    tagParentEl,
+    tagDepthEl,
+    fixedParentEl,
+    orderEl,
+    sortEl,
+  ] = [...block.children];
 
-  // Load article index
+  const layoutType = layoutTypeEl?.querySelector('p')?.textContent.trim();
+  const childParent = cleanUrl(childParentEl?.querySelector('a')?.getAttribute('href') || '');
+  const childDepth = parseInt(childDepthEl?.querySelector('p')?.textContent.trim(), 10);
+  const tagParent = cleanUrl(tagParentEl?.querySelector('a')?.getAttribute('href') || '');
+  const tagDepth = parseInt(tagDepthEl?.querySelector('p')?.textContent.trim(), 10);
+  const order = orderEl?.querySelector('p')?.textContent.trim(); // title or last-modified-date
+  const sort = sortEl?.querySelector('p')?.textContent.trim(); // ascending or descending
+
   let articleList = [];
   try {
     articleList = await ffetch('/article-index.json').all();
@@ -116,25 +153,33 @@ export default async function decorate(block) {
 
   block.innerHTML = '';
 
-  if (layoutType === 'child-article') {
-    const filtered = articleList.filter(({ path }) => path.startsWith(childArticleRoot) && path !== childArticleRoot);
+  const parentPath = layoutType === 'child-article' ? childParent : tagParent;
+  const parentDepth = getDepth(parentPath);
+  const maxDepth = layoutType === 'child-article' ? childDepth : tagDepth;
 
+  const baseFiltered = articleList.filter(({ path }) => {
+    const isChild = path.startsWith(parentPath) && path !== parentPath;
+    const currentDepth = getDepth(path);
+    return isChild && currentDepth === parentDepth + maxDepth;
+  });
+
+  const sortedArticles = sortArticles(baseFiltered, order, sort);
+
+  if (layoutType === 'child-article') {
     const articleContainer = document.createElement('div');
     articleContainer.className = 'article-list';
 
-    filtered.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
+    sortedArticles.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
 
     block.appendChild(articleContainer);
     return;
   }
 
-  // child-article-tag logic
+  // child-article-tag layout
   const uid = generateUID();
   let tags = [];
   try {
-    const taxonomy = await ffetch('/taxonomy.json').all();
-    console.log('taxonomy: ', taxonomy);
-    tags = taxonomy || [];
+    tags = await ffetch('/taxonomy.json').all();
   } catch (e) {
     console.warn('Failed to fetch tags:', e);
     return;
@@ -151,16 +196,13 @@ export default async function decorate(block) {
   const renderArticles = (tagFilter = '') => {
     articleContainer.innerHTML = '';
     const filtered = tagFilter
-      ? articleList.filter((a) => a.tags?.includes(tagFilter))
-      : articleList;
-    filtered
-      .filter(({ path }) => path.startsWith(childArticleTagRoot) && path !== childArticleTagRoot)
-      .forEach((article) => articleContainer.appendChild(createArticleCard(article)));
+      ? sortedArticles.filter((a) => a.tags?.includes(tagFilter))
+      : sortedArticles;
+    filtered.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
   };
 
   const tabs = [];
 
-  // ALL tab
   const allTab = createTab({ tag: '', title: 'ALL' }, uid, true);
   tabs.push(allTab);
   tabList.appendChild(allTab);
@@ -177,10 +219,8 @@ export default async function decorate(block) {
   setupTabKeyboardNavigation(tabList);
   renderArticles();
 
-  // Tab click behavior
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
-      // Update selected states
       tabs.forEach((t) => {
         t.classList.remove('tag--active');
         t.setAttribute('aria-selected', 'false');
