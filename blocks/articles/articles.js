@@ -1,20 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable object-curly-newline */
-/* eslint-disable max-len */
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-shadow, object-curly-newline, no-nested-ternary */
 
 import ffetch from '../../scripts/ffetch.js';
-import { cleanUrl } from '../../scripts/helper.js';
+import { cleanUrl, generateUID, getDepth } from '../../scripts/helper.js';
 
-function generateUID() {
-  return Math.random().toString(36).slice(2, 10);
-}
-
-function getDepth(path = '') {
-  return path.split('/').filter(Boolean).length;
-}
-
+// Sort articles based on title or last modified date
 function sortArticles(articles, orderBy, sortDir) {
   return articles.sort((a, b) => {
     let valA;
@@ -33,6 +22,16 @@ function sortArticles(articles, orderBy, sortDir) {
   });
 }
 
+// Sort articles by last published date in descending order
+function sortByLastPublished(articles) {
+  return articles.sort((a, b) => {
+    const valA = new Date(a.lastPublished || 0);
+    const valB = new Date(b.lastPublished || 0);
+    return valB - valA;
+  });
+}
+
+// Create a tab element for filtering articles by tag
 function createTab({ tag, title }, uid, isActive = false) {
   const li = document.createElement('li');
   li.setAttribute('role', 'tab');
@@ -52,33 +51,32 @@ function createTab({ tag, title }, uid, isActive = false) {
   return li;
 }
 
-function createArticleCard(article) {
-  const { path, title = '', description = '', image = '', imageAlt = '' } = article;
+// Create an article card element to display article details
+function createArticleCard({ path, title = '', description = '', image = '', imageAlt = '' }) {
+  const article = document.createElement('article');
+  article.className = 'article-content';
 
-  const articleEl = document.createElement('article');
-  articleEl.className = 'article-content';
+  const imgLink = document.createElement('a');
+  imgLink.className = 'article-image--link';
+  imgLink.href = path;
 
-  const imageLink = document.createElement('a');
-  imageLink.className = 'article-image--link';
-  imageLink.href = path;
-
-  const imageContainer = document.createElement('div');
-  imageContainer.className = 'article-image';
+  const imgWrapper = document.createElement('div');
+  imgWrapper.className = 'article-image';
 
   const cmpImage = document.createElement('div');
   cmpImage.className = 'cmp-image';
 
   const img = document.createElement('img');
+  img.className = 'cmp-image__image';
   img.src = image;
   img.alt = imageAlt;
   img.loading = 'lazy';
-  img.className = 'cmp-image__image';
   img.width = 765;
   img.height = 535;
 
   cmpImage.appendChild(img);
-  imageContainer.appendChild(cmpImage);
-  imageLink.appendChild(imageContainer);
+  imgWrapper.appendChild(cmpImage);
+  imgLink.appendChild(imgWrapper);
 
   const titleLink = document.createElement('a');
   titleLink.className = 'article-title--link';
@@ -94,13 +92,12 @@ function createArticleCard(article) {
   desc.className = 'article-description';
   desc.textContent = description;
 
-  articleEl.appendChild(imageLink);
-  articleEl.appendChild(titleLink);
-  articleEl.appendChild(desc);
+  article.append(imgLink, titleLink, desc);
 
-  return articleEl;
+  return article;
 }
 
+// Enable keyboard navigation for tab elements
 function setupTabKeyboardNavigation(tabList) {
   const tabs = [...tabList.querySelectorAll('[role="tab"]')];
 
@@ -123,6 +120,7 @@ function setupTabKeyboardNavigation(tabList) {
   });
 }
 
+// Main decorate function that builds the article layout
 export default async function decorate(block) {
   const [
     layoutTypeEl,
@@ -130,18 +128,24 @@ export default async function decorate(block) {
     childDepthEl,
     tagParentEl,
     tagDepthEl,
-    fixedParentEl,
+    recentParentEl,
+    recentDepthEl,
+    recentCountEl,
     orderEl,
     sortEl,
   ] = [...block.children];
 
+  // Extract configuration values from the block
   const layoutType = layoutTypeEl?.querySelector('p')?.textContent.trim();
   const childParent = cleanUrl(childParentEl?.querySelector('a')?.getAttribute('href') || '');
   const childDepth = parseInt(childDepthEl?.querySelector('p')?.textContent.trim(), 10);
   const tagParent = cleanUrl(tagParentEl?.querySelector('a')?.getAttribute('href') || '');
   const tagDepth = parseInt(tagDepthEl?.querySelector('p')?.textContent.trim(), 10);
-  const order = orderEl?.querySelector('p')?.textContent.trim(); // title or last-modified-date
-  const sort = sortEl?.querySelector('p')?.textContent.trim(); // ascending or descending
+  const recentParent = cleanUrl(recentParentEl?.querySelector('a')?.getAttribute('href') || '');
+  const recentDepth = parseInt(recentDepthEl?.querySelector('p')?.textContent.trim(), 10);
+  const recentCount = parseInt(recentCountEl?.querySelector('p')?.textContent.trim(), 10);
+  const order = orderEl?.querySelector('p')?.textContent.trim();
+  const sort = sortEl?.querySelector('p')?.textContent.trim();
 
   let articleList = [];
   try {
@@ -153,94 +157,104 @@ export default async function decorate(block) {
 
   block.innerHTML = '';
 
-  const parentPath = layoutType === 'child-article' ? childParent : tagParent;
-  const parentDepth = getDepth(parentPath);
-  const maxDepth = layoutType === 'child-article' ? childDepth : tagDepth;
+  // Filter articles based on path and depth
+  const getArticlesByDepth = (parentPath, maxDepth) => {
+    const parentDepth = getDepth(parentPath);
+    return articleList.filter(({ path }) => {
+      const isChild = path.startsWith(parentPath) && path !== parentPath;
+      const currentDepth = getDepth(path);
+      return isChild && currentDepth > parentDepth && currentDepth <= parentDepth + maxDepth;
+    });
+  };
 
-  const baseFiltered = articleList.filter(({ path }) => {
-    const isChild = path.startsWith(parentPath) && path !== parentPath;
-    const currentDepth = getDepth(path);
-    return isChild && currentDepth > parentDepth && currentDepth <= parentDepth + maxDepth;
-  });
-
-  const sortedArticles = sortArticles(baseFiltered, order, sort);
-
+  // Render articles by parent/child relationship
   if (layoutType === 'child-article') {
+    const filtered = getArticlesByDepth(childParent, childDepth);
+    const sorted = sortArticles(filtered, order, sort);
+
     const articleContainer = document.createElement('div');
     articleContainer.className = 'article-list';
-
-    sortedArticles.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
-
+    sorted.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
     block.appendChild(articleContainer);
     return;
   }
 
-  // child-article-tag layout
-  const uid = generateUID();
-  let tags = [];
-  try {
-    tags = await ffetch('/taxonomy.json').all();
-  } catch (e) {
-    console.warn('Failed to fetch tags:', e);
+  // Render articles by tag with tab UI
+  if (layoutType === 'child-article-tag') {
+    const filtered = getArticlesByDepth(tagParent, tagDepth);
+    const sorted = sortArticles(filtered, order, sort);
+
+    const uid = generateUID();
+    let tags = [];
+    try {
+      tags = await ffetch('/taxonomy.json').all();
+    } catch (e) {
+      console.warn('Failed to fetch tags:', e);
+      return;
+    }
+
+    const tabList = document.createElement('ol');
+    tabList.className = 'tag-list';
+    tabList.setAttribute('role', 'tablist');
+    tabList.setAttribute('aria-multiselectable', 'false');
+
+    const articleContainer = document.createElement('div');
+    articleContainer.className = 'article-list';
+
+    const renderArticles = (tagFilter = '') => {
+      articleContainer.innerHTML = '';
+      const filtered = tagFilter
+        ? sorted.filter((a) => (a['cq-tags'] || '').split(',').map((t) => t.trim()).includes(tagFilter))
+        : sorted;
+      filtered.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
+    };
+
+    const tabs = [];
+
+    const allTab = createTab({ tag: '', title: 'ALL' }, uid, true);
+    tabs.push(allTab);
+    tabList.appendChild(allTab);
+
+    tags.forEach((tagData) => {
+      const tab = createTab(tagData, uid, false);
+      tabs.push(tab);
+      tabList.appendChild(tab);
+    });
+
+    block.appendChild(tabList);
+    block.appendChild(articleContainer);
+
+    setupTabKeyboardNavigation(tabList);
+    renderArticles();
+
+    // Handle tab click events for filtering
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => {
+          t.classList.remove('tag--active');
+          t.setAttribute('aria-selected', 'false');
+          t.setAttribute('tabindex', '-1');
+        });
+
+        tab.classList.add('tag--active');
+        tab.setAttribute('aria-selected', 'true');
+        tab.setAttribute('tabindex', '0');
+        tab.focus();
+
+        renderArticles(tab.dataset.tag);
+      });
+    });
     return;
   }
 
-  const tabList = document.createElement('ol');
-  tabList.className = 'tag-list';
-  tabList.setAttribute('role', 'tablist');
-  tabList.setAttribute('aria-multiselectable', 'false');
+  // Render most recent articles from a given path
+  if (layoutType === 'recent-article') {
+    const filtered = getArticlesByDepth(recentParent, recentDepth);
+    const sorted = sortByLastPublished(filtered).slice(0, recentCount);
 
-  const articleContainer = document.createElement('div');
-  articleContainer.className = 'article-list';
-
-  const renderArticles = (tagFilter = '') => {
-    articleContainer.innerHTML = '';
-
-    const filtered = tagFilter
-      ? sortedArticles.filter((a) => {
-        const rawTags = a['cq-tags'] || '';
-        const tagArray = rawTags.split(',').map((t) => t.trim()).filter(Boolean);
-        return tagArray.includes(tagFilter);
-      })
-      : sortedArticles;
-
-    filtered.forEach((article) => {
-      articleContainer.appendChild(createArticleCard(article));
-    });
-  };
-
-  const tabs = [];
-
-  const allTab = createTab({ tag: '', title: 'ALL' }, uid, true);
-  tabs.push(allTab);
-  tabList.appendChild(allTab);
-
-  tags.forEach((tagData) => {
-    const tab = createTab(tagData, uid, false);
-    tabs.push(tab);
-    tabList.appendChild(tab);
-  });
-
-  block.appendChild(tabList);
-  block.appendChild(articleContainer);
-
-  setupTabKeyboardNavigation(tabList);
-  renderArticles();
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach((t) => {
-        t.classList.remove('tag--active');
-        t.setAttribute('aria-selected', 'false');
-        t.setAttribute('tabindex', '-1');
-      });
-
-      tab.classList.add('tag--active');
-      tab.setAttribute('aria-selected', 'true');
-      tab.setAttribute('tabindex', '0');
-      tab.focus();
-
-      renderArticles(tab.dataset.tag);
-    });
-  });
+    const articleContainer = document.createElement('div');
+    articleContainer.className = 'article-list';
+    sorted.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
+    block.appendChild(articleContainer);
+  }
 }
