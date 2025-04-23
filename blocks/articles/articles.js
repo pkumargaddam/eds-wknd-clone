@@ -105,7 +105,8 @@ export default async function decorate(block) {
   // Load article index
   let articleList = [];
   try {
-    articleList = await ffetch('/article-index.json').all();
+    console.log('TAXO: ', await ffetch('/article-index.json').sheet('tags').all());
+    articleList = await ffetch('/article-index.json').sheet('tags').all();
   } catch (e) {
     console.warn('Failed to fetch articles:', e);
     return;
