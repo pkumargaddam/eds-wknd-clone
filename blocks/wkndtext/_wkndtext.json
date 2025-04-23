@@ -21,27 +21,11 @@
             "id": "text",
             "fields": [
               {
-                "component": "rte",
-                "name": "textContent",
-                "label": "Text Content",
-                "valueType": "string",
-                "config": {
-                  "toolbar": [
-                    "paragraph",
-                    "heading1",
-                    "heading2",
-                    "heading3",
-                    "heading4",
-                    "heading5",
-                    "heading6",
-                    "preformatted",
-                    "|",
-                    "bold",
-                    "italic",
-                    "underline",
-                    "link"
-                  ]
-                }
+                "component": "richtext",
+                "name": "text",
+                "value": "",
+                "label": "Text",
+                "valueType": "string"
               },
               {
                 "component": "multiselect",
