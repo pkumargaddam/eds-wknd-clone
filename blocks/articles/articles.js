@@ -11,9 +11,9 @@ function generateUID() {
 function createTab({ tag, title }, uid, isActive = false) {
   const li = document.createElement('li');
   li.setAttribute('role', 'tab');
-  li.className = 'cmp-tabs__tab';
+  li.className = 'tag';
   if (isActive) {
-    li.classList.add('cmp-tabs__tab--active');
+    li.classList.add('tag--active');
     li.setAttribute('tabindex', '0');
     li.setAttribute('aria-selected', 'true');
   } else {
@@ -87,12 +87,15 @@ function setupTabKeyboardNavigation(tabList) {
     } else if (e.key === 'ArrowLeft') {
       const prevTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
       prevTab.focus();
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      document.activeElement.click();
     }
   });
 
   // Tab key should only land on the active tab
   tabs.forEach((tab) => {
-    tab.setAttribute('tabindex', tab.classList.contains('cmp-tabs__tab--active') ? '0' : '-1');
+    tab.setAttribute('tabindex', tab.classList.contains('tag--active') ? '0' : '-1');
   });
 }
 
@@ -115,7 +118,13 @@ export default async function decorate(block) {
 
   if (layoutType === 'child-article') {
     const filtered = articleList.filter(({ path }) => path.startsWith(childArticleRoot) && path !== childArticleRoot);
-    filtered.forEach((article) => block.appendChild(createArticleCard(article)));
+
+    const articleContainer = document.createElement('div');
+    articleContainer.className = 'article-list';
+
+    filtered.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
+
+    block.appendChild(articleContainer);
     return;
   }
 
@@ -124,9 +133,6 @@ export default async function decorate(block) {
   let tags = [];
   try {
     const taxonomy = await ffetch('/taxonomy.json').all();
-    // const taxonomy = [];
-    // console.log('TAXO: ', await ffetch('/taxonomy.json').all());
-
     console.log('taxonomy: ', taxonomy);
     tags = taxonomy || [];
   } catch (e) {
@@ -176,12 +182,12 @@ export default async function decorate(block) {
     tab.addEventListener('click', () => {
       // Update selected states
       tabs.forEach((t) => {
-        t.classList.remove('cmp-tabs__tab--active');
+        t.classList.remove('tag--active');
         t.setAttribute('aria-selected', 'false');
         t.setAttribute('tabindex', '-1');
       });
 
-      tab.classList.add('cmp-tabs__tab--active');
+      tab.classList.add('tag--active');
       tab.setAttribute('aria-selected', 'true');
       tab.setAttribute('tabindex', '0');
       tab.focus();

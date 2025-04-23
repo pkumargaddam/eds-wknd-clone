@@ -1,5 +1,5 @@
 /* stylelint-disable selector-class-pattern */
-.articles {
+.article-list {
   display: flex;
   flex-flow: row wrap;
   gap: 32px 14px;
@@ -51,4 +51,28 @@ article {
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.tag {
+  border-bottom: 1px solid transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 14px;
+  max-height: 48px;
+  min-width: 48px;
+  padding: .5rem 1rem;
+  text-transform: uppercase;
+}
+
+.tag--active {
+  background-color: #202020;
+  border: none;
+  border-color: inherit;
+  color: #fff;
 }
