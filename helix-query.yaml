@@ -62,10 +62,13 @@ indices:
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
+      cq-tags:
+        select: head > meta[name="cq-tags"]
+        value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(pricefx.com))+(.*)|^(.*)")
       imageAlt:
         select: head > meta[property="og:image:alt"]
         value: attribute(el, "content")
-  
+        
