@@ -53,10 +53,6 @@
                         "value": "small"
                       },
                       {
-                        "name": "Default",
-                        "value": "default"
-                      },
-                      {
                         "name": "Large",
                         "value": "large"
                       }
