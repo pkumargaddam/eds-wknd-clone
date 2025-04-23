@@ -175,12 +175,19 @@
           {
             "component": "aem-content",
             "name": "child-article-parent",
-            "label": "Choose Article Parent Page",
+            "label": "Parent Page",
             "valueType": "string",
             "required": true,
             "validation": {
               "rootPath": "/content/eds-wknd"
             }
+          },
+          {
+            "component": "number",
+            "name": "number",
+            "label": "Child Depth",
+            "valueType": "number",
+            "value": 1
           }
         ],
         "condition": {
@@ -202,12 +209,19 @@
           {
             "component": "aem-content",
             "name": "child-article-tag-parent",
-            "label": "Choose Article Parent Page",
+            "label": "Parent Page",
             "valueType": "string",
             "required": true,
             "validation": {
               "rootPath": "/content/eds-wknd"
             }
+          },
+          {
+            "component": "number",
+            "name": "number",
+            "label": "Child Depth",
+            "valueType": "number",
+            "value": 1
           }
         ],
         "condition": {
