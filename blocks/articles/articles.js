@@ -105,8 +105,7 @@ export default async function decorate(block) {
   // Load article index
   let articleList = [];
   try {
-    console.log('TAXO: ', await ffetch('/article-index.json').sheet('tags').all());
-    articleList = await ffetch('/article-index.json').sheet('tags').all();
+    articleList = await ffetch('/article-index.json').all();
   } catch (e) {
     console.warn('Failed to fetch articles:', e);
     return;
@@ -125,7 +124,8 @@ export default async function decorate(block) {
   let tags = [];
 
   try {
-    const taxonomy = await ffetch('/taxonomy.json').all();
+    console.log('TAXO: ', await ffetch('/taxonomy.json').sheet('tags').all());
+    const taxonomy = await ffetch('/taxonomy.json').sheet('tags').all();
     console.log('taxonomy: ', taxonomy);
     tags = taxonomy.default.data || [];
   } catch (e) {
