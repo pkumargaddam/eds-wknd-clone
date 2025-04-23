@@ -124,8 +124,8 @@ export default async function decorate(block) {
   let tags = [];
   console.log('TAXO: ', await ffetch('/taxonomy.json').all());
   try {
-    // const taxonomy = await ffetch('/taxonomy.json').sheet('tags').all();
-    const taxonomy = [];
+    const taxonomy = await ffetch('/taxonomy.json').all();
+    // const taxonomy = [];
 
     console.log('taxonomy: ', taxonomy);
     tags = taxonomy.default.data || [];
