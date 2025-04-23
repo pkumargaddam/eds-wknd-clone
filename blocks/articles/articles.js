@@ -160,7 +160,7 @@ export default async function decorate(block) {
   const baseFiltered = articleList.filter(({ path }) => {
     const isChild = path.startsWith(parentPath) && path !== parentPath;
     const currentDepth = getDepth(path);
-    return isChild && currentDepth === parentDepth + maxDepth;
+    return isChild && currentDepth > parentDepth && currentDepth <= parentDepth + maxDepth;
   });
 
   const sortedArticles = sortArticles(baseFiltered, order, sort);
