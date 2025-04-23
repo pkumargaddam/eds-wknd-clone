@@ -195,10 +195,18 @@ export default async function decorate(block) {
 
   const renderArticles = (tagFilter = '') => {
     articleContainer.innerHTML = '';
+
     const filtered = tagFilter
-      ? sortedArticles.filter((a) => a.tags?.includes(tagFilter))
+      ? sortedArticles.filter((a) => {
+        const rawTags = a['cq-tags'] || '';
+        const tagArray = rawTags.split(',').map((t) => t.trim()).filter(Boolean);
+        return tagArray.includes(tagFilter);
+      })
       : sortedArticles;
-    filtered.forEach((article) => articleContainer.appendChild(createArticleCard(article)));
+
+    filtered.forEach((article) => {
+      articleContainer.appendChild(createArticleCard(article));
+    });
   };
 
   const tabs = [];

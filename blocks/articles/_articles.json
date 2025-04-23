@@ -35,8 +35,8 @@
               "value": "child-article-tag"
             },
             {
-              "name": "Fetch Articles Manually",
-              "value": "fixed-article"
+              "name": "Recent Articles",
+              "value": "recent-article"
             }
           ]
         },
@@ -118,20 +118,42 @@
         },
         {
           "component": "container",
-          "label": "List Article Cards from Selected Page",
-          "name": "fixed-article-container",
+          "label": "List recent Article Cards from Selected Parent Page",
+          "name": "recent-article-container",
           "valueType": "string",
-          "collapsible": true,
+          "collapsible": false,
           "fields": [
             {
               "component": "aem-content",
-              "name": "fixed-article-parent",
-              "label": "Choose Page path",
+              "name": "recent-article-parent",
+              "label": "Parent Page",
               "valueType": "string[]",
               "multi": true,
               "required": true,
               "validation": {
                 "rootPath": "/content/eds-wknd"
+              }
+            },
+            {
+              "component": "number",
+              "name": "recent-article-parent-depth",
+              "label": "Child Depth",
+              "valueType": "number",
+              "value": 1,
+              "validation": {
+                "numberMin": 1,
+                "customErrorMsg": "Value cannot be less than 1."
+              }
+            },
+            {
+              "component": "number",
+              "name": "recent-article-parent-count",
+              "label": "Article Count",
+              "valueType": "number",
+              "value": 4,
+              "validation": {
+                "numberMin": 1,
+                "customErrorMsg": "Value cannot be less than 1."
               }
             }
           ],
@@ -140,7 +162,7 @@
               {
                 "var": "layout-type"
               },
-              "fixed-article"
+              "recent-article"
             ]
           }
         },
