@@ -122,9 +122,8 @@ export default async function decorate(block) {
   // child-article-tag logic
   const uid = generateUID();
   let tags = [];
-
+  console.log('TAXO: ', await ffetch('/taxonomy.json').sheet('tags').all());
   try {
-    console.log('TAXO: ', await ffetch('/taxonomy.json').sheet('tags').all());
     const taxonomy = await ffetch('/taxonomy.json').sheet('tags').all();
     console.log('taxonomy: ', taxonomy);
     tags = taxonomy.default.data || [];
