@@ -122,13 +122,13 @@ export default async function decorate(block) {
   // child-article-tag logic
   const uid = generateUID();
   let tags = [];
-  console.log('TAXO: ', await ffetch('/taxonomy.json').all());
   try {
     const taxonomy = await ffetch('/taxonomy.json').all();
     // const taxonomy = [];
+    // console.log('TAXO: ', await ffetch('/taxonomy.json').all());
 
     console.log('taxonomy: ', taxonomy);
-    tags = taxonomy.default.data || [];
+    tags = taxonomy || [];
   } catch (e) {
     console.warn('Failed to fetch tags:', e);
     return;
