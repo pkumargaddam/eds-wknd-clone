@@ -188,15 +188,16 @@
           }
         },
         {
-          "title": "WkndTitle",
-          "id": "title",
+
+          "title": "WkndText",
+          "id": "text",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "model": "title",
-                  "name": "Wkndtitle"
+                  "model": "text",
+                  "name": "Wkndtext"
                 }
               }
             }
