@@ -188,6 +188,7 @@
           }
         },
         {
+
           "title": "WkndText",
           "id": "text",
           "plugins": {
