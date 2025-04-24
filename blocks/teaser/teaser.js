@@ -3,6 +3,7 @@ import ffetch from '../../scripts/ffetch.js';
 import { cleanUrl } from '../../scripts/helper.js';
 
 export default async function decorate(block) {
+  console.log('Teaser Loaded load');
   // Destructure block children assuming fixed column structure
   const [
     pageLinkEl,
