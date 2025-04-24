@@ -1,5 +1,0 @@
-mountpoints:
-  /:
-    url: "https://author-p51328-e442308.adobeaemcloud.com/bin/franklin.delivery/iamhelium/eds-wknd/main"
-    type: "markup"
-    suffix: ".html"
