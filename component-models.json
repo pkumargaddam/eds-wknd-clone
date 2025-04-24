@@ -162,18 +162,6 @@
     ]
   },
   {
-    "id": "carousel",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "label": "Title",
-        "value": "Please add components inside carousel"
-      }
-    ]
-  },
-  {
     "id": "columns",
     "fields": [
       {
