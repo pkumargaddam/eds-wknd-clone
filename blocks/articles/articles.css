@@ -7,6 +7,12 @@
   gap: 2rem 0.875rem;
 }
 
+@media (width <=767px) {
+  .article-list {
+    justify-content: space-between;
+  }
+}
+
 article {
   max-width: 16.25rem;
 }
