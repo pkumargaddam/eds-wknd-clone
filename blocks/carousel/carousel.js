@@ -20,6 +20,7 @@ export default async function decorate(block) {
     // Add classes and metadata
     newBlock.classList.add(...blockNames, 'block');
     newBlock.dataset.blockName = primaryBlock;
+    newBlock.dataset.blockStatus = 'loaded';
 
     // Replace raw block in DOM
     rawBlock.replaceWith(newBlock);
