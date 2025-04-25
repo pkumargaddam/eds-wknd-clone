@@ -54,8 +54,7 @@ indices:
     include:
       - /index/magazine/**
       - /index/adventures/**
-    exclude:
-      - /**
+    exclude: *excludes
     target: /article-index.json
     properties:
       title:
@@ -64,10 +63,19 @@ indices:
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
+      cq-tags:
+        select: head > meta[name="cq-tags"]
+        value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(pricefx.com))+(.*)|^(.*)")
       imageAlt:
         select: head > meta[property="og:image:alt"]
         value: attribute(el, "content")
-  
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      lastPublished:
+        select: head > meta[name="published-time"]
+        value: parseTimestamp(attribute(el, "content"), "YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+        
