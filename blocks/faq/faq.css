@@ -1,44 +1,63 @@
-/* Basic styling for FAQ component */
-.faq-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 20px;
-  }
-  
-  .faq-item {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px red;
-  }
-  
-  .faq-item h3 {
-    font-size: 1.2em;
-    margin: 0;
-    color: #333;
-  }
-  
-  .faq-item p {
-    font-size: 1em;
-    color: #555;
-    margin-top: 10px;
-    line-height: 1.6;
-  }
-  
-  .faq-details {
-    margin-bottom: 10px;
-  }
-  
-  .faq-heading {
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .faq-description {
-    margin-top: 10px;
-    font-size: 1em;
-    color: #555;
-    line-height: 1.6;
-  }
-  
+/* Accordion container styles */
+.accordion {
+  margin: 20px 0;
+}
+
+/* Accordion item styles */
+.accordion-item {
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Accordion header styles */
+.accordion-header {
+  background-color: #007bff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  margin: 0;
+  font-size: 18px;
+}
+
+.accordion-header button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  text-align: left;
+  width: 100%;
+  font-size: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
+.accordion-header button:focus {
+  outline: none;
+}
+
+/* Accordion body styles */
+.accordion-body {
+  padding: 15px;
+  background-color: red;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.accordion-body p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Styles for the accordion when collapsed */
+.accordion-button.collapsed {
+  color: #007bff;
+  font-weight: bold;
+  background-color: #f9f9f9;
+}
+
+/* Add some transitions */
+.accordion-button,
+.accordion-body {
+  transition: all 0.3s ease;
+}

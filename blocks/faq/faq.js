@@ -1,53 +1,42 @@
-/* eslint-disable no-underscore-dangle */
 export default async function decorate(block) {
-  // Directly use the GraphQL endpoint URL
-  const url = 'https://author-p51328-e442308.adobeaemcloud.com/graphql/execute.json/eds-wknd/faqs';
+  const props = [...block.children];
+  const firsttag = props[0].textContent.trim();
+  const variationname = props[1].textContent.trim() || 'master';
+  const cachebuster = Math.floor(Math.random() * 1000);
+  const url = `https://author-p51328-e442308.adobeaemcloud.com/graphql/execute.json/eds-wknd/faqs?tag=${firsttag}&variation=${variationname}&ts=${cachebuster}`;
+  try {
+    // Fetch the FAQ data from the provided URL
+    const faq = await fetch(url);
+    const indexData = await faq.json(); // Rename index to indexData to avoid shadowing
 
-  // Prepare the GraphQL query
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: `
-          query {
-            faqModelList {
-              items {
-                question
-                answer {
-                  plaintext
-                }
-              }
-            }
-          }
-        `,
-    }),
-  };
+    let itemsHTML = '';
+    // Generate the FAQ accordion items
+    indexData.data.faqModelList.items.forEach((item, faqItemIndex) => {
+      const id = `faqItem${faqItemIndex}`;
 
-  // Fetch the FAQ data from the GraphQL endpoint
-  const faqResponse = await fetch(url, options);
-  const index = await faqResponse.json();
+      itemsHTML += `
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading${id}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${id}" aria-expanded="false" aria-controls="${id}">
+              ${item.question}
+            </button>
+          </h2>
+          <div id="${id}" class="accordion-collapse collapse" aria-labelledby="heading${id}" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              ${item.answer.plaintext || ''}
+            </div>
+          </div>
+        </div>`;
+    });
 
-  // Construct the FAQ items HTML
-  let itemsHTML = '';
-  index.data.faqModelList.items.forEach((item) => {
-    itemsHTML += `
-        <li>
-          <details class="faq-details">
-            <summary class="faq-heading">
-              <span>${item.question}</span>
-              <b></b>
-            </summary>
-            <div class="faq-description">${item.answer.plaintext}</div>
-          </details>
-        </li>`;
-  });
-
-  // Inject the FAQ content into the block element
-  block.innerHTML = `
-      <h2 class='section-heading'>Frequently Asked Questions</h2>
-      <ul class="faq-list">
+    // Inject the accordion container and FAQ items into the block
+    block.innerHTML = `
+      <h2 class="section-heading">Frequently Asked Questions</h2>
+      <div class="accordion" id="faqAccordion">
         ${itemsHTML}
-      </ul>`;
+      </div>`;
+  } catch (error) {
+    // Handle the case where the data cannot be fetched
+    block.innerHTML = '<p>Failed to load FAQ data.</p>';
+  }
 }
