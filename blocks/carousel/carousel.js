@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /*
 export default function decorate(block) {
   const slides = [...block.children];
@@ -59,3 +60,7 @@ export default function decorate(block) {
   });
 }
 */
+
+export default function decorate(block) {
+  console.log('CAROUSEL BLOCK');
+}
