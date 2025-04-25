@@ -6,10 +6,9 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/columns/v1/columns",
+            "resourceType": "core/franklin/components/section/v1/section",
             "template": {
-              "columns": "2",
-              "rows": "1"
+              "model": "section"
             }
           }
         }
@@ -17,40 +16,12 @@
     }
   ],
   "models": [
-    {
-      "id": "carousel",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "number",
-          "name": "columns",
-          "value": "",
-          "label": "Columns"
-        },
-        {
-          "component": "text",
-          "valueType": "number",
-          "name": "rows",
-          "value": "",
-          "label": "Rows"
-        }
-      ]
-    }
   ],
   "filters": [
     {
       "id": "carousel",
       "components": [
-        "slide"
-      ]
-    },
-    {
-      "id": "slide",
-      "components": [
-        "teaser",
-        "image",
-        "button",
-        "title"
+        "teaser"
       ]
     }
   ]
