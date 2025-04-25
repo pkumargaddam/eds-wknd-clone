@@ -128,21 +128,6 @@
           }
         },
         {
-          "title": "Banner",
-          "id": "banner",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Banner",
-                  "model": "banner"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Columns",
           "id": "columns",
           "plugins": {
