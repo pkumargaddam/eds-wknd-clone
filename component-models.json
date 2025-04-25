@@ -181,8 +181,38 @@
     ]
   },
   {
-    "id": "faq",
-    "fields": []
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Accordion Title",
+        "value": "FAQ Accordion"
+      },
+      {
+        "component": "array",
+        "name": "faqItems",
+        "label": "FAQ Items",
+        "items": [
+          {
+            "component": "reference",
+            "valueType": "string",
+            "name": "question",
+            "label": "Question"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "answer",
+            "label": "Answer"
+          }
+        ]
+      }
+    ],
+    "validation": {
+      "rootPath": "/content/eds-wknd/faqs"
+    }
   },
   {
     "id": "fragment",
