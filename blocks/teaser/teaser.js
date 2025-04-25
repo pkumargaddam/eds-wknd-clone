@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
 import ffetch from '../../scripts/ffetch.js';
 import { cleanUrl } from '../../scripts/helper.js';
+import { readBlockConfig } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
+  console.log(readBlockConfig(block));
   console.log('Teaser Loaded load');
   // Destructure block children assuming fixed column structure
   const [
