@@ -11,46 +11,35 @@ export default async function decorate(block) {
     // Clear existing children (if any)
     block.replaceChildren();
 
-    // Create a container for the FAQ accordion
-    const accordionContainer = document.createElement('div');
-    accordionContainer.classList.add('faq-accordion-container');
+    // Create a container for the FAQ block
+    const faqContainer = document.createElement('div');
+    faqContainer.classList.add('faq-container');
 
-    // Loop through each FAQ item and create the accordion elements
-    items.forEach((item, index) => {
-      const accordionItem = document.createElement('div');
-      accordionItem.classList.add('faq-accordion-item');
+    // Loop through each FAQ item and create the FAQ elements
+    items.forEach((item) => {
+      const faqItem = document.createElement('div');
+      faqItem.classList.add('faq-item');
 
-      // Create the header for the accordion item (question)
-      const header = document.createElement('button');
-      header.classList.add('faq-accordion-header');
-      header.textContent = item.question || 'No Question Available';
-      header.setAttribute('aria-expanded', 'false');
-      header.setAttribute('aria-controls', `faq-accordion-item-${index}`);
+      // Create the question for the FAQ item
+      const question = document.createElement('h3');
+      question.classList.add('faq-question');
+      question.textContent = item.question || 'No Question Available';
 
-      // Create the content (answer) for the accordion item
-      const content = document.createElement('div');
-      content.classList.add('faq-accordion-content');
-      content.id = `faq-accordion-item-${index}`;
-      content.textContent = item.answer?.plaintext || 'No Answer Available';
-      content.style.display = 'none';
+      // Create the answer for the FAQ item
+      const answer = document.createElement('p');
+      answer.classList.add('faq-answer');
+      answer.textContent = item.answer?.plaintext || 'No Answer Available';
 
-      // Add event listener to toggle the accordion visibility
-      header.addEventListener('click', () => {
-        const isExpanded = header.getAttribute('aria-expanded') === 'true';
-        header.setAttribute('aria-expanded', !isExpanded);
-        content.style.display = isExpanded ? 'none' : 'block';
-      });
+      // Append the question and answer to the FAQ item
+      faqItem.appendChild(question);
+      faqItem.appendChild(answer);
 
-      // Append the header and content to the accordion item
-      accordionItem.appendChild(header);
-      accordionItem.appendChild(content);
-
-      // Add the accordion item to the container
-      accordionContainer.appendChild(accordionItem);
+      // Add the FAQ item to the container
+      faqContainer.appendChild(faqItem);
     });
 
-    // Append the accordion container to the block
-    block.appendChild(accordionContainer);
+    // Append the FAQ container to the block
+    block.appendChild(faqContainer);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error fetching data:', error);
