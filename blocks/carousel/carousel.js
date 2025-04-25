@@ -1,4 +1,4 @@
-import { loadCSS } from '../../scripts/aem.js';
+import { loadBlock } from '../../scripts/aem.js'; // or wherever your loadBlock lives
 
 export default async function decorate(block) {
   const rawBlocks = [...block.children].filter((childDiv) => {
@@ -33,15 +33,7 @@ export default async function decorate(block) {
     // Replace raw block in DOM
     rawBlock.replaceWith(newBlock);
 
-    try {
-      // Load block CSS
-      loadCSS(`${window.hlx.codeBasePath}/blocks/${primaryBlock}/${primaryBlock}.css`);
-
-      // Dynamically import and decorate
-      const mod = await import(`../${primaryBlock}/${primaryBlock}.js`);
-      await mod.default(newBlock);
-    } catch (e) {
-      console.warn(`No decorator or CSS found for block: ${primaryBlock}`, e);
-    }
+    // Load block (CSS + JS + decorator if available)
+    await loadBlock(newBlock);
   }));
 }
