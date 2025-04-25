@@ -1,3 +1,5 @@
+import { loadCSS } from '../../scripts/aem.js';
+
 export default async function decorate(block) {
   const rawBlocks = [...block.children].filter((childDiv) => {
     const marker = childDiv.querySelector(':scope > div:first-child > p');
@@ -32,11 +34,14 @@ export default async function decorate(block) {
     rawBlock.replaceWith(newBlock);
 
     try {
+      // Load block CSS
+      loadCSS(`${window.hlx.codeBasePath}/blocks/${primaryBlock}/${primaryBlock}.css`);
+
       // Dynamically import and decorate
       const mod = await import(`../${primaryBlock}/${primaryBlock}.js`);
       await mod.default(newBlock);
     } catch (e) {
-      console.warn(`No decorator found for block: ${primaryBlock}`, e);
+      console.warn(`No decorator or CSS found for block: ${primaryBlock}`, e);
     }
   }));
 }
