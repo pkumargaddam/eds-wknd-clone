@@ -11,28 +11,28 @@ export default async function decorate(block) {
     // Clear existing children (if any)
     block.replaceChildren();
 
-    // Create a container for the accordion
+    // Create a container for the FAQ accordion
     const accordionContainer = document.createElement('div');
-    accordionContainer.classList.add('accordion-container');
+    accordionContainer.classList.add('faq-accordion-container');
 
     // Loop through each FAQ item and create the accordion elements
     items.forEach((item, index) => {
       const accordionItem = document.createElement('div');
-      accordionItem.classList.add('accordion-item');
+      accordionItem.classList.add('faq-accordion-item');
 
       // Create the header for the accordion item (question)
       const header = document.createElement('button');
-      header.classList.add('accordion-header');
+      header.classList.add('faq-accordion-header');
       header.textContent = item.question || 'No Question Available';
       header.setAttribute('aria-expanded', 'false');
-      header.setAttribute('aria-controls', `accordion-item-${index}`);
+      header.setAttribute('aria-controls', `faq-accordion-item-${index}`);
 
       // Create the content (answer) for the accordion item
       const content = document.createElement('div');
-      content.classList.add('accordion-content');
-      content.id = `accordion-item-${index}`;
+      content.classList.add('faq-accordion-content');
+      content.id = `faq-accordion-item-${index}`;
       content.textContent = item.answer?.plaintext || 'No Answer Available';
-      content.style.display = 'none'; // Initially hidden
+      content.style.display = 'none';
 
       // Add event listener to toggle the accordion visibility
       header.addEventListener('click', () => {
@@ -55,4 +55,10 @@ export default async function decorate(block) {
     // eslint-disable-next-line no-console
     console.error('Error fetching data:', error);
   }
+
+  // Optional: Log the meta tag information if needed
+  const metaTag = document.querySelector('meta[name="cq-tags"]');
+  const content = metaTag ? metaTag.getAttribute('content') : null;
+  // eslint-disable-next-line no-console
+  console.log('AEM TAG: ', content, block);
 }

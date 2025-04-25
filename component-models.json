@@ -181,7 +181,7 @@
     ]
   },
   {
-    "id": "accordion",
+    "id": "faq",
     "fields": [
       {
         "component": "text",
