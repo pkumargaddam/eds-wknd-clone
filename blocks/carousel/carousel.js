@@ -1,30 +1,35 @@
-// import decorateTeaser from '../teaser/teaser.js';
+export default async function decorate(block) {
+  const rawBlocks = [...block.children].filter((childDiv) => {
+    const marker = childDiv.querySelector(':scope > div:first-child > p');
+    return marker && marker.textContent.trim().length > 0;
+  });
 
-// export default async function decorate(block) {
-//   const rawTeasers = [...block.children].filter((childDiv) => {
-//     const marker = childDiv.querySelector(':scope > div:first-child > p');
-//     return marker && marker.textContent.includes('teaser');
-//   });
+  await Promise.all(rawBlocks.map(async (rawBlock) => {
+    const rows = [...rawBlock.children];
+    const configText = rows[0]?.querySelector('p')?.textContent.trim() || '';
+    const blockNames = configText.split(',').map((name) => name.trim()).filter(Boolean);
 
-//   await Promise.all(rawTeasers.map(async (teaserRaw) => {
-//     const rows = [...teaserRaw.children];
+    if (blockNames.length === 0) return;
 
-//     const configText = rows[0]?.querySelector('p')?.textContent.trim() || '';
-//     const blockClasses = configText.split(',').map((cls) => cls.trim()).filter(Boolean);
+    const primaryBlock = blockNames[0]; // e.g., 'teaser' or 'hero'
 
-//     // Create a new block without the config row
-//     const teaserBlock = document.createElement('div');
-//     teaserBlock.append(...rows.slice(1));
+    // Create new trimmed block without config row
+    const newBlock = document.createElement('div');
+    newBlock.append(...rows.slice(1));
 
-//     // Apply necessary classes and block attributes
-//     teaserBlock.classList.add(...blockClasses, 'block');
-//     teaserBlock.dataset.blockName = 'teaser';
-//     // teaserBlock.dataset.blockStatus = 'loaded';
+    // Add classes and metadata
+    newBlock.classList.add(...blockNames, 'block');
+    newBlock.dataset.blockName = primaryBlock;
 
-//     // Replace old raw block
-//     teaserRaw.replaceWith(teaserBlock);
+    // Replace raw block in DOM
+    rawBlock.replaceWith(newBlock);
 
-//     // Run the actual teaser decorator
-//     await decorateTeaser(teaserBlock);
-//   }));
-// }
+    try {
+      // Dynamically load the block's decorator
+      const mod = await import(`../${primaryBlock}/${primaryBlock}.js`);
+      await mod.default(newBlock);
+    } catch (e) {
+      console.warn(`No decorator found for block: ${primaryBlock}`, e);
+    }
+  }));
+}
