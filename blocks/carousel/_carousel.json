@@ -54,7 +54,8 @@
       "id": "carousel",
       "components": [
         "teaser",
-        "banner"
+        "banner",
+        "hero"
       ]
     }
   ]
