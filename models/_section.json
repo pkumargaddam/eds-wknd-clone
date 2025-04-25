@@ -77,7 +77,8 @@
         "columns",
         "fragment",
         "seperator",
-        "teaser"
+        "teaser",
+        "carousel"
       ]
     }
   ]

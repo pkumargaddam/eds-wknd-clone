@@ -24,9 +24,6 @@
       "components": [
         {
           "...": "./_section.json#/definitions"
-        },
-        {
-          "...": "../blocks/carousel/_carousel.json#/definitions"
         }
       ]
     },
