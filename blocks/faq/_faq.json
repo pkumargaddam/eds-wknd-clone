@@ -16,41 +16,22 @@
       }
     }
   ],
-  "models": [
-    {
-      "id": "faq",
-      "fields": [
+      "models": [
         {
-          "component": "text",
-          "valueType": "string",
-          "name": "title",
-          "label": "Accordion Title",
-          "value": "FAQ Accordion"
-        },
-        {
-          "component": "array",
-          "name": "faqItems",
-          "label": "FAQ Items",
-          "items": [
-            {
-              "component": "reference",
-              "valueType": "string",
-              "name": "question",
-              "label": "Question"
-            },
+          "id": "faq",
+          "fields": [
             {
               "component": "text",
               "valueType": "string",
-              "name": "answer",
-              "label": "Answer"
+              "name": "title",
+              "label": "Title",
+              "value": "Content fragment With GraphQL",
+              "validation": {
+                "rootPath": "/content/eds-helium-xwalk"
+              }
             }
           ]
         }
       ],
-      "validation": {
-        "rootPath": "/content/eds-wknd/faqs"
-      }
-    }
-  ],
   "filters": []
 }
