@@ -16,7 +16,36 @@
       }
     }
   ],
-  "models": [],
+  "models": [
+    {
+      "id": "carousel",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Carousel Style",
+          "valueType": "string",
+          "required": true,
+          "maxSize": 1,
+          "options": [
+            {
+              "name": "Margin Bottom",
+              "children": [
+                {
+                  "name": "default",
+                  "value": ""
+                },
+                {
+                  "name": "Margin 72px",
+                  "value": "margin-lxxii"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "filters": [
     {
       "id": "carousel",
