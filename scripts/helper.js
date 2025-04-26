@@ -44,7 +44,7 @@ export function cleanUrl(url) {
  * @returns {string} A UID string consisting of 8 characters (letters and numbers).
  */
 export function generateUID() {
-  return Math.random().toString(36).slice(2, 10);
+  return Math.random().toString(36).slice(2, 15);
 }
 
 /**
