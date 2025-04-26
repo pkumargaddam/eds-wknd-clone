@@ -38,3 +38,23 @@ export function cleanUrl(url) {
   // Ensure it starts with a "/"
   return cleaned.startsWith('/') ? cleaned : `/${cleaned}`;
 }
+
+/**
+ * Generates a short, random alphanumeric unique identifier (UID).
+ * @returns {string} A UID string consisting of 8 characters (letters and numbers).
+ */
+export function generateUID() {
+  return Math.random().toString(36).slice(2, 15);
+}
+
+/**
+ * Calculates the depth of a given path.
+ * The depth is determined by the number of non-empty segments in the path.
+ * @param {string} path - The path string to analyze. Defaults to an empty string.
+ * @returns {number} The depth of the path (i.e., the number of non-empty segments).
+ */
+export function getDepth(path = '') {
+  // Split the path by slashes ('/'), filter out any empty segments,
+  // and count the remaining segments to determine the depth
+  return path.split('/').filter(Boolean).length;
+}

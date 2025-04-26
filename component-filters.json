@@ -16,14 +16,24 @@
       "cards",
       "columns",
       "fragment",
+      "seperator",
       "teaser",
-      "seperator"
+      "carousel",
+      "seperator",
+      "articles"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "teaser",
+      "hero"
     ]
   },
   {
@@ -38,7 +48,8 @@
       "text",
       "image",
       "button",
-      "title"
+      "title",
+      "teaser"
     ]
   }
 ]
