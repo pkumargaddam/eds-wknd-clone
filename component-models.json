@@ -143,6 +143,21 @@
     ]
   },
   {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "FAQs Accordion",
+        "validation": {
+          "rootPath": "/content/eds-helium-xwalk"
+        }
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -177,21 +192,6 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
-      }
-    ]
-  },
-  {
-    "id": "faq",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "label": "Title",
-        "value": "Content fragment With GraphQL",
-        "validation": {
-          "rootPath": "/content/eds-helium-xwalk"
-        }
       }
     ]
   },
