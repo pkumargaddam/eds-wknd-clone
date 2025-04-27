@@ -432,8 +432,8 @@
     "fields": [
       {
         "component": "text",
-        "label": "Input Placeholder",
-        "name": "placeholder",
+        "label": "Search Input Placeholder",
+        "name": "search-placeholder",
         "valueType": "string",
         "value": "Search"
       }
