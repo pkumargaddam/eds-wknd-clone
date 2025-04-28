@@ -76,8 +76,12 @@
         "cards",
         "columns",
         "fragment",
+        "seperator",
         "teaser",
-        "seperator"
+        "carousel",
+        "seperator",
+        "articles",
+        "search"
       ]
     }
   ]
