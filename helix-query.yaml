@@ -20,6 +20,7 @@ indices:
       - '/fragments/**'
       - '/style-guide/**'
       - '/spreadsheets/**'
+      - '/index/error-handler-pages/**'
     target: /query-index.json
     properties:
       title:
