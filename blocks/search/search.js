@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 import ffetch from '../../scripts/ffetch.js';
 
 export default async function decorate(block) {
+  console.log('search: ', block);
   const placeholder = block.querySelector('p')?.textContent?.trim() || 'Search';
 
   const cmpSearch = document.createElement('div');
