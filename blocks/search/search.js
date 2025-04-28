@@ -1,9 +1,18 @@
 /* eslint-disable no-console */
 import ffetch from '../../scripts/ffetch.js';
 
+/**
+ * Search Component
+ * - Lazy loads page data only when the user inputs 2 or more characters.
+ * - Shows loading indicator while fetching or searching.
+ * - Highlights matching text.
+ * - Fully accessible with ARIA attributes.
+ */
 export default async function decorate(block) {
+  // Extract placeholder text from the block or fallback to 'Search'
   const placeholder = block.querySelector('p')?.textContent?.trim() || 'Search';
 
+  // Create search component structure
   const cmpSearch = document.createElement('div');
   cmpSearch.className = 'cmp-search';
   cmpSearch.setAttribute('role', 'search');
@@ -25,27 +34,34 @@ export default async function decorate(block) {
       id="cmp-search-results-0" aria-hidden="true" style="display: none"></div>
   `;
 
+  // Replace block content with search component
   block.innerHTML = '';
   block.appendChild(cmpSearch);
 
+  // Component elements references
   const input = cmpSearch.querySelector('.cmp-search__input');
   const resultsContainer = cmpSearch.querySelector('.cmp-search__results');
   const clearButton = cmpSearch.querySelector('.cmp-search__clear');
   const loadingIndicator = cmpSearch.querySelector('.cmp-search__loading-indicator');
   const searchIcon = cmpSearch.querySelector('.cmp-search__icon');
 
-  let teaserData = null; // Initially NULL (lazy fetch later)
+  let teaserData = null; // Lazy-loaded teaser data (initialized null)
 
+  /**
+   * Highlights the matched term inside the result text.
+   */
   function highlightMatch(text, term) {
     const regex = new RegExp(`(${term})`, 'gi');
     return text.replace(regex, '<mark class="cmp-search__item-mark">$1</mark>');
   }
 
+  /**
+   * Renders search results into the results container.
+   */
   function renderResults(term, data) {
     resultsContainer.innerHTML = '';
 
     const searchTerm = term.trim().toLowerCase();
-
     const matches = data.filter((item) => item.title?.toLowerCase().includes(searchTerm)
       || item.description?.toLowerCase().includes(searchTerm));
 
@@ -69,7 +85,6 @@ export default async function decorate(block) {
         a.setAttribute('role', 'option');
         a.setAttribute('aria-selected', 'false');
         a.setAttribute('href', path);
-
         a.innerHTML = `<span class="cmp-search__item-title">${displayText}</span>`;
         resultsContainer.appendChild(a);
       });
@@ -80,9 +95,13 @@ export default async function decorate(block) {
     }
   }
 
+  /**
+   * Handles user input events in the search field.
+   */
   async function handleInput(e) {
     const term = e.target.value.trim();
 
+    // If input is less than 2 characters, reset search state
     if (term.length < 2) {
       clearButton.style.display = 'none';
       clearButton.setAttribute('aria-hidden', 'true');
@@ -96,27 +115,30 @@ export default async function decorate(block) {
     clearButton.style.display = 'block';
     clearButton.setAttribute('aria-hidden', 'false');
 
+    // Show loading state
     loadingIndicator.style.display = 'block';
     loadingIndicator.setAttribute('aria-hidden', 'false');
     searchIcon.style.display = 'none';
     searchIcon.setAttribute('aria-hidden', 'true');
 
-    // Lazy fetch only when needed
+    // Lazy-load teaser data if not already loaded
     if (!teaserData) {
-      teaserData = await ffetch('/teaser-index.json').all();
+      teaserData = await ffetch('/query-index.json').all();
     }
 
     renderResults(term, teaserData);
 
+    // Hide loading state
     loadingIndicator.style.display = 'none';
     loadingIndicator.setAttribute('aria-hidden', 'true');
     searchIcon.style.display = 'block';
     searchIcon.setAttribute('aria-hidden', 'false');
   }
 
-  input.addEventListener('input', handleInput);
-
-  clearButton.addEventListener('click', (e) => {
+  /**
+   * Clear button click handler.
+   */
+  function handleClear(e) {
     e.preventDefault();
     input.value = '';
     input.setAttribute('aria-expanded', 'false');
@@ -125,21 +147,26 @@ export default async function decorate(block) {
     resultsContainer.innerHTML = '';
     resultsContainer.style.display = 'none';
     resultsContainer.setAttribute('aria-hidden', 'true');
-  });
+  }
 
-  // Close results if clicked outside
-  document.addEventListener('click', (e) => {
-    if (!input.contains(e.target)) {
+  /**
+   * Outside click handler to close the results dropdown.
+   */
+  function handleOutsideClick(e) {
+    if (!cmpSearch.contains(e.target)) {
       resultsContainer.style.display = 'none';
       resultsContainer.setAttribute('aria-hidden', 'true');
       input.setAttribute('aria-expanded', 'false');
     }
-  });
+  }
 
-  // Re-open results if clicked back inside input
-  input.addEventListener('focus', async () => {
+  /**
+   * Focus handler to reload results if user focuses back into input.
+   */
+  async function handleFocus() {
     if (input.value.trim().length >= 2) {
       if (!teaserData) {
+        // Show loading while fetching teaser data
         loadingIndicator.style.display = 'block';
         loadingIndicator.setAttribute('aria-hidden', 'false');
         searchIcon.style.display = 'none';
@@ -154,5 +181,11 @@ export default async function decorate(block) {
       }
       renderResults(input.value.trim(), teaserData);
     }
-  });
+  }
+
+  // Attach Event Listeners
+  input.addEventListener('input', handleInput);
+  clearButton.addEventListener('click', handleClear);
+  document.addEventListener('click', handleOutsideClick);
+  input.addEventListener('focus', handleFocus);
 }
