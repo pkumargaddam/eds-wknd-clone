@@ -2,7 +2,6 @@
 import ffetch from '../../scripts/ffetch.js';
 
 export default async function decorate(block) {
-  console.log('search: ', block);
   const placeholder = block.querySelector('p')?.textContent?.trim() || 'Search';
 
   const cmpSearch = document.createElement('div');
@@ -35,7 +34,7 @@ export default async function decorate(block) {
   const loadingIndicator = cmpSearch.querySelector('.cmp-search__loading-indicator');
   const searchIcon = cmpSearch.querySelector('.cmp-search__icon');
 
-  const teaserData = ffetch('/teaser-index.json').all();
+  let teaserData = null; // Initially NULL (lazy fetch later)
 
   function highlightMatch(text, term) {
     const regex = new RegExp(`(${term})`, 'gi');
@@ -82,9 +81,9 @@ export default async function decorate(block) {
   }
 
   async function handleInput(e) {
-    const term = e.target.value;
+    const term = e.target.value.trim();
 
-    if (!term.trim()) {
+    if (term.length < 2) {
       clearButton.style.display = 'none';
       clearButton.setAttribute('aria-hidden', 'true');
       resultsContainer.innerHTML = '';
@@ -102,9 +101,12 @@ export default async function decorate(block) {
     searchIcon.style.display = 'none';
     searchIcon.setAttribute('aria-hidden', 'true');
 
-    const data = await teaserData;
+    // Lazy fetch only when needed
+    if (!teaserData) {
+      teaserData = await ffetch('/teaser-index.json').all();
+    }
 
-    renderResults(term, data);
+    renderResults(term, teaserData);
 
     loadingIndicator.style.display = 'none';
     loadingIndicator.setAttribute('aria-hidden', 'true');
@@ -127,7 +129,7 @@ export default async function decorate(block) {
 
   // Close results if clicked outside
   document.addEventListener('click', (e) => {
-    if (!cmpSearch.contains(e.target)) {
+    if (!input.contains(e.target)) {
       resultsContainer.style.display = 'none';
       resultsContainer.setAttribute('aria-hidden', 'true');
       input.setAttribute('aria-expanded', 'false');
@@ -136,9 +138,21 @@ export default async function decorate(block) {
 
   // Re-open results if clicked back inside input
   input.addEventListener('focus', async () => {
-    if (input.value.trim()) {
-      const data = await teaserData;
-      renderResults(input.value, data);
+    if (input.value.trim().length >= 2) {
+      if (!teaserData) {
+        loadingIndicator.style.display = 'block';
+        loadingIndicator.setAttribute('aria-hidden', 'false');
+        searchIcon.style.display = 'none';
+        searchIcon.setAttribute('aria-hidden', 'true');
+
+        teaserData = await ffetch('/teaser-index.json').all();
+
+        loadingIndicator.style.display = 'none';
+        loadingIndicator.setAttribute('aria-hidden', 'true');
+        searchIcon.style.display = 'block';
+        searchIcon.setAttribute('aria-hidden', 'false');
+      }
+      renderResults(input.value.trim(), teaserData);
     }
   });
 }

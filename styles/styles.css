@@ -23,9 +23,12 @@
   /* colors */
   --color-black: #202020;
   --color-gray: #696969;
+  --color-gray-three: #333;
   --color-gray-dark: #bbb;
+  --color-gray-darker: #ccc;
   --color-gray-light: #ebebeb;
   --color-gray-lighter: #f7f7f7;
+  --color-gray-lightest: #ebebeb8a;
   --color-white: #fff;
   --color-yellow: #ffea00;
   --color-blue: #0045ff;
