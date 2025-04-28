@@ -26,6 +26,22 @@
           "label": "Search Placeholder",
           "value": "Search",
           "valueType": "string"
+        },
+        {
+          "component": "select",
+          "label": "Search Field Alignment",
+          "name": "classes",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Default",
+              "value": ""
+            },
+            {
+              "name": "Right",
+              "value": "right"
+            }
+          ]
         }
       ]
     }
