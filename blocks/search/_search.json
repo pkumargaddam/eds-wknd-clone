@@ -22,10 +22,10 @@
       "fields": [
         {
           "component": "text",
-          "label": "Search Input Placeholder",
           "name": "search-placeholder",
-          "valueType": "string",
-          "value": "Search"
+          "label": "Search Placeholder",
+          "value": "Search",
+          "valueType": "string"
         }
       ]
     }
