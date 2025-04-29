@@ -37,7 +37,7 @@ function handleScrollHamburgerVisibility() {
   const navMobile = document.querySelector('#nav-mobile');
 
   // Toggle body class for scroll styling
-  if (window.scrollY > 0) {
+  if (window.scrollY > 10) {
     document.body.classList.add('scrolling');
   } else {
     document.body.classList.remove('scrolling');
