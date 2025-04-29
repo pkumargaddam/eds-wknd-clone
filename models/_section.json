@@ -82,7 +82,8 @@
         "seperator",
         "articles",
         "search",
-        "accordion"
+        "accordion",
+        "breadcrumbs"
       ]
     }
   ]
