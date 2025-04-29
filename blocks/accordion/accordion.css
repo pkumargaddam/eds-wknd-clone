@@ -22,6 +22,10 @@
   transition: background-color 0.2s ease-in-out;
 }
 
+.accordion-question:hover {
+  background-color: transparent; 
+}
+
 .accordion-question::after {
   content: '+';
   position: absolute;
