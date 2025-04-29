@@ -27,15 +27,16 @@
 }
 
 .accordion-question::after {
-  content: '+';
+  content: var(--wkndicon-plus);
   position: absolute;
   right: 16px;
   font-size: 24px;
   font-weight: 400;
+  line-height: 1;
 }
 
 .accordion-question[aria-expanded="true"]::after {
-  content: '−';
+  content: var(--wkndicon-minus);
 }
 
 .accordion-answer {
