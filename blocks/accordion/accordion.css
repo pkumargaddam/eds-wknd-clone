@@ -10,43 +10,40 @@
 
 .accordion-question {
   width: 100%;
-  text-align: left;
-  background: none;
+  padding: 0.25em 1em;             /* ✅ Tight spacing */
   border: none;
+  background: none;
+  text-align: left;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  padding: 1em;
-  position: relative;
   cursor: pointer;
+  display: flex;                   /* ✅ Flex aligns icon and text */
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.2;
   outline: none;
 }
 
-/* Remove hover background color */
+/* Remove hover background */
 .accordion-question:hover,
 .accordion-question:focus {
   background-color: transparent;
 }
 
-/* Icon after the question */
+/* Icon style */
 .accordion-question::after {
   content: var(--wkndicon-plus);
   font-family: wknd-icon-font, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  font-size: 24px;
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
+  font-size: 20px;                /* ✅ Smaller icon size */
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Toggle icon on expanded state */
+/* Icon on expand */
 .accordion-question[aria-expanded="true"]::after {
   content: var(--wkndicon-minus);
 }
@@ -56,6 +53,6 @@
   font-size: 14px;
   color: #333;
   line-height: 1.6;
-  padding: 0 16px 16px;
+  padding: 0 1em 1em;            /* ✅ Consistent with question padding */
   display: none;
 }
