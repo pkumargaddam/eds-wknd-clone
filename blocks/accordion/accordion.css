@@ -22,8 +22,9 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.accordion-question:hover {
-  background-color: transparent; 
+.accordion-question:hover,
+.accordion-question:focus {
+  background-color: transparent;
 }
 
 .accordion-question::after {
