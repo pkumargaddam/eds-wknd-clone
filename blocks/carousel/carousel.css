@@ -1,0 +1,103 @@
+/* stylelint-disable selector-class-pattern */
+
+/* ========================================
+   Carousel Styles
+======================================== */
+
+/* Carousel Wrapper */
+.cmp-carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Carousel Content Style */
+.cmp-carousel__content {
+  position: relative;
+  padding-bottom: 8px;
+}
+
+/* Each Slide */
+.cmp-carousel__item {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  top: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  width: 100%;
+  z-index: 0;
+}
+
+/* Active Slide */
+.cmp-carousel__item--active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+/* Carousel Navigation Buttons Style */
+.cmp-carousel__actions {
+  float: right;
+}
+
+.cmp-carousel__action {
+  appearance: none;
+  background: none;
+  border: none;
+  margin: 0 1em 0 0;
+  padding: 1px 0 1px 6px;
+}
+
+.cmp-carousel__action:hover,
+.cmp-carousel__action:focus {
+  background: none;
+}
+
+.cmp-carousel__action-text {
+  display: none;
+}
+
+/* Carousel Indicator Style */
+.cmp-carousel__indicators {
+  display: flex;
+  justify-content: center;
+  margin: 0.5em 0 0;
+  list-style: none;
+  padding: 0;
+}
+
+.cmp-carousel__indicator {
+  background: var(--color-gray-dark);
+  border-radius: 50%;
+  cursor: pointer;
+  height: 10px;
+  margin: 0 7px;  
+  transition: background 0.3s ease;
+  width: 10px;
+}
+
+.cmp-carousel__indicator--active {
+  background: var(--color-black);
+}
+
+@media (width <= 767px) {
+  .cmp-carousel__indicators {
+    float: left;
+    padding-left: 14px;
+    padding-top: 14px;
+  }
+}
+
+/* Carousel Image */
+.cmp-carousel img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+/* Carousel Additional Classes Style */
+.carousel.margin-lxxii .cmp-carousel {
+  margin-bottom: 72px;
+}
