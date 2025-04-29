@@ -3,11 +3,9 @@ export default async function decorate(block) {
   try {
     const response = await fetch('/graphql/execute.json/eds-wknd/faqs');
     const data = await response.json();
-
     const faqs = data?.data?.faqModelList?.items || [];
 
     block.replaceChildren();
-
     const accordionContainer = document.createElement('div');
     accordionContainer.classList.add('accordion-container');
 
@@ -23,12 +21,20 @@ export default async function decorate(block) {
       const answerDiv = document.createElement('div');
       answerDiv.classList.add('accordion-answer');
       answerDiv.textContent = faq.answer?.plaintext ?? 'No answer available';
-      answerDiv.style.display = 'none';
 
       questionButton.addEventListener('click', () => {
         const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
-        questionButton.setAttribute('aria-expanded', String(!isExpanded));
-        answerDiv.style.display = isExpanded ? 'none' : 'block';
+
+        // Collapse all
+        block.querySelectorAll('.accordion-question').forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+        // eslint-disable-next-line no-return-assign
+        block.querySelectorAll('.accordion-answer').forEach((ans) => ans.style.display = 'none');
+
+        // Expand clicked one
+        if (!isExpanded) {
+          questionButton.setAttribute('aria-expanded', 'true');
+          answerDiv.style.display = 'block';
+        }
       });
 
       accordionItem.appendChild(questionButton);
