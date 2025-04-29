@@ -1,9 +1,7 @@
-
-
 .accordion-container {
   width: 100%;
   margin: 0 auto;
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .accordion-item {
@@ -15,32 +13,45 @@
   text-align: left;
   background: none;
   border: none;
-  font-size: 1pc;
+  font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
   padding: 1em;
   position: relative;
   cursor: pointer;
+  outline: none;
 }
 
+/* Remove hover background color */
 .accordion-question:hover,
 .accordion-question:focus {
   background-color: transparent;
 }
 
+/* Icon after the question */
 .accordion-question::after {
   content: var(--wkndicon-plus);
+  font-family: wknd-icon-font, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 24px;
   position: absolute;
   right: 16px;
-  font-size: 24px;
-  font-weight: 400;
+  top: 50%;
+  transform: translateY(-50%);
   line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Toggle icon on expanded state */
 .accordion-question[aria-expanded="true"]::after {
   content: var(--wkndicon-minus);
 }
 
+/* Answer panel */
 .accordion-answer {
   font-size: 14px;
   color: #333;
