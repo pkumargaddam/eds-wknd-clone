@@ -1,7 +1,7 @@
 .accordion-container {
   width: 100%;
   margin: 0 auto;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .accordion-item {
@@ -13,13 +13,12 @@
   text-align: left;
   background: none;
   border: none;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 1pc;
+  font-weight: 600;
   text-transform: uppercase;
-  padding: 16px;
+  padding: 1em;
   position: relative;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
 }
 
 .accordion-question:hover,
@@ -33,7 +32,6 @@
   right: 16px;
   font-size: 24px;
   font-weight: 400;
-  transition: transform 0.3s ease;
 }
 
 .accordion-question[aria-expanded="true"]::after {
@@ -41,7 +39,7 @@
 }
 
 .accordion-answer {
-  font-size: 16px;
+  font-size: 14px;
   color: #333;
   line-height: 1.6;
   padding: 0 16px 16px;
