@@ -143,6 +143,207 @@
     ]
   },
   {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "FAQs Accordion",
+        "validation": {
+          "rootPath": "/content/eds-helium-xwalk"
+        }
+      }
+    ]
+  },
+  {
+    "id": "articles",
+    "fields": [
+      {
+        "component": "select",
+        "label": "Layout Type",
+        "name": "layout-type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "All Articles",
+            "value": "child-article"
+          },
+          {
+            "name": "All Articles with tags",
+            "value": "child-article-tag"
+          },
+          {
+            "name": "Recent Articles",
+            "value": "recent-article"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "List all Articles as card under the Selected Parent Page",
+        "name": "child-article-container",
+        "valueType": "string",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "child-article-parent",
+            "label": "Parent Page",
+            "valueType": "string",
+            "required": true,
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          },
+          {
+            "component": "number",
+            "name": "child-article-depth",
+            "label": "Child Depth",
+            "valueType": "number",
+            "value": 1,
+            "validation": {
+              "numberMin": 1,
+              "customErrorMsg": "Value cannot be less than 1."
+            }
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "layout-type"
+            },
+            "child-article"
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "List all Articles as card with Tag filter under Selected Parent Page",
+        "name": "child-article-tag-container",
+        "valueType": "string",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "child-article-tag-parent",
+            "label": "Parent Page",
+            "valueType": "string",
+            "required": true,
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          },
+          {
+            "component": "number",
+            "name": "child-article-tag-depth",
+            "label": "Child Depth",
+            "valueType": "number",
+            "value": 1,
+            "validation": {
+              "numberMin": 1,
+              "customErrorMsg": "Value cannot be less than 1."
+            }
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "layout-type"
+            },
+            "child-article-tag"
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "List recent Article Cards from Selected Parent Page",
+        "name": "recent-article-container",
+        "valueType": "string",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "recent-article-parent",
+            "label": "Parent Page",
+            "valueType": "string[]",
+            "required": true,
+            "validation": {
+              "rootPath": "/content/eds-wknd"
+            }
+          },
+          {
+            "component": "number",
+            "name": "recent-article-parent-depth",
+            "label": "Child Depth",
+            "valueType": "number",
+            "value": 1,
+            "validation": {
+              "numberMin": 1,
+              "customErrorMsg": "Value cannot be less than 1."
+            }
+          },
+          {
+            "component": "number",
+            "name": "recent-article-parent-count",
+            "label": "Article Count",
+            "valueType": "number",
+            "value": 4,
+            "validation": {
+              "numberMin": 1,
+              "customErrorMsg": "Value cannot be less than 1."
+            }
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "layout-type"
+            },
+            "recent-article"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "Order By",
+        "name": "order",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Title",
+            "value": "title"
+          },
+          {
+            "name": "Last modified date",
+            "value": "last-modified-date"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "Sort Order",
+        "name": "sort",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Ascending",
+            "value": "ascending"
+          },
+          {
+            "name": "Descending",
+            "value": "descending"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "breadcrumbs",
     "fields": [
       {
@@ -239,6 +440,34 @@
     ]
   },
   {
+    "id": "carousel",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Carousel Style",
+        "valueType": "string",
+        "required": true,
+        "maxSize": 1,
+        "options": [
+          {
+            "name": "Margin Bottom",
+            "children": [
+              {
+                "name": "default",
+                "value": ""
+              },
+              {
+                "name": "Margin 72px",
+                "value": "margin-lxxii"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {
@@ -271,6 +500,10 @@
     "id": "hero",
     "fields": [
       {
+        "name": "classes",
+        "value": "banner"
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "image",
@@ -283,13 +516,34 @@
         "name": "imageAlt",
         "label": "Alt",
         "value": ""
+      }
+    ]
+  },
+  {
+    "id": "search",
+    "fields": [
+      {
+        "component": "text",
+        "name": "search-placeholder",
+        "label": "Search Placeholder",
+        "value": "Search",
+        "valueType": "string"
       },
       {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "component": "select",
+        "label": "Search Field Alignment",
+        "name": "classes",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          }
+        ]
       }
     ]
   },
@@ -477,6 +731,62 @@
             false
           ]
         }
+      }
+    ]
+  },
+  {
+    "id": "text",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Text Variation",
+        "valueType": "string",
+        "required": true,
+        "maxSize": 2,
+        "options": [
+          {
+            "name": "Text Style",
+            "children": [
+              {
+                "name": "Default",
+                "value": "default"
+              },
+              {
+                "name": "Quoteblock",
+                "value": "quoteblock"
+              }
+            ]
+          },
+          {
+            "name": "Paragraph",
+            "children": [
+              {
+                "name": "ExtraSmall",
+                "value": "extrasmall"
+              },
+              {
+                "name": "Small",
+                "value": "small"
+              },
+              {
+                "name": "Default",
+                "value": "default-para"
+              },
+              {
+                "name": "Large",
+                "value": "large"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
