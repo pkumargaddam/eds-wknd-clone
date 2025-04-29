@@ -25,12 +25,10 @@ export default async function decorate(block) {
       questionButton.addEventListener('click', () => {
         const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
 
-        // Collapse all
         block.querySelectorAll('.accordion-question').forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
         // eslint-disable-next-line no-return-assign
         block.querySelectorAll('.accordion-answer').forEach((ans) => ans.style.display = 'none');
 
-        // Expand clicked one
         if (!isExpanded) {
           questionButton.setAttribute('aria-expanded', 'true');
           answerDiv.style.display = 'block';
