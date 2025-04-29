@@ -8,18 +8,19 @@
 version: 1
 
 indices:
-  pages:
+  default:
     include:
       - '/**'
     exclude:
       - '/**.json'
-      - /configuration/**
-      - /nav/**
-      - /footer/**
-      - /metadata/**
-      - /fragments/**
-      - /style-guide/**
-      - /spreadsheets/**
+      - '/configuration/**'
+      - '/nav/**'
+      - '/footer/**'
+      - '/metadata/**'
+      - '/fragments/**'
+      - '/style-guide/**'
+      - '/spreadsheets/**'
+      - '/index/error-handler-pages/**'
     target: /query-index.json
     properties:
       title:
@@ -37,17 +38,17 @@ indices:
 
   teaser:
     include:
-      - /**
+      - '/**'
     exclude: 
       - '/**.json'
-      - /configuration/**
-      - /nav/**
-      - /footer/**
-      - /metadata/**
-      - /fragments/**
-      - /style-guide/**
-      - /spreadsheets/**
-      - /content/mysite/en
+      - '/configuration/**'
+      - '/nav/**'
+      - '/footer/**'
+      - '/metadata/**'
+      - '/fragments/**'
+      - '/style-guide/**'
+      - '/spreadsheets/**'
+      - '/content/mysite/en'
     target: /teaser-index.json
     properties:
       title:
@@ -65,8 +66,8 @@ indices:
 
   articles:
     include:
-      - /index/magazine/**
-      - /index/adventures/**
+      - '/index/magazine/**'
+      - '/index/adventures/**'
     exclude: *excludes
     target: /article-index.json
     properties:
