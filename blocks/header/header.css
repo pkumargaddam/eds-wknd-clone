@@ -39,7 +39,7 @@ header p {
 
 #nav-desktop {
   display: flex;
-  padding: 15px var(--gutter-padding);
+  padding: 15px 0 15px var(--gutter-padding);
 }
 
 .nav-wrapper-desktop .nav-sections {
@@ -120,6 +120,7 @@ footer {
 .nav-wrapper-desktop .nav-brand img {
   margin: 12px 0 7px 32px;
   max-width: 6rem;
+  width: 100%;
 }
 
 @media (width >=1024px) {
@@ -159,15 +160,8 @@ footer {
   Desktop Tools (Search, etc.)
 ============================================================ */
 .nav-wrapper-desktop .nav-tools {
-  align-items: center;
-  display: flex;
-  justify-content: flex-end;
+  padding: 0 var(--gutter-padding);
   width: 50%;
-}
-
-.nav-wrapper-desktop .nav-tools>div {
-  max-width: 10rem;
-  width: 100%;
 }
 
 .nav-wrapper-desktop .nav-tools .icon-search {
@@ -176,7 +170,6 @@ footer {
 
 @media (width >=1024px) {
   .nav-wrapper-desktop .nav-tools {
-    padding: 0 var(--gutter-padding);
     width: 16.6667%;
   }
 }
