@@ -2,7 +2,7 @@ import { HOME, RIGHTARROW } from '../../scripts/constants.js';
 import { getMetadata } from '../../scripts/aem.js';
 
 const breadcrumbOverrides = {
-  '/aem-boilerplate': 'Index',
+  'aem-boilerplate': 'Index',
 };
 
 const getPageTitle = async (url) => {
