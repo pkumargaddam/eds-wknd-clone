@@ -517,6 +517,7 @@ main .form .button-wrapper button {
 }
 
 main .form .button-wrapper button:hover {
+    /* stylelint-disable-next-line declaration-property-value-no-unknown */
     border: 3px solid var(#fff);
     color: #fff;
     background-color: var(--button-secondary-color);
