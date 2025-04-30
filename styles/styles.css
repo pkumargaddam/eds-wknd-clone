@@ -274,9 +274,8 @@ button {
   box-sizing: border-box;
   display: inline-block;
   max-width: 100%;
-  margin: 12px 0;
   border: 2px solid transparent;
-  padding: 14px 18px;
+  padding: 16px 32px;
   font-family: var(--body-font-family);
   font-style: normal;
   font-weight:var(--font-weight-bold);
