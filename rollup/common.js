@@ -1,26 +1,28 @@
 import path from 'path';
-import * as pkg from '../package.json';
+/* eslint import/no-unresolved: */
 import fs from 'fs';
 import cleanup from 'rollup-plugin-cleanup';
 import license from 'rollup-plugin-license';
+// eslint-disable-next-line import/extensions
+import * as pkg from '../package.json';
 
 export function readLicenseFile(packageName, includeComments = true) {
-  const directory =`node_modules/${packageName}`;
+  const directory = `node_modules/${packageName}`;
   const licensePath = path.join(directory, 'LICENSE');
   try {
     let content = fs.readFileSync(licensePath, 'utf-8');
     if (includeComments) {
-    content += `
+      content += `
 /*
  *  Package: ${packageName}
  *  Version: ${pkg.devDependencies[packageName]}
- */`
+ */`;
     } else {
       content += `
 
  Package: ${packageName}
  Version: ${pkg.devDependencies[packageName]}
-`
+`;
     }
     return content;
   } catch (error) {
@@ -30,7 +32,7 @@ export function readLicenseFile(packageName, includeComments = true) {
 }
 
 export function plugins(pkgname) {
-  const licenseContent = readLicenseFile(pkgname)
+  const licenseContent = readLicenseFile(pkgname);
   return [
     cleanup({
       comments: 'none',
@@ -38,5 +40,5 @@ export function plugins(pkgname) {
     license({
       banner: licenseContent,
     }),
-  ]
+  ];
 }

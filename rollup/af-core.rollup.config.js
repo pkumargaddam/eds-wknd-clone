@@ -1,8 +1,9 @@
 import path from 'path';
+/* eslint import/no-unresolved: */
 import { terser } from 'rollup-plugin-terser';
-import {plugins} from './common.js';
+import { plugins } from './common.js';
 
-const packageName = '@aemforms/af-core'
+const packageName = '@aemforms/af-core';
 const directory = `node_modules/${packageName}`;
 
 export default {
