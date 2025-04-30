@@ -34,16 +34,6 @@
 .breadcrumb nav .breadcrumb-separator {
   align-items: center;
   display: flex;
-}
-
-@media (width >= 768px) {
-  .section.breadcrumb-container {
-      display: block;
-  }
-}
-
-/* stylelint-disable-next-line no-duplicate-selectors */
-.breadcrumb nav .breadcrumb-separator {
   display: inline-block;
   width: 0;
   height: 0;
@@ -53,3 +43,10 @@
   border-left: 8px solid #FFD700; /* Yellow triangle */
   vertical-align: middle;
 }
+
+@media (width >= 768px) {
+  .section.breadcrumb-container {
+      display: block;
+  }
+}
+
