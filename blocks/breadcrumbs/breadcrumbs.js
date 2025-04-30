@@ -15,7 +15,7 @@ const getPageTitle = async (url) => {
 const getAllPathsExceptCurrent = async (paths, startLevel) => {
   const result = [];
   let startLevelVal = startLevel;
-
+  // Excluding content/pricefx/en in main url
   if (!window.location.host.includes('author')) {
     if (startLevelVal <= 4) {
       startLevelVal = 1;
@@ -23,14 +23,10 @@ const getAllPathsExceptCurrent = async (paths, startLevel) => {
       startLevelVal -= 3;
     }
   }
-
-  const ignorePaths = ['eds-wknd', 'aem-boilerplate'];
-  const pathsList = paths
-    .replace(/^\/|\/$/g, '')
-    .split('/')
-    .filter((part) => !ignorePaths.includes(part.toLowerCase()));
-
+  // remove first and last slash characters
+  const pathsList = paths.replace(/^\/|\/$/g, '').split('/');
   let pathVal = '';
+  // Excluding current link
   for (let i = 0; i <= pathsList.length - 2; i += 1) {
     pathVal = `${pathVal}/${pathsList[i]}`;
     let url = `${window.location.origin}${pathVal}`;
