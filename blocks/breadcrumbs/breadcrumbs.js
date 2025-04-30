@@ -6,36 +6,31 @@ const getPageTitle = async (url) => {
   if (resp.ok) {
     const html = document.createElement('div');
     html.innerHTML = await resp.text();
-    return html.querySelector('title').innerText;
+    return html.querySelector('title')?.innerText || '';
   }
-
   return '';
 };
 
 const getAllPathsExceptCurrent = async (paths, startLevel) => {
   const result = [];
+  const startLevelVal = parseInt(startLevel, 10) || 1;
 
-  let startLevelVal = parseInt(startLevel, 10) || 1;
+  // Step 1: Clean and split path
+  const rawPaths = paths.replace(/^\/|\/$/g, '').split('/');
 
-  // For non-author instances, adjust start level logic (if needed)
-  if (!window.location.host.includes('author')) {
-    if (startLevelVal <= 4) {
-      startLevelVal = 1;
-    } else {
-      startLevelVal -= 3;
-    }
+  // Step 2: Identify and remove only base folders before 'index'
+  const ignoreUntil = ['eds-wknd', 'aem-boilerplate'];
+  let filteredPaths = [...rawPaths];
+  // eslint-disable-next-line max-len
+  const firstValidIndex = rawPaths.findIndex((folder) => !ignoreUntil.includes(folder.toLowerCase()));
+  if (firstValidIndex > 0) {
+    filteredPaths = rawPaths.slice(firstValidIndex);
   }
 
-  // ✅ Remove unwanted base folders
-  const ignorePaths = ['eds-wknd', 'aem-boilerplate'];
-  const pathsList = paths
-    .replace(/^\/|\/$/g, '')
-    .split('/')
-    .filter((part) => !ignorePaths.includes(part.toLowerCase()));
-
+  // Step 3: Build path structure excluding current page
   let pathVal = '';
-  for (let i = 0; i <= pathsList.length - 2; i += 1) {
-    pathVal = `${pathVal}/${pathsList[i]}`;
+  for (let i = 0; i <= filteredPaths.length - 2; i += 1) {
+    pathVal = `${pathVal}/${filteredPaths[i]}`;
     let url = `${window.location.origin}${pathVal}`;
     if (window.location.host.includes('author')) {
       url = `${window.location.origin}${pathVal}.html`;
@@ -49,6 +44,7 @@ const getAllPathsExceptCurrent = async (paths, startLevel) => {
       }
     }
   }
+
   return result;
 };
 
@@ -72,14 +68,11 @@ export default async function decorate(block) {
 
   let startLevel = startLevelVal?.textContent.trim() || 1;
   const metaBreadcrumbLevel = getMetadata('breadcrumblevel');
-
-  // ✅ Use metadata if provided
   if (metaBreadcrumbLevel) {
     startLevel = metaBreadcrumbLevel;
   }
 
   block.innerHTML = '';
-
   if (hideBreadcrumb === 'true') return;
 
   const breadcrumb = document.createElement('nav');
