@@ -3,7 +3,13 @@ import ffetch from '../../scripts/ffetch.js';
 
 export default async function decorate(block) {
   // Get current path (e.g., /us/en/adventures/yosemite)
-  const currentPath = window.location.pathname.replace(/\/$/, '');
+  function normalizePath(path) {
+    return path
+      .replace('/content/eds-wknd', '')
+      .replace('/index.html', '')
+      .replace(/\/$/, '');
+  }
+  const currentPath = normalizePath(window.location.pathname);
   const segments = currentPath.split('/').filter(Boolean);
 
   // Create <nav> element for breadcrumbs
