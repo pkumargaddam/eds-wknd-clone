@@ -74,10 +74,10 @@ export default async function decorate(block) {
   if (hideBreadcrumb === 'true') {
     return;
   }
-  // eslint-disable-next-line no-undef
-  const breadcrumb = createElement('nav', '', {
-    'aria-label': 'Breadcrumb',
-  });
+
+  const breadcrumb = document.createElement('nav');
+  breadcrumb.setAttribute('aria-label', 'Breadcrumb');
+
   const HomeLink = createLink({
     path: '', name: 'HomePage', url: window.location.origin, label: 'Home',
   });
