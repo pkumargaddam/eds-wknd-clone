@@ -1,16 +1,95 @@
+.excludes: &excludes
+  - '**/drafts/**'
+  - '**/images/**'
+  - '**/icons/**'
+  - '**/test/**'
+  - '**/fragments/**'
+
 version: 1
 
 indices:
-  pages:
+  default:
     include:
       - '/**'
     exclude:
       - '/**.json'
+      - '/configuration/**'
+      - '/nav/**'
+      - '/footer/**'
+      - '/metadata/**'
+      - '/fragments/**'
+      - '/style-guide/**'
+      - '/spreadsheets/**'
+      - '/index/error-handler-pages/**'
     target: /query-index.json
     properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
       robots:
         select: head > meta[name="robots"]
         value: attribute(el, "content")
+
+  teaser:
+    include:
+      - '/**'
+    exclude: 
+      - '/**.json'
+      - '/configuration/**'
+      - '/nav/**'
+      - '/footer/**'
+      - '/metadata/**'
+      - '/fragments/**'
+      - '/style-guide/**'
+      - '/spreadsheets/**'
+      - '/content/mysite/en'
+    target: /teaser-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "^(https?:\/\/.*?(pricefx.com))+(.*)|^(.*)")
+      imageAlt:
+        select: head > meta[property="og:image:alt"]
+        value: attribute(el, "content")
+
+  articles:
+    include:
+      - '/index/magazine/**'
+      - '/index/adventures/**'
+    exclude: *excludes
+    target: /article-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      cq-tags:
+        select: head > meta[name="cq-tags"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "^(https?:\/\/.*?(pricefx.com))+(.*)|^(.*)")
+      imageAlt:
+        select: head > meta[property="og:image:alt"]
+        value: attribute(el, "content")
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      lastPublished:
+        select: head > meta[name="published-time"]
+        value: parseTimestamp(attribute(el, "content"), "YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+        
