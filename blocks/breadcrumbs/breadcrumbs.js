@@ -89,8 +89,11 @@ export default async function decorate(block) {
     paths.forEach((pathPart) => breadcrumbLinks.push(createLink(pathPart).outerHTML));
     if (hideCurrentPage === 'false') {
       const currentPath = document.createElement('span');
-      const currentTitle = document.querySelector('title').innerText;
-      currentPath.innerText = currentTitle.replace(' | Pricefx', '');
+      let currentTitle = document.querySelector('title').innerText;
+      currentTitle = currentTitle
+        .replace(/^div\s\|\s*/i, '')
+        .replace(/\s\|\s*Pricefx$/i, '');
+      currentPath.innerText = currentTitle;
       breadcrumbLinks.push(currentPath.outerHTML);
     }
     breadcrumb.innerHTML = breadcrumbLinks.join(`<span class="breadcrumb-separator">${RIGHTARROW}</span>`);
