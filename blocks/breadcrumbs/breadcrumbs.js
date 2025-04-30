@@ -1,4 +1,4 @@
-import { HOME } from '../../scripts/constants.js';
+import { HOME, RIGHTARROW } from '../../scripts/constants.js';
 import { getMetadata } from '../../scripts/aem.js';
 
 const breadcrumbOverrides = {
@@ -110,7 +110,7 @@ export default async function decorate(block) {
     }
 
     breadcrumb.innerHTML = breadcrumbLinks.join(
-      '<span class="breadcrumb-separator"></span>',
+      `<span class="breadcrumb-separator">${RIGHTARROW}</span>`,
     );
     block.append(breadcrumb);
   }, 0);
