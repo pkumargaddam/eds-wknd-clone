@@ -82,7 +82,9 @@
         "seperator",
         "articles",
         "search",
-        "accordion"
+        "accordion",
+        "form",
+        "embed-adaptive-form"
       ]
     }
   ]
