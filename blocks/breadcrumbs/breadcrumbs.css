@@ -1,51 +1,42 @@
-.breadcrumb {
-    font-size: 14px;
-    padding: 0;
-  }
-  
-  .breadcrumb ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .breadcrumb li {
-    display: inline-block;
-    padding: 10px 5px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #202020;
-  }
-  
-  .breadcrumb li + li::before {
-    content: "▶";
-    color: #ffea00;
-    padding: 0 5px;
-  }
-  
-  /* Modifier classes */
-  .breadcrumb.left {
-    text-align: left;
-  }
+.breadcrumbs {
+  font-size: 0.875rem;
+  margin: 1rem 0;
+}
 
-  .breadcrumb.center {
-    text-align: center;
-  }
+/* stylelint-disable-next-line selector-class-pattern */
+.breadcrumbs__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
 
-  .breadcrumb.right {
-    text-align: right;
-  }
-  
-  .breadcrumb.light {
-    color: #202020;
-  }
+/* stylelint-disable-next-line selector-class-pattern */
+.breadcrumbs__list li::after {
+  content: ">";
+  margin: 0 0.5rem;
+  color: #aaa;
+}
 
-  .breadcrumb.dark {
-    color: white;
-  }
-  
-  .breadcrumb.slash li + li::before {
-    content: "/";
-    color: #999;
-  }
-  
+/* stylelint-disable-next-line selector-class-pattern */
+.breadcrumbs__list li:last-child::after {
+  content: "";
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.breadcrumbs__list li {
+  white-space: nowrap;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.breadcrumbs__list a {
+  text-decoration: none;
+  color: #0073e6;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.breadcrumbs__list a:hover {
+  text-decoration: underline;
+}
