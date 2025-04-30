@@ -1,6 +1,6 @@
 sitemaps:
   default:
     source: /query-index.json
-    loc: https://eds-demo.iamhelium.com.au
+    origin: https://eds-demo.iamhelium.com.au
     destination: /sitemap.xml
     lastmod: YYYY-MM-DD
