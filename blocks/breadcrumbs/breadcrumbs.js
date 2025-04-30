@@ -1,18 +1,20 @@
 /* eslint-disable no-console */
 import ffetch from '../../scripts/ffetch.js';
 
-export default async function decorate(block) {
-  // Get current path (e.g., /us/en/adventures/yosemite)
-  function normalizePath(path) {
-    return path
-      .replace('/content/eds-wknd', '')
-      .replace('/index.html', '')
-      .replace(/\/$/, '');
-  }
-  const currentPath = normalizePath(window.location.pathname);
-  const segments = currentPath.split('/').filter(Boolean);
+function normalizePath(path) {
+  return path
+    .replace(/^\/content\/eds-wknd/, '')
+    .replace(/\/index$/, '')
+    .replace(/\/index\.html$/, '')
+    .replace(/\.html$/, '')
+    .replace(/\/$/, '') || '/';
+}
 
-  // Create <nav> element for breadcrumbs
+export default async function decorate(block) {
+  const rawPath = window.location.pathname;
+  const cleanedPath = normalizePath(rawPath);
+  const segments = cleanedPath.split('/').filter(Boolean);
+
   const breadcrumbNav = document.createElement('nav');
   breadcrumbNav.className = 'breadcrumbs';
   breadcrumbNav.setAttribute('aria-label', 'Breadcrumb');
@@ -20,7 +22,7 @@ export default async function decorate(block) {
   const breadcrumbList = document.createElement('ul');
   breadcrumbList.className = 'breadcrumbs__list';
 
-  // Add "Home" link
+  // Home link
   const homeLi = document.createElement('li');
   const homeLink = document.createElement('a');
   homeLink.href = '/';
@@ -28,36 +30,33 @@ export default async function decorate(block) {
   homeLi.appendChild(homeLink);
   breadcrumbList.appendChild(homeLi);
 
-  // Resolve each segment to a readable title from query-index.json
+  // Accumulate paths and fetch titles
   let pathAccumulator = '';
   const fetchPromises = [];
 
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < segments.length; i++) {
-    pathAccumulator += `/${segments[i]}`;
-    const segmentPath = pathAccumulator;
-
+  segments.forEach((segment) => {
+    pathAccumulator += `/${segment}`;
     fetchPromises.push(
       ffetch('/query-index.json')
-        .filter((entry) => entry.path === segmentPath)
+        .filter((item) => item.path === pathAccumulator)
         .first(),
     );
-  }
+  });
 
   const results = await Promise.all(fetchPromises);
 
   results.forEach((item, index) => {
     const li = document.createElement('li');
-    const segment = segments[index];
     const isLast = index === results.length - 1;
+    const label = item?.title || segments[index];
 
     if (item && !isLast) {
       const a = document.createElement('a');
       a.href = item.path;
-      a.textContent = item.title || segment;
+      a.textContent = label;
       li.appendChild(a);
     } else {
-      li.textContent = item?.title || segment;
+      li.textContent = label;
     }
 
     breadcrumbList.appendChild(li);
