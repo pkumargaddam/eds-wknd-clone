@@ -31,7 +31,7 @@
   text-decoration: underline;
 }
 
-.breadcrumb nav .breadcrumb-separator {
+.breadcrumb-separator {
   align-items: center;
   display: flex;
   display: inline-block;
