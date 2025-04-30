@@ -1,13 +1,22 @@
 import { HOME, RIGHTARROW } from '../../scripts/constants.js';
 import { getMetadata } from '../../scripts/aem.js';
 
+const breadcrumbOverrides = {
+  '/aem-boilerplate': 'Index',
+};
+
 const getPageTitle = async (url) => {
+  // Check for any manual override
+  const overrideKey = Object.keys(breadcrumbOverrides).find((key) => url.includes(key));
+  if (overrideKey) return breadcrumbOverrides[overrideKey];
+
   const resp = await fetch(url);
   if (resp.ok) {
     const html = document.createElement('div');
     html.innerHTML = await resp.text();
     return html.querySelector('title')?.innerText || '';
   }
+
   return '';
 };
 
@@ -15,11 +24,10 @@ const getAllPathsExceptCurrent = async (paths, startLevel) => {
   const result = [];
   const startLevelVal = parseInt(startLevel, 10) || 1;
 
-  // Step 1: Clean and split path
   const rawPaths = paths.replace(/^\/|\/$/g, '').split('/');
 
-  // Step 2: Identify and remove only base folders before 'index'
-  const ignoreUntil = ['eds-wknd', 'aem-boilerplate'];
+  // Skip any initial system folders
+  const ignoreUntil = ['content', 'eds-wknd'];
   let filteredPaths = [...rawPaths];
   // eslint-disable-next-line max-len
   const firstValidIndex = rawPaths.findIndex((folder) => !ignoreUntil.includes(folder.toLowerCase()));
@@ -27,7 +35,6 @@ const getAllPathsExceptCurrent = async (paths, startLevel) => {
     filteredPaths = rawPaths.slice(firstValidIndex);
   }
 
-  // Step 3: Build path structure excluding current page
   let pathVal = '';
   for (let i = 0; i <= filteredPaths.length - 2; i += 1) {
     pathVal = `${pathVal}/${filteredPaths[i]}`;
@@ -58,6 +65,7 @@ const createLink = (path) => {
     pathLink.title = path.label;
     pathLink.innerHTML = HOME;
   }
+
   return pathLink;
 };
 
