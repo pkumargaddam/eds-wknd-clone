@@ -14,8 +14,10 @@ const getPageTitle = async (url) => {
 
 const getAllPathsExceptCurrent = async (paths, startLevel) => {
   const result = [];
-  let startLevelVal = startLevel;
-  // Excluding content/pricefx/en in main url
+
+  let startLevelVal = parseInt(startLevel, 10) || 1;
+
+  // For non-author instances, adjust start level logic (if needed)
   if (!window.location.host.includes('author')) {
     if (startLevelVal <= 4) {
       startLevelVal = 1;
@@ -23,10 +25,15 @@ const getAllPathsExceptCurrent = async (paths, startLevel) => {
       startLevelVal -= 3;
     }
   }
-  // remove first and last slash characters
-  const pathsList = paths.replace(/^\/|\/$/g, '').split('/');
+
+  // ✅ Remove unwanted base folders
+  const ignorePaths = ['eds-wknd', 'aem-boilerplate'];
+  const pathsList = paths
+    .replace(/^\/|\/$/g, '')
+    .split('/')
+    .filter((part) => !ignorePaths.includes(part.toLowerCase()));
+
   let pathVal = '';
-  // Excluding current link
   for (let i = 0; i <= pathsList.length - 2; i += 1) {
     pathVal = `${pathVal}/${pathsList[i]}`;
     let url = `${window.location.origin}${pathVal}`;
@@ -62,18 +69,18 @@ export default async function decorate(block) {
   const [hideBreadcrumbVal, startLevelVal, hideCurrentPageVal] = block.children;
   const hideBreadcrumb = hideBreadcrumbVal?.textContent.trim() || 'false';
   const hideCurrentPage = hideCurrentPageVal?.textContent.trim() || 'false';
+
   let startLevel = startLevelVal?.textContent.trim() || 1;
   const metaBreadcrumbLevel = getMetadata('breadcrumblevel');
 
-  if (metaBreadcrumbLevel !== '') {
+  // ✅ Use metadata if provided
+  if (metaBreadcrumbLevel) {
     startLevel = metaBreadcrumbLevel;
   }
 
   block.innerHTML = '';
 
-  if (hideBreadcrumb === 'true') {
-    return;
-  }
+  if (hideBreadcrumb === 'true') return;
 
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
@@ -86,7 +93,11 @@ export default async function decorate(block) {
   window.setTimeout(async () => {
     const path = window.location.pathname;
     const paths = await getAllPathsExceptCurrent(path, startLevel);
-    paths.forEach((pathPart) => breadcrumbLinks.push(createLink(pathPart).outerHTML));
+
+    paths.forEach((pathPart) => {
+      breadcrumbLinks.push(createLink(pathPart).outerHTML);
+    });
+
     if (hideCurrentPage === 'false') {
       const currentPath = document.createElement('span');
       let currentTitle = document.querySelector('title').innerText;
@@ -96,7 +107,10 @@ export default async function decorate(block) {
       currentPath.innerText = currentTitle;
       breadcrumbLinks.push(currentPath.outerHTML);
     }
-    breadcrumb.innerHTML = breadcrumbLinks.join(`<span class="breadcrumb-separator">${RIGHTARROW}</span>`);
+
+    breadcrumb.innerHTML = breadcrumbLinks.join(
+      `<span class="breadcrumb-separator">${RIGHTARROW}</span>`,
+    );
     block.append(breadcrumb);
   }, 0);
 }
