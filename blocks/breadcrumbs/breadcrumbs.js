@@ -1,72 +1,99 @@
-/* eslint-disable no-console */
-import ffetch from '../../scripts/ffetch.js';
+import { HOME, RIGHTARROW } from '../../scripts/constants.js';
+import { getMetadata } from '../../scripts/aem.js';
 
-export default async function decorate(block) {
-  function normalizePath(path) {
-    return path
-      .replace(/^\/content\/eds-wknd/, '')
-      .replace(/\/index\.html$/, '')
-      .replace(/\.html$/, '')
-      .replace(/\/$/, '')
-      || '/';
+const getPageTitle = async (url) => {
+  const resp = await fetch(url);
+  if (resp.ok) {
+    const html = document.createElement('div');
+    html.innerHTML = await resp.text();
+    return html.querySelector('title').innerText;
   }
 
-  const currentPath = normalizePath(window.location.pathname);
-  // eslint-disable-next-line no-undef
-  const segments = currentPath.split('/').filter(Boolean);
+  return '';
+};
 
-  // Create <nav> element for breadcrumbs
-  const breadcrumbNav = document.createElement('nav');
-  breadcrumbNav.className = 'breadcrumbs';
-  breadcrumbNav.setAttribute('aria-label', 'Breadcrumb');
-
-  const breadcrumbList = document.createElement('ul');
-  breadcrumbList.className = 'breadcrumbs__list';
-
-  // Add "Home" link
-  const homeLi = document.createElement('li');
-  const homeLink = document.createElement('a');
-  homeLink.href = '/';
-  homeLink.textContent = 'Home';
-  homeLi.appendChild(homeLink);
-  breadcrumbList.appendChild(homeLi);
-
-  // Resolve each segment to a readable title from query-index.json
-  let pathAccumulator = '';
-  const fetchPromises = [];
-
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < segments.length; i++) {
-    pathAccumulator += `/${segments[i]}`;
-    const segmentPath = pathAccumulator;
-
-    fetchPromises.push(
-      ffetch('/query-index.json')
-        .filter((entry) => entry.path === segmentPath)
-        .first(),
-    );
-  }
-
-  const results = await Promise.all(fetchPromises);
-
-  results.forEach((item, index) => {
-    const li = document.createElement('li');
-    const segment = segments[index];
-    const isLast = index === results.length - 1;
-
-    if (item && !isLast) {
-      const a = document.createElement('a');
-      a.href = item.path;
-      a.textContent = item.title || segment;
-      li.appendChild(a);
+const getAllPathsExceptCurrent = async (paths, startLevel) => {
+  const result = [];
+  let startLevelVal = startLevel;
+  // Excluding content/pricefx/en in main url
+  if (!window.location.host.includes('author')) {
+    if (startLevelVal <= 4) {
+      startLevelVal = 1;
     } else {
-      li.textContent = item?.title || segment;
+      startLevelVal -= 3;
+    }
+  }
+  // remove first and last slash characters
+  const pathsList = paths.replace(/^\/|\/$/g, '').split('/');
+  let pathVal = '';
+  // Excluding current link
+  for (let i = 0; i <= pathsList.length - 2; i += 1) {
+    pathVal = `${pathVal}/${pathsList[i]}`;
+    let url = `${window.location.origin}${pathVal}`;
+    if (window.location.host.includes('author')) {
+      url = `${window.location.origin}${pathVal}.html`;
     }
 
-    breadcrumbList.appendChild(li);
-  });
+    if (i >= startLevelVal - 1) {
+      // eslint-disable-next-line no-await-in-loop
+      const name = await getPageTitle(url);
+      if (name) {
+        result.push({ pathVal, name, url });
+      }
+    }
+  }
+  return result;
+};
 
-  breadcrumbNav.appendChild(breadcrumbList);
+const createLink = (path) => {
+  const pathLink = document.createElement('a');
+  pathLink.href = path.url;
+
+  if (path.name !== 'HomePage') {
+    pathLink.innerText = path.name;
+  } else {
+    pathLink.title = path.label;
+    pathLink.innerHTML = HOME;
+  }
+  return pathLink;
+};
+
+export default async function decorate(block) {
+  const [hideBreadcrumbVal, startLevelVal, hideCurrentPageVal] = block.children;
+  const hideBreadcrumb = hideBreadcrumbVal?.textContent.trim() || 'false';
+  const hideCurrentPage = hideCurrentPageVal?.textContent.trim() || 'false';
+  let startLevel = startLevelVal?.textContent.trim() || 1;
+  const metaBreadcrumbLevel = getMetadata('breadcrumblevel');
+
+  if (metaBreadcrumbLevel !== '') {
+    startLevel = metaBreadcrumbLevel;
+  }
+
   block.innerHTML = '';
-  block.appendChild(breadcrumbNav);
+
+  if (hideBreadcrumb === 'true') {
+    return;
+  }
+  // eslint-disable-next-line no-undef
+  const breadcrumb = createElement('nav', '', {
+    'aria-label': 'Breadcrumb',
+  });
+  const HomeLink = createLink({
+    path: '', name: 'HomePage', url: window.location.origin, label: 'Home',
+  });
+  const breadcrumbLinks = [HomeLink.outerHTML];
+
+  window.setTimeout(async () => {
+    const path = window.location.pathname;
+    const paths = await getAllPathsExceptCurrent(path, startLevel);
+    paths.forEach((pathPart) => breadcrumbLinks.push(createLink(pathPart).outerHTML));
+    if (hideCurrentPage === 'false') {
+      const currentPath = document.createElement('span');
+      const currentTitle = document.querySelector('title').innerText;
+      currentPath.innerText = currentTitle.replace(' | Pricefx', '');
+      breadcrumbLinks.push(currentPath.outerHTML);
+    }
+    breadcrumb.innerHTML = breadcrumbLinks.join(`<span class="breadcrumb-separator">${RIGHTARROW}</span>`);
+    block.append(breadcrumb);
+  }, 0);
 }
