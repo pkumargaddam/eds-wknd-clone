@@ -4,10 +4,13 @@ import ffetch from '../../scripts/ffetch.js';
 export default async function decorate(block) {
   function normalizePath(path) {
     return path
-      .replace('/content/eds-wknd', '')
-      .replace('/index.html', '')
-      .replace(/\/$/, '');
+      .replace(/^\/content\/eds-wknd/, '')
+      .replace(/\/index\.html$/, '')
+      .replace(/\.html$/, '')
+      .replace(/\/$/, '')
+      || '/';
   }
+
   const currentPath = normalizePath(window.location.pathname);
   // eslint-disable-next-line no-undef
   const segments = currentPath.split('/').filter(Boolean);
