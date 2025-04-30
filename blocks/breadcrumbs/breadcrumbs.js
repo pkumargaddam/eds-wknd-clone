@@ -1,4 +1,3 @@
-import { HOME } from '../../scripts/constants.js';
 import { getMetadata } from '../../scripts/aem.js';
 
 const breadcrumbOverrides = {
@@ -58,14 +57,7 @@ const getAllPathsExceptCurrent = async (paths, startLevel) => {
 const createLink = (path) => {
   const pathLink = document.createElement('a');
   pathLink.href = path.url;
-
-  if (path.name !== 'HomePage') {
-    pathLink.innerText = path.name;
-  } else {
-    pathLink.title = path.label;
-    pathLink.innerHTML = HOME;
-  }
-
+  pathLink.innerText = path.name;
   return pathLink;
 };
 
@@ -86,10 +78,8 @@ export default async function decorate(block) {
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
-  const HomeLink = createLink({
-    path: '', name: 'HomePage', url: window.location.origin, label: 'Home',
-  });
-  const breadcrumbLinks = [HomeLink.outerHTML];
+  // ❌ No Home link
+  const breadcrumbLinks = [];
 
   window.setTimeout(async () => {
     const path = window.location.pathname;
