@@ -4,7 +4,7 @@
 .article-list {
   display: flex;
   flex-flow: row wrap;
-  gap: 2rem 0.875rem;
+  column-gap: 0.875rem;
 }
 
 @media (width <=767px) {
@@ -15,6 +15,7 @@
 
 article {
   max-width: 16.25rem;
+  margin-bottom: 2rem;
 }
 
 /* article image style */

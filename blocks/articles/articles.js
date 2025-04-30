@@ -1,5 +1,4 @@
 /* eslint-disable no-console, no-shadow, object-curly-newline, no-nested-ternary */
-
 import ffetch from '../../scripts/ffetch.js';
 import { cleanUrl, generateUID, getDepth } from '../../scripts/helper.js';
 
