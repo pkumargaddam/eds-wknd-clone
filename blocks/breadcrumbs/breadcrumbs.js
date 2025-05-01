@@ -3,6 +3,7 @@ import { getMetadata } from '../../scripts/aem.js';
 const breadcrumbOverrides = {
   'aem-boilerplate': 'Index',
   index: 'Index',
+  adventures: 'Adventures',
 };
 
 const getPageTitle = async (url) => {
