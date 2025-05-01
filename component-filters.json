@@ -21,7 +21,10 @@
       "carousel",
       "seperator",
       "articles",
-      "search"
+      "search",
+      "accordion",
+      "form",
+      "embed-adaptive-form"
     ]
   },
   {
@@ -51,6 +54,35 @@
       "button",
       "title",
       "teaser"
+    ]
+  },
+  {
+    "id": "form",
+    "components": [
+      "captcha",
+      "checkbox",
+      "checkbox-group",
+      "date-input",
+      "drop-down",
+      "email",
+      "file-input",
+      "form-accordion",
+      "form-button",
+      "form-fragment",
+      "form-image",
+      "form-modal",
+      "form-reset-button",
+      "form-submit-button",
+      "number-input",
+      "panel",
+      "password",
+      "plain-text",
+      "radio-group",
+      "rating",
+      "telephone-input",
+      "text-input",
+      "tnc",
+      "wizard"
     ]
   }
 ]

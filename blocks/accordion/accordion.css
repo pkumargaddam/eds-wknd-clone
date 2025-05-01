@@ -1,0 +1,55 @@
+.accordion-container {
+    width: 100%;
+    margin: 0 auto;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.accordion-question {
+    width: 100%;
+    padding: 0.25em 1em;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.2;
+    outline: none;
+}
+
+.accordion-question:hover,
+.accordion-question:focus {
+    background-color: transparent;
+}
+
+.accordion-question::after {
+    content: var(--wkndicon-plus);
+    font-family: wknd-icon-font, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.accordion-question[aria-expanded="true"]::after {
+    content: var(--wkndicon-minus);
+}
+
+.accordion-answer {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    padding: 0 1em 1em;
+    display: none;
+}

@@ -81,7 +81,10 @@
         "carousel",
         "seperator",
         "articles",
-        "search"
+        "search",
+        "accordion",
+        "form",
+        "embed-adaptive-form"
       ]
     }
   ]
