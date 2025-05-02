@@ -27,6 +27,11 @@
   text-decoration: none;
 }
 
+.breadcrumb nav a.breadcrumb-link {
+  color: black;
+}
+
+
 .breadcrumb nav a:hover {
   text-decoration: underline;
 }

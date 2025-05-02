@@ -27,6 +27,7 @@ const createLink = (path) => {
   const pathLink = document.createElement('a');
   pathLink.href = path.url;
   pathLink.innerText = path.name;
+  pathLink.classList.add('breadcrumb-link');
   return pathLink;
 };
 
