@@ -2,12 +2,9 @@ import { getMetadata } from '../../scripts/aem.js';
 
 const breadcrumbOverrides = {
   'aem-boilerplate': 'Index',
-  index: 'Index',
-  adventures: 'Adventures',
 };
 
 const getPageTitle = async (url) => {
-  // Check for any manual override
   const overrideKey = Object.keys(breadcrumbOverrides).find((key) => url.includes(key));
   if (overrideKey) return breadcrumbOverrides[overrideKey];
 
@@ -27,7 +24,6 @@ const getAllPathsExceptCurrent = async (paths, startLevel) => {
 
   const rawPaths = paths.replace(/^\/|\/$/g, '').split('/');
 
-  // Skip any initial system folders
   const ignoreUntil = ['content', 'eds-wknd'];
   let filteredPaths = [...rawPaths];
   // eslint-disable-next-line max-len
@@ -80,7 +76,6 @@ export default async function decorate(block) {
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
-  // ❌ No Home link
   const breadcrumbLinks = [];
 
   window.setTimeout(async () => {
