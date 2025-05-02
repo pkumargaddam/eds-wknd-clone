@@ -11,19 +11,17 @@ const getPageTitle = async (url) => {
 const getOnlyParentPath = async (paths) => {
   const rawPaths = paths.replace(/^\/|\/$/g, '').split('/');
 
-  // Filter out unwanted folders
-  const filteredPaths = rawPaths.filter((part) => part && !['content', 'eds-wknd', 'index', 'aem-boilerplate'].includes(part.toLowerCase()));
+  // ✅ Keep full structure except the last part
+  const parentParts = rawPaths.slice(0, -1);
 
-  // Get the parent folder (second last part)
-  const parentFolder = filteredPaths.length >= 2 ? filteredPaths[filteredPaths.length - 2] : null;
+  if (parentParts.length === 0) return null;
 
-  if (!parentFolder) return null;
-
-  const parentPath = `/${filteredPaths.slice(0, -1).join('/')}`;
-  const parentUrl = `${window.location.origin}${parentPath}.html`; // ✅ always add .html
+  const parentPath = `/${parentParts.join('/')}`;
+  const parentUrl = `${window.location.origin}${parentPath}.html`;
 
   const name = await getPageTitle(parentUrl);
-  return { pathVal: parentPath, name: name || parentFolder, url: parentUrl };
+  const lastFolderName = parentParts[parentParts.length - 1];
+  return { pathVal: parentPath, name: name || lastFolderName, url: parentUrl };
 };
 
 const createLink = (path) => {
@@ -49,13 +47,12 @@ export default async function decorate(block) {
   window.setTimeout(async () => {
     const path = window.location.pathname;
 
-    // ➔ Only add the parent folder
+    // ➔ Use full path structure now
     const parentPath = await getOnlyParentPath(path);
     if (parentPath) {
       breadcrumbLinks.push(createLink(parentPath).outerHTML);
     }
 
-    // ➔ Add the current page title
     if (hideCurrentPage === 'false') {
       const currentPath = document.createElement('span');
       let currentTitle = document.querySelector('title').innerText;
