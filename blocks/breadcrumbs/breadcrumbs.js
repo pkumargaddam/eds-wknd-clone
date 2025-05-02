@@ -1,55 +1,31 @@
-import { getMetadata } from '../../scripts/aem.js';
-
-const breadcrumbOverrides = {
-  'aem-boilerplate': 'Index',
-};
-
 const getPageTitle = async (url) => {
-  const overrideKey = Object.keys(breadcrumbOverrides).find((key) => url.includes(key));
-  if (overrideKey) return breadcrumbOverrides[overrideKey];
-
   const resp = await fetch(url);
   if (resp.ok) {
     const html = document.createElement('div');
     html.innerHTML = await resp.text();
     return html.querySelector('title')?.innerText || '';
   }
-
   return '';
 };
 
-const getAllPathsExceptCurrent = async (paths, startLevel) => {
-  const result = [];
-  const startLevelVal = parseInt(startLevel, 10) || 1;
-
+const getOnlyParentPath = async (paths) => {
   const rawPaths = paths.replace(/^\/|\/$/g, '').split('/');
 
-  const ignoreUntil = ['content', 'eds-wknd'];
-  let filteredPaths = [...rawPaths];
-  // eslint-disable-next-line max-len
-  const firstValidIndex = rawPaths.findIndex((folder) => !ignoreUntil.includes(folder.toLowerCase()));
-  if (firstValidIndex > 0) {
-    filteredPaths = rawPaths.slice(firstValidIndex);
+  // Filter out unwanted folders
+  const filteredPaths = rawPaths.filter((part) => part && !['content', 'eds-wknd', 'index', 'aem-boilerplate'].includes(part.toLowerCase()));
+
+  // Get the parent folder (second last part)
+  const parentFolder = filteredPaths.length >= 2 ? filteredPaths[filteredPaths.length - 2] : null;
+
+  if (!parentFolder) return null;
+
+  let parentUrl = `${window.location.origin}/${filteredPaths.slice(0, -1).join('/')}`;
+  if (window.location.host.includes('author')) {
+    parentUrl += '.html';
   }
 
-  let pathVal = '';
-  for (let i = 0; i <= filteredPaths.length - 2; i += 1) {
-    pathVal = `${pathVal}/${filteredPaths[i]}`;
-    let url = `${window.location.origin}${pathVal}`;
-    if (window.location.host.includes('author')) {
-      url = `${window.location.origin}${pathVal}.html`;
-    }
-
-    if (i >= startLevelVal - 1) {
-      // eslint-disable-next-line no-await-in-loop
-      const name = await getPageTitle(url);
-      if (name) {
-        result.push({ pathVal, name, url });
-      }
-    }
-  }
-
-  return result;
+  const name = await getPageTitle(parentUrl);
+  return { pathVal: `/${parentFolder}`, name: name || parentFolder, url: parentUrl };
 };
 
 const createLink = (path) => {
@@ -60,15 +36,9 @@ const createLink = (path) => {
 };
 
 export default async function decorate(block) {
-  const [hideBreadcrumbVal, startLevelVal, hideCurrentPageVal] = block.children;
+  const [hideBreadcrumbVal, , hideCurrentPageVal] = block.children;
   const hideBreadcrumb = hideBreadcrumbVal?.textContent.trim() || 'false';
   const hideCurrentPage = hideCurrentPageVal?.textContent.trim() || 'false';
-
-  let startLevel = startLevelVal?.textContent.trim() || 1;
-  const metaBreadcrumbLevel = getMetadata('breadcrumblevel');
-  if (metaBreadcrumbLevel) {
-    startLevel = metaBreadcrumbLevel;
-  }
 
   block.innerHTML = '';
   if (hideBreadcrumb === 'true') return;
@@ -80,12 +50,14 @@ export default async function decorate(block) {
 
   window.setTimeout(async () => {
     const path = window.location.pathname;
-    const paths = await getAllPathsExceptCurrent(path, startLevel);
 
-    paths.forEach((pathPart) => {
-      breadcrumbLinks.push(createLink(pathPart).outerHTML);
-    });
+    // ➔ Only add the parent folder
+    const parentPath = await getOnlyParentPath(path);
+    if (parentPath) {
+      breadcrumbLinks.push(createLink(parentPath).outerHTML);
+    }
 
+    // ➔ Add the current page title
     if (hideCurrentPage === 'false') {
       const currentPath = document.createElement('span');
       let currentTitle = document.querySelector('title').innerText;
