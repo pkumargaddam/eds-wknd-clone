@@ -28,7 +28,7 @@
 }
 
 .breadcrumb nav a.breadcrumb-link {
-  color: black;
+  color: var(--color-black);
 }
 
 
