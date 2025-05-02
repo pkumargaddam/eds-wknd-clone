@@ -32,8 +32,11 @@
 }
 
 
-.breadcrumb nav a:hover {
+.breadcrumb-link:hover {
   text-decoration: underline;
+  color: var(--color-black);
+
+
 }
 
 .breadcrumb-separator {
