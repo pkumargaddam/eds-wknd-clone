@@ -19,13 +19,11 @@ const getOnlyParentPath = async (paths) => {
 
   if (!parentFolder) return null;
 
-  let parentUrl = `${window.location.origin}/${filteredPaths.slice(0, -1).join('/')}`;
-  if (window.location.host.includes('author')) {
-    parentUrl += '.html';
-  }
+  const parentPath = `/${filteredPaths.slice(0, -1).join('/')}`;
+  const parentUrl = `${window.location.origin}${parentPath}.html`; // ✅ always add .html
 
   const name = await getPageTitle(parentUrl);
-  return { pathVal: `/${parentFolder}`, name: name || parentFolder, url: parentUrl };
+  return { pathVal: parentPath, name: name || parentFolder, url: parentUrl };
 };
 
 const createLink = (path) => {
