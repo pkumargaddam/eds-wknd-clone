@@ -27,7 +27,7 @@
   text-decoration: none;
 }
 
-.breadcrumb nav a.breadcrumb-link {
+.breadcrumb-link {
   color: var(--color-black);
 }
 
