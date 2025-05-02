@@ -11,7 +11,6 @@ const getPageTitle = async (url) => {
 const getOnlyParentPath = async (paths) => {
   const rawPaths = paths.replace(/^\/|\/$/g, '').split('/');
 
-  // ✅ Keep full structure except the last part
   const parentParts = rawPaths.slice(0, -1);
 
   if (parentParts.length === 0) return null;
@@ -47,7 +46,6 @@ export default async function decorate(block) {
   window.setTimeout(async () => {
     const path = window.location.pathname;
 
-    // ➔ Use full path structure now
     const parentPath = await getOnlyParentPath(path);
     if (parentPath) {
       breadcrumbLinks.push(createLink(parentPath).outerHTML);
