@@ -11,7 +11,6 @@ const getPageTitle = async (url) => {
 const getAllParentPaths = async (fullPath) => {
   const segments = fullPath.replace(/^\/|\/$/g, '').split('/');
 
-  // Only start from "index" onwards
   const indexIdx = segments.indexOf('index');
   if (indexIdx === -1) return [];
 
@@ -47,7 +46,6 @@ export default async function decorate(block) {
 
   const breadcrumbLinks = [];
 
-  // Hardcoded Home (index)
   const homeURL = `${window.location.origin}/content/eds-wknd/index.html`;
   breadcrumbLinks.push(createLink('Home', homeURL).outerHTML);
 
@@ -56,7 +54,6 @@ export default async function decorate(block) {
 
   parentPaths.forEach((p, i) => {
     breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
-    // If it's the last item, just show plain text
     if (i === parentPaths.length - 1) {
       breadcrumbLinks.push(`<span>${p.name}</span>`);
     } else {
