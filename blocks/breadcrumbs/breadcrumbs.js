@@ -10,7 +10,6 @@ const getPageTitle = async (url) => {
 
 const getAllParentPaths = async (fullPath, includeCurrentPage) => {
   const segments = fullPath.replace(/^\/|\/$/g, '').split('/');
-
   const indexIdx = segments.indexOf('index');
   if (indexIdx === -1) return [];
 
@@ -68,7 +67,6 @@ export default async function decorate(block) {
   });
 
   breadcrumbLinks.forEach((el) => breadcrumb.appendChild(el));
-
   block.innerHTML = '';
   block.appendChild(breadcrumb);
 }
