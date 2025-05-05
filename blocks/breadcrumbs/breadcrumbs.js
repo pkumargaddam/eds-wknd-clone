@@ -8,7 +8,7 @@ const getPageTitle = async (url) => {
   return '';
 };
 
-const getAllParentPaths = async (fullPath) => {
+const getAllParentPaths = async (fullPath, startLevel = 1) => {
   const segments = fullPath.replace(/^\/|\/$/g, '').split('/');
   const indexIdx = segments.indexOf('index');
   if (indexIdx === -1) return [];
@@ -17,7 +17,7 @@ const getAllParentPaths = async (fullPath) => {
   const allPaths = [];
 
   // eslint-disable-next-line no-plusplus
-  for (let i = 1; i < usefulSegments.length; i++) {
+  for (let i = startLevel; i < usefulSegments.length; i++) {
     const subPathParts = segments.slice(0, indexIdx + i + 1);
     const fullSubPath = `/${subPathParts.join('/')}`;
     const url = `${window.location.origin}${fullSubPath}.html`;
@@ -40,14 +40,12 @@ const createLink = (label, href) => {
 };
 
 export default async function decorate(block) {
-  // Read values from children like in your reference code
-  const [hideBreadcrumbEl,, hideCurrentPageEl] = block.children;
+  const [hideBreadcrumbEl, startLevelEl, hideCurrentPageEl] = block.children;
   const hideBreadcrumb = hideBreadcrumbEl?.textContent.trim() === 'true';
   const hideCurrentPage = hideCurrentPageEl?.textContent.trim() === 'true';
+  const startLevel = parseInt(startLevelEl?.textContent.trim(), 10) || 1;
 
-  // Optional: startLevel is unused in this version, but you can apply if needed
   block.innerHTML = '';
-
   if (hideBreadcrumb) return;
 
   const breadcrumb = document.createElement('nav');
@@ -58,16 +56,13 @@ export default async function decorate(block) {
   breadcrumbLinks.push(createLink('Home', homeURL).outerHTML);
 
   const path = window.location.pathname;
-  const parentPaths = await getAllParentPaths(path);
+  const parentPaths = await getAllParentPaths(path, startLevel);
 
   parentPaths.forEach((p, i) => {
     breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
     const isLast = i === parentPaths.length - 1;
 
-    if (isLast && hideCurrentPage) {
-      return; // skip the last item if current page is hidden
-    }
-
+    if (isLast && hideCurrentPage) return;
     if (isLast) {
       breadcrumbLinks.push(`<span>${p.name}</span>`);
     } else {
