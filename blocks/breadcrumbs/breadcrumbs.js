@@ -18,7 +18,6 @@ const getAllParentPaths = async (fullPath) => {
   const usefulSegments = segments.slice(indexIdx);
   const allPaths = [];
 
-  // Build breadcrumb segments
   // eslint-disable-next-line no-plusplus
   for (let i = 1; i < usefulSegments.length; i++) {
     const subPathParts = segments.slice(0, indexIdx + i + 1);
@@ -46,28 +45,26 @@ export default async function decorate(block) {
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
+  const breadcrumbLinks = [];
+
+  // Hardcoded Home (index)
+  const homeURL = `${window.location.origin}/content/eds-wknd/index.html`;
+  breadcrumbLinks.push(createLink('Home', homeURL).outerHTML);
+
   const path = window.location.pathname;
   const parentPaths = await getAllParentPaths(path);
 
-  // Add Home link first
-  const homeURL = `${window.location.origin}/content/eds-wknd/index.html`;
-  const breadcrumbLinks = [createLink('Home', homeURL)];
-
-  // Add parent paths
   parentPaths.forEach((p, i) => {
-    // Last item = plain text (no link)
+    breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
+    // If it's the last item, just show plain text
     if (i === parentPaths.length - 1) {
-      const span = document.createElement('span');
-      span.textContent = p.name;
-      breadcrumbLinks.push(span);
+      breadcrumbLinks.push(`<span>${p.name}</span>`);
     } else {
-      breadcrumbLinks.push(createLink(p.name, p.url));
+      breadcrumbLinks.push(createLink(p.name, p.url).outerHTML);
     }
   });
 
-  // Append all links to breadcrumb nav
-  breadcrumbLinks.forEach((el) => breadcrumb.appendChild(el));
-
+  breadcrumb.innerHTML = breadcrumbLinks.join('');
   block.innerHTML = '';
   block.appendChild(breadcrumb);
 }
