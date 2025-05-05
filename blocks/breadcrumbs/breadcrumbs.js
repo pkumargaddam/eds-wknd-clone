@@ -10,12 +10,18 @@ const getPageTitle = async (url) => {
 
 const getAllParentPaths = async (fullPath) => {
   const rawPaths = fullPath.replace(/^\/|\/$/g, '').split('/');
+
+  // Start breadcrumb only from 'index' onward
+  const indexPosition = rawPaths.indexOf('index');
+  const startIdx = indexPosition !== -1 ? indexPosition : 0;
+  const meaningfulPaths = rawPaths.slice(startIdx);
+
   const allPaths = [];
 
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < rawPaths.length; i++) {
-    const parentParts = rawPaths.slice(0, i + 1);
-    const parentPath = `/${parentParts.join('/')}`;
+  for (let i = 0; i < meaningfulPaths.length; i++) {
+    const parentParts = meaningfulPaths.slice(0, i + 1);
+    const parentPath = `/${rawPaths.slice(0, startIdx).concat(parentParts).join('/')}`;
     const parentUrl = `${window.location.origin}${parentPath}.html`;
 
     // eslint-disable-next-line no-await-in-loop
@@ -48,7 +54,7 @@ export default async function decorate(block) {
 
   const breadcrumbLinks = [];
 
-  // Add Home manually
+  // Add Home manually (for /index.html)
   breadcrumbLinks.push('<a href="/index.html" class="breadcrumb-link">Home</a>');
 
   window.setTimeout(async () => {
@@ -60,7 +66,6 @@ export default async function decorate(block) {
     if (hideCurrentPage === 'true') parentPaths.pop();
 
     parentPaths.forEach((p, idx) => {
-      // Replace last item with <span> if it's the current page
       if (hideCurrentPage === 'false' && idx === parentPaths.length - 1) {
         const currentPath = document.createElement('span');
         let currentTitle = document.querySelector('title').innerText;
@@ -75,7 +80,7 @@ export default async function decorate(block) {
     });
 
     breadcrumb.innerHTML = breadcrumbLinks.join(
-      '<span class="breadcrumb-separator"></span>',
+      '<span class="breadcrumb-separator"> › </span>',
     );
     block.append(breadcrumb);
   }, 0);
