@@ -8,19 +8,23 @@ const getPageTitle = async (url) => {
   return '';
 };
 
-const getOnlyParentPath = async (paths) => {
-  const rawPaths = paths.replace(/^\/|\/$/g, '').split('/');
+const getAllParentPaths = async (fullPath) => {
+  const rawPaths = fullPath.replace(/^\/|\/$/g, '').split('/');
+  const allPaths = [];
 
-  const parentParts = rawPaths.slice(0, -1);
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < rawPaths.length; i++) {
+    const parentParts = rawPaths.slice(0, i + 1);
+    const parentPath = `/${parentParts.join('/')}`;
+    const parentUrl = `${window.location.origin}${parentPath}.html`;
 
-  if (parentParts.length === 0) return null;
+    // eslint-disable-next-line no-await-in-loop
+    const name = await getPageTitle(parentUrl);
+    const displayName = name || parentParts[parentParts.length - 1];
+    allPaths.push({ pathVal: parentPath, name: displayName, url: parentUrl });
+  }
 
-  const parentPath = `/${parentParts.join('/')}`;
-  const parentUrl = `${window.location.origin}${parentPath}.html`;
-
-  const name = await getPageTitle(parentUrl);
-  const lastFolderName = parentParts[parentParts.length - 1];
-  return { pathVal: parentPath, name: name || lastFolderName, url: parentUrl };
+  return allPaths;
 };
 
 const createLink = (path) => {
@@ -44,23 +48,31 @@ export default async function decorate(block) {
 
   const breadcrumbLinks = [];
 
+  // Add Home manually
+  breadcrumbLinks.push('<a href="/index.html" class="breadcrumb-link">Home</a>');
+
   window.setTimeout(async () => {
     const path = window.location.pathname;
 
-    const parentPath = await getOnlyParentPath(path);
-    if (parentPath) {
-      breadcrumbLinks.push(createLink(parentPath).outerHTML);
-    }
+    const parentPaths = await getAllParentPaths(path);
 
-    if (hideCurrentPage === 'false') {
-      const currentPath = document.createElement('span');
-      let currentTitle = document.querySelector('title').innerText;
-      currentTitle = currentTitle
-        .replace(/^div\s\|\s*/i, '')
-        .replace(/\s\|\s*Pricefx$/i, '');
-      currentPath.innerText = currentTitle;
-      breadcrumbLinks.push(currentPath.outerHTML);
-    }
+    // Remove the last item if we are not showing the current page
+    if (hideCurrentPage === 'true') parentPaths.pop();
+
+    parentPaths.forEach((p, idx) => {
+      // Replace last item with <span> if it's the current page
+      if (hideCurrentPage === 'false' && idx === parentPaths.length - 1) {
+        const currentPath = document.createElement('span');
+        let currentTitle = document.querySelector('title').innerText;
+        currentTitle = currentTitle
+          .replace(/^div\s\|\s*/i, '')
+          .replace(/\s\|\s*Pricefx$/i, '');
+        currentPath.innerText = currentTitle;
+        breadcrumbLinks.push(currentPath.outerHTML);
+      } else {
+        breadcrumbLinks.push(createLink(p).outerHTML);
+      }
+    });
 
     breadcrumb.innerHTML = breadcrumbLinks.join(
       '<span class="breadcrumb-separator"></span>',
