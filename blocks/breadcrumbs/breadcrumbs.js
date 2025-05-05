@@ -41,6 +41,11 @@ const createLink = (label, href) => {
 };
 
 export default async function decorate(block) {
+  const hideBreadcrumb = block.dataset.hideBreadcrumb === 'true';
+  const hideCurrentPage = block.dataset.hideCurrent === 'true';
+
+  if (hideBreadcrumb) return;
+
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
@@ -54,7 +59,14 @@ export default async function decorate(block) {
 
   parentPaths.forEach((p, i) => {
     breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
-    if (i === parentPaths.length - 1) {
+
+    const isLast = i === parentPaths.length - 1;
+
+    if (isLast && hideCurrentPage) {
+      return; // skip last item if current page should be hidden
+    }
+
+    if (isLast) {
       breadcrumbLinks.push(`<span>${p.name}</span>`);
     } else {
       breadcrumbLinks.push(createLink(p.name, p.url).outerHTML);
