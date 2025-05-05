@@ -35,5 +35,15 @@
     "npm-run-all": "4.1.5",
     "stylelint": "16.17.0",
     "stylelint-config-standard": "37.0.0"
+  },
+  "dependencies": {
+    "@adobe/json-formula": "0.1.50",
+    "@aemforms/af-core": "0.22.116",
+    "@aemforms/af-custom-functions": "1.0.14",
+    "@aemforms/af-formatters": "0.22.116",
+    "rollup": "^2.79.1",
+    "rollup-plugin-cleanup": "^3.2.1",
+    "rollup-plugin-license": "^3.0.1",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
