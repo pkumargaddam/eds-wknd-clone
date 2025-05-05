@@ -10,7 +10,6 @@ const getPageTitle = async (url) => {
 
 const getAllParentPaths = async (fullPath) => {
   const segments = fullPath.replace(/^\/|\/$/g, '').split('/');
-
   const indexIdx = segments.indexOf('index');
   if (indexIdx === -1) return [];
 
@@ -41,8 +40,13 @@ const createLink = (label, href) => {
 };
 
 export default async function decorate(block) {
-  const hideBreadcrumb = block.dataset.hideBreadcrumb === 'true';
-  const hideCurrentPage = block.dataset.hideCurrent === 'true';
+  // Read values from children like in your reference code
+  const [hideBreadcrumbEl,, hideCurrentPageEl] = block.children;
+  const hideBreadcrumb = hideBreadcrumbEl?.textContent.trim() === 'true';
+  const hideCurrentPage = hideCurrentPageEl?.textContent.trim() === 'true';
+
+  // Optional: startLevel is unused in this version, but you can apply if needed
+  block.innerHTML = '';
 
   if (hideBreadcrumb) return;
 
@@ -50,7 +54,6 @@ export default async function decorate(block) {
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
   const breadcrumbLinks = [];
-
   const homeURL = `${window.location.origin}/content/eds-wknd/index.html`;
   breadcrumbLinks.push(createLink('Home', homeURL).outerHTML);
 
@@ -59,11 +62,10 @@ export default async function decorate(block) {
 
   parentPaths.forEach((p, i) => {
     breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
-
     const isLast = i === parentPaths.length - 1;
 
     if (isLast && hideCurrentPage) {
-      return; // skip last item if current page should be hidden
+      return; // skip the last item if current page is hidden
     }
 
     if (isLast) {
@@ -74,6 +76,5 @@ export default async function decorate(block) {
   });
 
   breadcrumb.innerHTML = breadcrumbLinks.join('');
-  block.innerHTML = '';
   block.appendChild(breadcrumb);
 }
