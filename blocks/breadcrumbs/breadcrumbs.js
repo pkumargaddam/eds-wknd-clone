@@ -41,6 +41,16 @@ const createLink = (label, href) => {
 };
 
 export default async function decorate(block) {
+  // Retrieve the JSON properties directly from the model for this block
+  const hideBreadcrumb = block.getAttribute('data-hide-breadcrumb') === 'true';  // Assuming this is passed as data attribute
+  const hideCurrentPage = block.getAttribute('data-hide-current-page') === 'true';  // Same for this property
+
+  // If the "Hide Breadcrumb" property is true, hide the entire breadcrumb
+  if (hideBreadcrumb) {
+    block.style.display = 'none';
+    return;
+  }
+
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
@@ -53,9 +63,15 @@ export default async function decorate(block) {
   const parentPaths = await getAllParentPaths(path);
 
   parentPaths.forEach((p, i) => {
-    breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
+    breadcrumbLinks.push('<span class="breadcrumb-separator"> / </span>');
+
+    // If "Hide Current Page" is true, don't display it as a link
     if (i === parentPaths.length - 1) {
-      breadcrumbLinks.push(`<span>${p.name}</span>`);
+      if (!hideCurrentPage) {
+        breadcrumbLinks.push(`<span>${p.name}</span>`); // No link for the last item (current page)
+      } else {
+        breadcrumbLinks.push('<span>Current Page Hidden</span>'); // Optional placeholder text
+      }
     } else {
       breadcrumbLinks.push(createLink(p.name, p.url).outerHTML);
     }
