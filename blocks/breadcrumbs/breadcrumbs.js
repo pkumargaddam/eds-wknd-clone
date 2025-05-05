@@ -13,18 +13,19 @@ const getAllParentPaths = async (fullPath, startLevel = 1) => {
   const indexIdx = segments.indexOf('index');
   if (indexIdx === -1) return [];
 
-  const usefulSegments = segments.slice(indexIdx);
+  // Adjust the path to include the base segments up to the level you want
   const allPaths = [];
 
+  // Starting from startLevel and onward to include the appropriate path segments
   // eslint-disable-next-line no-plusplus
-  for (let i = startLevel; i < usefulSegments.length; i++) {
-    const subPathParts = segments.slice(0, indexIdx + i + 1);
+  for (let i = startLevel; i < segments.length; i++) {
+    const subPathParts = segments.slice(0, i + 1);
     const fullSubPath = `/${subPathParts.join('/')}`;
     const url = `${window.location.origin}${fullSubPath}.html`;
 
     // eslint-disable-next-line no-await-in-loop
     const name = await getPageTitle(url);
-    const displayName = name || usefulSegments[i];
+    const displayName = name || segments[i];
     allPaths.push({ name: displayName, url });
   }
 
@@ -59,10 +60,10 @@ export default async function decorate(block) {
   const parentPaths = await getAllParentPaths(path, startLevel);
 
   parentPaths.forEach((p, i) => {
-    breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
+    breadcrumbLinks.push('<span class="breadcrumb-separator"> > </span>');
     const isLast = i === parentPaths.length - 1;
 
-    if (isLast && hideCurrentPage) return;
+    if (isLast && hideCurrentPage) return; // Skip the last page if hidden
     if (isLast) {
       breadcrumbLinks.push(`<span>${p.name}</span>`);
     } else {
