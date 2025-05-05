@@ -9,79 +9,62 @@ const getPageTitle = async (url) => {
 };
 
 const getAllParentPaths = async (fullPath) => {
-  const rawPaths = fullPath.replace(/^\/|\/$/g, '').split('/');
+  const segments = fullPath.replace(/^\/|\/$/g, '').split('/');
 
-  // Start breadcrumb only from 'index' onward
-  const indexPosition = rawPaths.indexOf('index');
-  const startIdx = indexPosition !== -1 ? indexPosition : 0;
-  const meaningfulPaths = rawPaths.slice(startIdx);
+  // Only start from "index" onwards
+  const indexIdx = segments.indexOf('index');
+  if (indexIdx === -1) return [];
 
+  const usefulSegments = segments.slice(indexIdx);
   const allPaths = [];
 
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < meaningfulPaths.length; i++) {
-    const parentParts = meaningfulPaths.slice(0, i + 1);
-    const parentPath = `/${rawPaths.slice(0, startIdx).concat(parentParts).join('/')}`;
-    const parentUrl = `${window.location.origin}${parentPath}.html`;
+  for (let i = 1; i < usefulSegments.length; i++) {
+    const subPathParts = segments.slice(0, indexIdx + i + 1);
+    const fullSubPath = `/${subPathParts.join('/')}`;
+    const url = `${window.location.origin}${fullSubPath}.html`;
 
     // eslint-disable-next-line no-await-in-loop
-    const name = await getPageTitle(parentUrl);
-    const displayName = name || parentParts[parentParts.length - 1];
-    allPaths.push({ pathVal: parentPath, name: displayName, url: parentUrl });
+    const name = await getPageTitle(url);
+    const displayName = name || usefulSegments[i];
+    allPaths.push({ name: displayName, url });
   }
 
   return allPaths;
 };
 
-const createLink = (path) => {
-  const pathLink = document.createElement('a');
-  pathLink.href = path.url;
-  pathLink.innerText = path.name;
-  pathLink.classList.add('breadcrumb-link');
-  return pathLink;
+const createLink = (label, href) => {
+  const a = document.createElement('a');
+  a.href = href;
+  a.className = 'breadcrumb-link';
+  a.textContent = label;
+  return a;
 };
 
 export default async function decorate(block) {
-  const [hideBreadcrumbVal, , hideCurrentPageVal] = block.children;
-  const hideBreadcrumb = hideBreadcrumbVal?.textContent.trim() || 'false';
-  const hideCurrentPage = hideCurrentPageVal?.textContent.trim() || 'false';
-
-  block.innerHTML = '';
-  if (hideBreadcrumb === 'true') return;
-
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
   const breadcrumbLinks = [];
 
-  // Add Home manually (for /index.html)
-  breadcrumbLinks.push('<a href="/index.html" class="breadcrumb-link">Home</a>');
+  // Hardcoded Home (index)
+  const homeURL = `${window.location.origin}/content/eds-wknd/index.html`;
+  breadcrumbLinks.push(createLink('Home', homeURL).outerHTML);
 
-  window.setTimeout(async () => {
-    const path = window.location.pathname;
+  const path = window.location.pathname;
+  const parentPaths = await getAllParentPaths(path);
 
-    const parentPaths = await getAllParentPaths(path);
+  parentPaths.forEach((p, i) => {
+    breadcrumbLinks.push('<span class="breadcrumb-separator"> › </span>');
+    // If it's the last item, just show plain text
+    if (i === parentPaths.length - 1) {
+      breadcrumbLinks.push(`<span>${p.name}</span>`);
+    } else {
+      breadcrumbLinks.push(createLink(p.name, p.url).outerHTML);
+    }
+  });
 
-    // Remove the last item if we are not showing the current page
-    if (hideCurrentPage === 'true') parentPaths.pop();
-
-    parentPaths.forEach((p, idx) => {
-      if (hideCurrentPage === 'false' && idx === parentPaths.length - 1) {
-        const currentPath = document.createElement('span');
-        let currentTitle = document.querySelector('title').innerText;
-        currentTitle = currentTitle
-          .replace(/^div\s\|\s*/i, '')
-          .replace(/\s\|\s*Pricefx$/i, '');
-        currentPath.innerText = currentTitle;
-        breadcrumbLinks.push(currentPath.outerHTML);
-      } else {
-        breadcrumbLinks.push(createLink(p).outerHTML);
-      }
-    });
-
-    breadcrumb.innerHTML = breadcrumbLinks.join(
-      '<span class="breadcrumb-separator"> › </span>',
-    );
-    block.append(breadcrumb);
-  }, 0);
+  breadcrumb.innerHTML = breadcrumbLinks.join('');
+  block.innerHTML = '';
+  block.appendChild(breadcrumb);
 }
