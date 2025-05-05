@@ -8,74 +8,60 @@ const getPageTitle = async (url) => {
   return '';
 };
 
-const getOnlyParentPath = async (paths) => {
-  const rawPaths = paths.replace(/^\/|\/$/g, '').split('/');
+const getAllParentPaths = async (fullPath) => {
+  const segments = fullPath.replace(/^\/|\/$/g, '').split('/');
 
-  const parentParts = rawPaths.slice(0, -1);
+  const indexIdx = segments.indexOf('index');
+  if (indexIdx === -1) return [];
 
-  if (parentParts.length === 0) return null;
+  const usefulSegments = segments.slice(indexIdx);
+  const allPaths = [];
 
-  const parentPath = `/${parentParts.join('/')}`;
-  const parentUrl = `${window.location.origin}${parentPath}.html`;
+  // eslint-disable-next-line no-plusplus
+  for (let i = 1; i < usefulSegments.length; i++) {
+    const subPathParts = segments.slice(0, indexIdx + i + 1);
+    const fullSubPath = `/${subPathParts.join('/')}`;
+    const url = `${window.location.origin}${fullSubPath}.html`;
 
-  const name = await getPageTitle(parentUrl);
-  const lastFolderName = parentParts[parentParts.length - 1];
-  return { pathVal: parentPath, name: name || lastFolderName, url: parentUrl };
+    // eslint-disable-next-line no-await-in-loop
+    const name = await getPageTitle(url);
+    const displayName = name || usefulSegments[i];
+    allPaths.push({ name: displayName, url });
+  }
+
+  return allPaths;
 };
 
-const createLink = (path) => {
-  const pathLink = document.createElement('a');
-  pathLink.href = path.url;
-  pathLink.innerText = path.name;
-  pathLink.classList.add('breadcrumb-link');
-  return pathLink;
+const createLink = (label, href) => {
+  const a = document.createElement('a');
+  a.href = href;
+  a.className = 'breadcrumb-link';
+  a.textContent = label;
+  return a;
 };
 
 export default async function decorate(block) {
-  const [hideBreadcrumbVal, , hideCurrentPageVal, navStartLevelVal] = block.children;
-  const hideBreadcrumb = hideBreadcrumbVal?.textContent.trim() || 'false';
-  const hideCurrentPage = hideCurrentPageVal?.textContent.trim() || 'false';
-  const navStartLevel = parseInt(navStartLevelVal?.textContent.trim() || '1', 10); // Default to 1 if not set
-
-  block.innerHTML = '';
-  if (hideBreadcrumb === 'true') return;
-
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
   const breadcrumbLinks = [];
 
-  window.setTimeout(async () => {
-    const path = window.location.pathname;
+  const homeURL = `${window.location.origin}/content/eds-wknd/index.html`;
+  breadcrumbLinks.push(createLink('Home', homeURL).outerHTML);
 
-    // Get only the parent path based on the current path
-    const parentPath = await getOnlyParentPath(path);
-    if (parentPath) {
-      breadcrumbLinks.push(createLink(parentPath).outerHTML);
+  const path = window.location.pathname;
+  const parentPaths = await getAllParentPaths(path);
+
+  parentPaths.forEach((p, i) => {
+    breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
+    if (i === parentPaths.length - 1) {
+      breadcrumbLinks.push(`<span>${p.name}</span>`);
+    } else {
+      breadcrumbLinks.push(createLink(p.name, p.url).outerHTML);
     }
+  });
 
-    // Handle navigation start level
-    const pathParts = path.replace(/^\/|\/$/g, '').split('/');
-    const startLevelPath = pathParts.slice(navStartLevel).join('/');
-    const startLevelUrl = `${window.location.origin}/${startLevelPath}.html`;
-
-    if (navStartLevel > 1 && startLevelPath) {
-      const startLevelName = await getPageTitle(startLevelUrl);
-      breadcrumbLinks.push(createLink({ name: startLevelName, url: startLevelUrl }).outerHTML);
-    }
-
-    // Conditionally hide the current page if the value is 'false'
-    if (hideCurrentPage === 'false') {
-      const currentPath = document.createElement('span');
-      let currentTitle = document.querySelector('title').innerText;
-      currentTitle = currentTitle
-        .replace(/^div\s\|\s*/i, '')
-        .replace(/\s\|\s*Pricefx$/i, '');
-      currentPath.innerText = currentTitle;
-      breadcrumbLinks.push(currentPath.outerHTML);
-    }
-
-    breadcrumb.innerHTML = breadcrumbLinks.join('<span class="breadcrumb-separator"> / </span>');
-    block.append(breadcrumb);
-  }, 0);
+  breadcrumb.innerHTML = breadcrumbLinks.join('');
+  block.innerHTML = '';
+  block.appendChild(breadcrumb);
 }
