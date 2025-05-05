@@ -8,7 +8,7 @@ const getPageTitle = async (url) => {
   return '';
 };
 
-const getAllParentPaths = async (fullPath) => {
+const getAllParentPaths = async (fullPath, includeCurrentPage) => {
   const segments = fullPath.replace(/^\/|\/$/g, '').split('/');
 
   const indexIdx = segments.indexOf('index');
@@ -17,8 +17,10 @@ const getAllParentPaths = async (fullPath) => {
   const usefulSegments = segments.slice(indexIdx);
   const allPaths = [];
 
+  const max = includeCurrentPage ? usefulSegments.length : usefulSegments.length - 1;
+
   // eslint-disable-next-line no-plusplus
-  for (let i = 1; i < usefulSegments.length; i++) {
+  for (let i = 1; i < max; i++) {
     const subPathParts = segments.slice(0, indexIdx + i + 1);
     const fullSubPath = `/${subPathParts.join('/')}`;
     const url = `${window.location.origin}${fullSubPath}.html`;
@@ -41,27 +43,32 @@ const createLink = (label, href) => {
 };
 
 export default async function decorate(block) {
+  const [hideBreadcrumbVal, , hideCurrentPageVal] = block.children;
+  const hideBreadcrumb = hideBreadcrumbVal?.textContent.trim().toLowerCase() === 'true';
+  const hideCurrentPage = hideCurrentPageVal?.textContent.trim().toLowerCase() === 'true';
+
+  if (hideBreadcrumb) {
+    block.innerHTML = '';
+    return;
+  }
+
   const breadcrumb = document.createElement('nav');
   breadcrumb.setAttribute('aria-label', 'Breadcrumb');
 
   const breadcrumbLinks = [];
 
   const homeURL = `${window.location.origin}/content/eds-wknd/index.html`;
-  breadcrumbLinks.push(createLink('Home', homeURL).outerHTML);
+  breadcrumbLinks.push(createLink('Home', homeURL));
 
-  const path = window.location.pathname;
-  const parentPaths = await getAllParentPaths(path);
+  const fullPath = window.location.pathname;
+  const parentPaths = await getAllParentPaths(fullPath, !hideCurrentPage);
 
-  parentPaths.forEach((p, i) => {
-    breadcrumbLinks.push('<span class="breadcrumb-separator"> </span>');
-    if (i === parentPaths.length - 1) {
-      breadcrumbLinks.push(`<span>${p.name}</span>`);
-    } else {
-      breadcrumbLinks.push(createLink(p.name, p.url).outerHTML);
-    }
+  parentPaths.forEach((p) => {
+    breadcrumbLinks.push(createLink(p.name, p.url));
   });
 
-  breadcrumb.innerHTML = breadcrumbLinks.join('');
+  breadcrumbLinks.forEach((el) => breadcrumb.appendChild(el));
+
   block.innerHTML = '';
   block.appendChild(breadcrumb);
 }
