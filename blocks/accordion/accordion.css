@@ -1,29 +1,22 @@
 .accordion-container {
     width: 100%;
     margin: 0 auto;
-    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
-        sans-serif;
-}
-
-.accordion-item {
-    border-bottom: 1px solid #e0e0e0;
+    font-family: var( --font-family-sans-serif),"Source Sans Pro", "Helvetica Neue", Helvetica, Arial,sans-serif;
 }
 
 .accordion-question {
     width: 100%;
-    padding: 0.25em 1em;
     border: none;
     background: none;
     text-align: left;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    line-height: 1.2;
-    outline: none;
+    line-height: 1;
+    border-bottom: 2px solid #e0e0e0;
 }
 
 .accordion-question:hover,
