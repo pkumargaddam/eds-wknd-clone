@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p51328-e442308.adobeaemcloud.com/bin/franklin.delivery/iamhelium/eds-wknd/main"
+    url: "https://author-p45403-e1284892.adobeaemcloud.com/bin/franklin.delivery/pkumargaddam/eds-wknd-clone/main"
     type: "markup"
     suffix: ".html"
