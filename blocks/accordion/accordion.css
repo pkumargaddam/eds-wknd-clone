@@ -19,6 +19,10 @@
     border-bottom: 2px solid #e0e0e0;
 }
 
+.accordion-question[aria-expanded="true"] {
+    border-bottom: none;
+  }
+
 .accordion-question:hover,
 .accordion-question:focus {
     background-color: transparent;
