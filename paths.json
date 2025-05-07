@@ -1,17 +1,17 @@
 {
   "mappings": [
-    "/content/eds-wknd/:/",
-    "/content/eds-wknd/configuration:/.helix/config.json",
-    "/content/eds-wknd/metadata:/metadata.json",
-    "/content/eds-wknd.resource/icons/:/icons/",
-    "/content/eds-wknd.resource/query-index.json:/query-index.json",
-    "/content/eds-wknd.resource/teaser-index.json:/teaser-index.json",
-    "/content/eds-wknd.resource/article-index.json:/article-index.json",
-    "/content/eds-wknd/taxonomy:/taxonomy.json",
-    "/content/eds-wknd/configuration/redirects:/redirects.json"
+    "/content/test-eds-page/:/",
+    "/content/test-eds-page/configuration:/.helix/config.json",
+    "/content/test-eds-page/metadata:/metadata.json",
+    "/content/test-eds-page.resource/icons/:/icons/",
+    "/content/test-eds-page.resource/query-index.json:/query-index.json",
+    "/content/test-eds-page.resource/teaser-index.json:/teaser-index.json",
+    "/content/test-eds-page.resource/article-index.json:/article-index.json",
+    "/content/test-eds-page/taxonomy:/taxonomy.json",
+    "/content/test-eds-page/configuration/redirects:/redirects.json"
   ],
   "includes": [
-    "/content/eds-wknd/",
-    "/content/dam/eds-wknd/"
+    "/content/test-eds-page/",
+    "/content/dam/test-eds-page/"
   ]
 }
