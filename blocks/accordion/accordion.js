@@ -42,7 +42,7 @@ export default async function decorate(block) {
 
     block.appendChild(accordionContainer);
   } catch (error) {
-    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console 
     console.error('Error fetching FAQs:', error);
   }
 }
